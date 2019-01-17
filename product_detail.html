@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- css reset -->
     <link rel="stylesheet" href="./css/reset.css">
@@ -19,6 +19,7 @@
     <script src="./js/common.js"></script>
     <title>Item_wrap</title>
 </head>
+
 <body>
     <div id="product-detail">
         <!-- header start -->
@@ -32,19 +33,163 @@
 
         <!--<div class="main">-->
         <div class="detail-content">
-            <div class="pro-title pro-item">标题：Apple 苹果 iPhone6s Plus 手机 金色 全网通 32G</div>
-            <div class="pro-desc pro-item">描述：Apple 苹果 iPhone6s Plus 手机 金色 全网通 32G</div>
+            <div class="pro-title pro-item">{{info.zhname}}</div>
+            <div class="pro-desc pro-item">{{info.desc}}</div>
             <div class="pro-price pro-item">价格：
-                <span class="pro-newPrice">￥2600</span>
-                <span class="pro-oldPrice">￥3600</span>
+                <span class="pro-newPrice">￥{{info.oneprice}}</span>
+                <span class="pro-oldPrice">￥{{info.price}}</span>
             </div>
-            <div class="detail-intro pro-item">商品介绍：
+            <!-- <div class="detail-intro pro-item">商品介绍：
                 <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
                 <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
                 <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
                 <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
                 <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
+            </div> -->
+            <div class="infoContent">
+                <div class="infoContentSon">
+                    <div class="infoContentSon_1">
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                粉丝数量
+                            </div>
+                            <div class="infoContentSon_1_bottom special">
+                                {{info.fansnum}}
+                            </div>
+                        </div>
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                注册时间
+                            </div>
+                            <div class="infoContentSon_1_bottom">
+                                {{info.addtime}}
+                            </div>
+                        </div>
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                头条阅读数
+                            </div>
+                            <div class="infoContentSon_1_bottom">
+                                {{info.headernum}}
+                            </div>
+                        </div>
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                封号次数
+                            </div>
+                            <div class="infoContentSon_1_bottom">
+                                0
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="infoContentSon">
+                    <div class="infoContentSon_1">
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                所属类目
+                            </div>
+                            <div class="infoContentSon_1_bottom">
+                                {{info.fortype}}
+                            </div>
+                        </div>
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                阅读UV
+                            </div>
+                            <div class="infoContentSon_1_bottom">
+                                {{info.UV}}
+                            </div>
+                        </div>
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                账号类型
+                            </div>
+                            <div class="infoContentSon_1_bottom" v-if='info.type == 1'>
+                                订阅号
+                            </div>
+                            <div class="infoContentSon_1_bottom" v-if='info.type == 2'>
+                                服务号
+                            </div>
+                        </div>
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                违规次数
+                            </div>
+                            <div class="infoContentSon_1_bottom">
+                                {{info.weiguinum == ''?0:info.weiguinum}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="infoContentSon">
+                    <div class="infoContentSon_1">
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                粉丝偏向
+                            </div>
+                            <div class="infoContentSon_1_bottom" v-if='info.sexbli == 0'>
+                                平衡
+                            </div>
+                            <div class="infoContentSon_1_bottom" v-if='info.sexbli == 1'>
+                                男居多
+                            </div>
+                            <div class="infoContentSon_1_bottom" v-if='info.sexbli == 2'>
+                                女居多
+                            </div>
+                        </div>
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                流量主月收入
+                            </div>
+                            <div class="infoContentSon_1_bottom">
+                                {{info.getmonth}}
+                            </div>
+                        </div>
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                粉丝区域
+                            </div>
+                            <div class="infoContentSon_1_bottom">
+                                全国
+                            </div>
+                        </div>
+                        <div class="infoContentSon_1_body">
+                            <div class="infoContentSon_1_top">
+                                认证状态
+                            </div>
+                            <div class="infoContentSon_1_bottom" v-if='info.isrz == 0'>
+                                未认证
+                            </div>
+                            <div class="infoContentSon_1_bottom" v-if='info.isrz == 1'>
+                                个人认证
+                            </div>
+                            <div class="infoContentSon_1_bottom" v-if='info.isrz == 2'>
+                                企业认证
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="tabDiv">
+                <ul class="fuckUl">
+                    <li  v-for="( item , index ) of  test" :key="index" class="li_itme noactive" :class="[willShow == index && 'active']" >
+                        <div class="fuckLiDiv" @click="got(index)">{{item.name}}</div>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="detail_shop" v-if = 'willShow == 0'>
+                <div class="maijiashuo">
+                    <!-- 卖家说 -->
+                    {{info.desc}}
+                </div>
+
+            </div>
+            <div class="detail_pic" v-if = 'willShow == 1'>
+                    图文详情
+                </div>
         </div>
 
         <!--</div>-->
@@ -58,50 +203,63 @@
 
     </div>
 
-<!-- jquery -->
-<script src="./js/jquery-2.1.4.js"></script>
-<script src="./js/jquery-weui.min.js"></script>
+    <!-- jquery -->
+    <script src="./js/jquery-2.1.4.js"></script>
+    <script src="./js/jquery-weui.min.js"></script>
 
-<!-- common js -->
-<script src="./js/common.js"></script>
-<script src="./js/public.js"></script>
-<script src="./js/vue.js"></script>
-<script src="./js/data.js"></script>
-<script src="./js/axios.js"></script>
+    <!-- common js -->
+    <script src="./js/common.js"></script>
+    <script src="./js/public.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/axios.js"></script>
     <script>
-
-        var vm=new Vue({
-            el:"#product-detail",
-            data:{
-               info:[]
+        var vm = new Vue({
+            el: "#product-detail",
+            data: {
+                info: [],
+                test: [{
+                        name: '商家描述'
+                    },
+                    {
+                        name: '附图'
+                    }
+                ],
+                willShow:0
             },
-            mounted(){
+            mounted() {
                 this.getinfo();
                 console.log(this.info)
-            },methods:{
-               getinfo(){
-                   let that=this;
-                   var id = getUrl('id');
-                   axios.post('http://wxpay.possji.cn/yikehao/getdetail',
-                       {
-                        id:id
+            },
+            methods: {
+                got(index) {
+                    this.willShow = index
+                },
+                getinfo() {
+                    let that = this;
+                    var id = getUrl('id');
+                    axios.post('http://wxpay.possji.cn/yikehao/getdetail', {
+                            id: id
                         })
-                   //then里面跟一个成功回调函数
-                       .then(function (resp) {
-                           if (resp.data.code){
-                               that.list=resp.data.data
-                           }else{
-                               $.toast("无法加载", "text");
-                           }
+                        //then里面跟一个成功回调函数
+                        .then(function (resp) {
+                            if (resp.data.code) {
+                                that.info = resp.data.data
+                                console.log(that.info);
 
-                       })
-                       // catch中跟一个失败回调函数
-                       .catch(function (error) {
-                           console.log(error);
-                       });
-               }
+                            } else {
+                                $.toast("无法加载", "text");
+                            }
+
+                        })
+                        // catch中跟一个失败回调函数
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
             }
         })
     </script>
 </body>
+
 </html>
