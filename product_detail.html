@@ -30,19 +30,6 @@
         </header>
         <!-- header end   -->
 
-        <!-- main start -->
-        <div class="swiper-container detailBanner" id="detailBanner" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="./images/item-img01.jpg" alt=""></div>
-                <div class="swiper-slide"><img src="./images/item-img02.jpg" alt=""></div>
-                <div class="swiper-slide"><img src="./images/item-img03.jpg" alt=""></div>
-                <div class="swiper-slide"><img src="./images/item-img04.jpg" alt=""></div>
-                <div class="swiper-slide"><img src="./images/item-img05.jpg" alt=""></div>
-            </div>
-            <!-- focus -->
-            <div class="swiper-pagination"></div>
-        </div>
-
         <!--<div class="main">-->
         <div class="detail-content">
             <div class="pro-title pro-item">标题：Apple 苹果 iPhone6s Plus 手机 金色 全网通 32G</div>
@@ -61,7 +48,6 @@
         </div>
 
         <!--</div>-->
-        <!-- main end   -->
 
         <!-- footer start -->
         <footer>
@@ -75,80 +61,47 @@
 <!-- jquery -->
 <script src="./js/jquery-2.1.4.js"></script>
 <script src="./js/jquery-weui.min.js"></script>
-<script src="./js/swiper.min.js"></script>
+
 <!-- common js -->
 <script src="./js/common.js"></script>
 <script src="./js/public.js"></script>
 <script src="./js/vue.js"></script>
 <script src="./js/data.js"></script>
-<script>
-    $(function () {
-        // alert(1)     // 测试jquery
+<script src="./js/axios.js"></script>
+    <script>
 
-        var index = {
-            // 初始化函数
-            init: function(){
-                this.bindEvents();
-                this.swiperSlide();
-                var business_id = getUrl('business_id');
-                this.fetchBanner();
-
+        var vm=new Vue({
+            el:"#product-detail",
+            data:{
+               info:[]
             },
-            // 事件函数
-            bindEvents: function(){
-            },
-            // swiper slide
-            swiperSlide: function(){
-                var detailBanner = new Swiper("#detailBanner",{
-                    loop: true,
-                    autoplay: 3000,
-                    pagination : '.swiper-pagination'
-                })
-            },
+            mounted(){
+                this.getinfo();
+                console.log(this.info)
+            },methods:{
+               getinfo(){
+                   let that=this;
+                   var id = getUrl('id');
+                   axios.post('http://wxpay.possji.cn/yikehao/getdetail',
+                       {
+                        id:id
+                        })
+                   //then里面跟一个成功回调函数
+                       .then(function (resp) {
+                           if (resp.data.code){
+                               that.list=resp.data.data
+                           }else{
+                               $.toast("无法加载", "text");
+                           }
 
-            // 渲染当前商品的 详细信息
-            product_detail: function(){
-                var detailVue = new Vue({
-                    el: "#product-detail",
-                    data:{
-                        banner_list:[], // 存放产品banner
-                        datail:{},      // 详情
-                        business_id: business_id,
-
-
+                       })
+                       // catch中跟一个失败回调函数
+                       .catch(function (error) {
+                           console.log(error);
+                       });
+               }
             }
-                })
-            },
-
-            // 渲染
-            fetchBanner: function(){
-                var business_id = getUrl('business_id');
-                var data = {
-                    business_id: business_id
-                }
-                var jsonData = JSON.stringify(data);
-                $.ajax({
-                    url:"http://localhost/item_wrap/api/product.json",
-                    type:"post",
-                    async:true,                 //是否异步
-                    // dataType:"jsonp",           //跨域json请求一定是jsonp
-                    // jsonp: jsonData,    //跨域请求的参数名，默认是callback
-                    data: jsonData,
-                    beforeSend: function(){},   //请求前的处理
-                    success:function(res){      //请求成功处理，和本地回调完全一样
-                        console.log(res)
-                    },
-                    complete: function(){},     //请求完成的处理
-                    error: function(){}         //请求出错处理
-
-                })
-                console.log(business_id)
-
-            }
-        }
-        // 执行函数
-        index.init();
-    })
-</script>
+        })
+    </script>
 </body>
 </html>
