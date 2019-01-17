@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- 公共common.css -->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/menu.css">
+
+    <!-- weui -->
+    <link rel="stylesheet" href="./css/weui.css">
+    <link rel="stylesheet" href="./css/jquery-weui.css">
+
+    <!-- 适配 -->
+    <script src="./js/common.js"></script>
+    <title>Item_wrap</title>
+</head>
+<body>
+    <div id="product-detail">
+        <!-- header start -->
+        <header>
+            <div class="topbar-second">
+                <span onclick="javascript:history.go(-1)"></span>商品详情
+                <i class="back" onclick="javascript:history.go(-1)"></i>
+            </div>
+        </header>
+        <!-- header end   -->
+
+        <!-- main start -->
+        <div class="swiper-container detailBanner" id="detailBanner" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="./images/item-img01.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="./images/item-img02.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="./images/item-img03.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="./images/item-img04.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="./images/item-img05.jpg" alt=""></div>
+            </div>
+            <!-- focus -->
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <!--<div class="main">-->
+        <div class="detail-content">
+            <div class="pro-title pro-item">标题：Apple 苹果 iPhone6s Plus 手机 金色 全网通 32G</div>
+            <div class="pro-desc pro-item">描述：Apple 苹果 iPhone6s Plus 手机 金色 全网通 32G</div>
+            <div class="pro-price pro-item">价格：
+                <span class="pro-newPrice">￥2600</span>
+                <span class="pro-oldPrice">￥3600</span>
+            </div>
+            <div class="detail-intro pro-item">商品介绍：
+                <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
+                <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
+                <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
+                <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
+                <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
+            </div>
+        </div>
+
+        <!--</div>-->
+        <!-- main end   -->
+
+        <!-- footer start -->
+        <footer>
+            <a class="pro-buy" href="order_confirm.html">立即购买
+            </a>
+        </footer>
+        <!-- footer end -->
+
+    </div>
+
+<!-- jquery -->
+<script src="./js/jquery-2.1.4.js"></script>
+<script src="./js/jquery-weui.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<!-- common js -->
+<script src="./js/common.js"></script>
+<script src="./js/public.js"></script>
+<script src="./js/vue.js"></script>
+<script src="./js/data.js"></script>
+<script>
+    $(function () {
+        // alert(1)     // 测试jquery
+
+        var index = {
+            // 初始化函数
+            init: function(){
+                this.bindEvents();
+                this.swiperSlide();
+                var business_id = getUrl('business_id');
+                this.fetchBanner();
+
+            },
+            // 事件函数
+            bindEvents: function(){
+            },
+            // swiper slide
+            swiperSlide: function(){
+                var detailBanner = new Swiper("#detailBanner",{
+                    loop: true,
+                    autoplay: 3000,
+                    pagination : '.swiper-pagination'
+                })
+            },
+
+            // 渲染当前商品的 详细信息
+            product_detail: function(){
+                var detailVue = new Vue({
+                    el: "#product-detail",
+                    data:{
+                        banner_list:[], // 存放产品banner
+                        datail:{},      // 详情
+                        business_id: business_id,
+
+
+            }
+                })
+            },
+
+            // 渲染
+            fetchBanner: function(){
+                var business_id = getUrl('business_id');
+                var data = {
+                    business_id: business_id
+                }
+                var jsonData = JSON.stringify(data);
+                $.ajax({
+                    url:"http://localhost/item_wrap/api/product.json",
+                    type:"post",
+                    async:true,                 //是否异步
+                    // dataType:"jsonp",           //跨域json请求一定是jsonp
+                    // jsonp: jsonData,    //跨域请求的参数名，默认是callback
+                    data: jsonData,
+                    beforeSend: function(){},   //请求前的处理
+                    success:function(res){      //请求成功处理，和本地回调完全一样
+                        console.log(res)
+                    },
+                    complete: function(){},     //请求完成的处理
+                    error: function(){}         //请求出错处理
+
+                })
+                console.log(business_id)
+
+            }
+        }
+        // 执行函数
+        index.init();
+    })
+</script>
+</body>
+</html>

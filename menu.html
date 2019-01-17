@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- index.css -->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/menu.css">
+    <!-- weui -->
+    <link rel="stylesheet" href="./css/weui.css">
+    <link rel="stylesheet" href="./css/jquery-weui.css">
+    <!-- rem适配 -->
+    <script src="./js/jquery-2.1.4.js"></script>
+    <script src="./js/common.js"></script>
+
+    <title>Item_wrap</title>
+</head>
+<body>
+    <!-- header start -->
+    <!--<div class="topbar-first maxWidth menu-topbar-first">-->
+        <!--<i class="back" ></i>-->
+        <!--<div class="search">-->
+            <!--<div class="weui-search-bar searchBar" id="searchBar">-->
+                <!--<form class="weui-search-bar__form">-->
+                    <!--<div class="weui-search-bar__box">-->
+                        <!--<i class="weui-icon-search"></i>-->
+                        <!--<input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">-->
+                        <!--<a href="javascript:" class="weui-icon-clear" id="searchClear"></a>-->
+                    <!--</div>-->
+                <!--</form>-->
+                <!--&lt;!&ndash;<a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>&ndash;&gt;-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<i class="omit"></i>-->
+    <!--&lt;!&ndash; main start &ndash;&gt;-->
+    <!--</div>-->
+    <!-- header end   -->
+
+    <div class="main">
+            <div class="menu" id="menu_bind">
+                <ul class="menu-item">
+                    <li :class="{'active' :item.type == selectItem }" v-for="(item,index) in data" @click="clickItem(item,index)">
+                        {{item.name}}
+                    </li>
+                </ul>
+            </div>
+            <div class="store-menu">
+            <!---->
+            <div class="swiper-container menuBanner" id="menuBanner" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"  v-for="(item,index) in data"><img :src="item.img_url" alt=""></div>
+                </div>
+                <!-- focus -->
+                <div class="swiper-pagination"></div>
+            </div>
+            <!-- store-content -->
+            <div class="store-content" id="store_bind">
+                <div class="store-item" v-for="(item,index) in data">
+                    <h3>{{item.name}}</h3>
+                    <ul class="store-item-content">
+                        <li v-for="(pro,index) in item.product">
+                            <div class="item-img">
+                                <img  :src="pro.img_url">
+                            </div>
+                            <div class="item-desc">
+                                <div class="item-title">{{pro.item_title}}</div>
+                                <div class="item-des">{{pro.item_des}}</div>
+                                <div class="item-price">
+                                    <div class="item-newPrice"><span>价格:￥</span><span class="newPrice">{{pro.newPrice}}</span> </div>
+                                    <div class="item-oldPrice"><span>价格:￥</span><span class="oldPrice">{{pro.oldPrice}}</span></div>
+                                </div>
+                            </div>
+                            <a class="bug" :href="'order_confirm.html?pro_id='+pro.business_id">立即购买</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- main end   -->
+
+    <!-- footer start -->
+    <footer>
+        <!-- tabbar -->
+        <div class="weui-tabbar" id="footer-tabber">
+            <a href="./index.html" class="weui-tabbar__item weui-bar__item--on">
+                <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+                <div class="weui-tabbar__icon">
+                    <img src="./images/indexicon.png" alt="">
+                </div>
+                <p class="weui-tabbar__label" style="color: #999999;">首页</p>
+            </a>
+            <!--<a href="javascript:;" class="weui-tabbar__item">-->
+            <a href="./menu.html" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="./images/bugicon.png" alt="">
+                </div>
+                <p class="weui-tabbar__label" style="color: #36c7fe;">买号</p>
+            </a>
+            <a href="./order.html" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="./images/sellicon.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">卖号</p>
+            </a>
+            <a href="./mine.html" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="./images/usericon.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- footer end   -->
+
+    <!-- jquery -->
+    <script src="./js/jquery-weui.min.js"></script>
+    <script src="./js/swiper.min.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/data.js"></script>
+    <script>
+        $(function () {
+            // alert(1)     // 测试jquery
+            var menu = {
+                // 初始化函数
+                init: function(){
+                    this.bindEvents();
+                    this.swiperSlide();
+
+                    this.menu_bind();
+                    this.store_bind();
+                },
+                // 事件函数
+                bindEvents: function(){
+                },
+                // swiper slide
+                swiperSlide: function(){
+                    this.banner_bind();
+                    var menuBanner = new Swiper("#menuBanner",{
+                        autoplay: 3000,
+                        autoplayDisableOnInteraction: false,
+                        pagination: '.swiper-pagination',
+                        observer: true,
+                        // observeParents: true,
+                    })
+                },
+                menu_bind: function(){
+                    var menu_bindVue = new Vue({
+                        el: "#menu_bind",
+                        data: {
+                            data: [],
+                            selectItem:1,   // 默认选中
+                        },
+                        methods: {
+                            clickItem:function(item,index){
+                                menu_bindVue.selectItem = item.type;
+                                // console.log(item.type_id);
+                                // var index = $(this).index();
+                                // var index = this.index();
+                                console.log(index);
+                                var scrollHeight = $(".store-item").eq(index).offset().top
+                                console.log(scrollHeight);
+                                if(0 == index){
+                                    $("html,body").animate({scrollTop:0}, 500);
+                                } else{
+                                    $("html,body").animate({scrollTop:scrollHeight}, 500);
+                                }
+                            }
+                        }
+                    })
+                    var mockData = returnJson("商品列表");
+                    console.log(mockData);
+                    menu_bindVue.data = mockData.data;
+
+
+                },
+                banner_bind: function () {
+                    var menubannerVue = new Vue({
+                        el: "#menuBanner",
+                        data:{
+                            data: []
+                        }
+
+                    })
+                    var mockData = returnJson('首页轮播');
+                    console.log(mockData)
+                    menubannerVue.data = mockData.data;
+                },
+                store_bind: function(){
+                    var storeVue = new Vue({
+                        el: "#store_bind",
+                        data:{
+                            data:[]
+                        }
+                    })
+                    var mockData = returnJson('商品列表');
+                    console.log(mockData)
+                    storeVue.data = mockData.data;
+                }
+
+            }
+            // 执行函数
+            menu.init();
+        })
+    </script>
+</body>
+</html>

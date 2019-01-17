@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!--<meta name="viewport"   content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- index.css -->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/mine.css">
+    <!-- weui -->
+    <link rel="stylesheet" href="./css/weui.css">
+    <link rel="stylesheet" href="./css/jquery-weui.css">
+    <!-- common -->
+    <script src="./js/jquery-2.1.4.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/city-picker.js"></script>
+    <title>Item_wrap 地址列表</title>
+</head>
+<body>
+<header>
+    <div class="topbar-second">
+        <span onclick="javascript:history.go(-1)"></span>修改地址
+        <i class="back" onclick="javascript:history.go(-1)"></i>
+    </div>
+</header>
+
+<ul class="address-content address-revise-content">
+    <li>
+        <label for="user-name" class="address-lab">收货人姓名</label>
+        <input id="user-name" type="text" placeholder="请填写收货人姓名">
+    </li>
+    <li>
+        <label for="user-tel" class="address-lab">手机号</label>
+        <input id="user-tel" type="text" placeholder="请填写手机号">
+    </li>
+    <li>
+        <label for="city-picker" class="address-lab">地址</label>
+        <input id="city-picker"  type="text" placeholder="请填写地址">
+    </li>
+    <li>
+        <label for="add-inf" class="address-lab">详细地址</label>
+        <input id="add-inf" type="text" placeholder="请填写详细地址">
+    </li>
+</ul>
+
+<a href="#" class="achieve">完成</a>
+
+<!-- jquery -->
+<script src="./js/jquery-weui.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<script>
+        // $("#city-picker").cityPicker({
+        //     title: "请选择收货地址"
+        // });
+        // alert(1)
+</script>
+</body>
+</html>

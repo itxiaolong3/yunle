@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+
+    <!-- 公共common.css -->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <!-- weui -->
+    <link rel="stylesheet" href="./css/weui.css">
+    <link rel="stylesheet" href="./css/jquery-weui.css">
+
+    <title>云乐互联</title>
+</head>
+<body ontouchstart>
+    <!-- header start -->
+    <header>
+        <!-- swiper -->
+        <div class="swiper-container indexBanner" id="indexBanner" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for="(item,index) in data">
+                    <a :href="item.tourl"><img :src="item.imgs" alt=""></a>
+                </div>
+            </div>
+            <!-- focus -->
+            <div class="swiper-pagination"></div>
+        </div>
+        <!-- search -->
+       <div class="search-wrap">
+           <div class="search-title">搜索</div>
+           <div class="search-content">
+               <input id="searchInput" type="text" placeholder="请输入搜索信息">
+           </div>
+       </div>
+    </header>
+    <!-- header end   -->
+
+    <div class="notice">
+        <div class="notice-title">交易动态</div>
+            <div class="notice-content">
+                <div class="swiper-container" id="noticalBanner" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+                    <div class="swiper-wrapper" >
+                        <div class="swiper-slide" v-for="(item,index) in data" >
+                            <a href="#">
+                                <span style="color: red;">{{item.totime}}</span>&nbsp;{{item.name}}以
+                                <span style="color: red;">{{item.payprice}}元</span>成交
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+    <!-- main start -->
+    <div class="main">
+        <!--导航栏-->
+        <!-- choiceness list -->
+        <div class="choiceness main-item" id="choiceness_bind">
+            <div class="choiceness-content">
+                <div class="choiceness-item" v-for="(item,index) in data">
+                    <a href="javascript:void(0)">
+                        <img :src="item.img_url" alt="">
+                        <span class="choiceness-item-desc">{{item.name}}</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <!-- item -->
+        <div class="category main-item">
+            <h3>牛号推荐</h3>
+             <div class="category-content" id="category_bind">
+                 <div class="category-item" v-for="(item,index) in data" style="height: 220px;">
+                     <a :href="'product_detail.html?business_id='+item.business_id+'&id='+2">
+                         <ul>
+                             <li>
+                                 <div class="li_top">
+                                     <img src="./images/sicon_wx.png" width="25" height="25">
+                                     <span>{{item.zhname}}</span>
+                                 </div>
+
+                             </li>
+                             <li>
+                                 <div class="li_top">
+                                     <img src="./images/sicon_hy.png" width="25" height="25">
+                                     <span>所属行业:【{{item.fortypetext}}】</span>
+                                 </div>
+                             </li>
+                             <li>
+                                 <div class="li_center">
+                                     <aside>
+                                         <span>粉丝数量</span>
+                                         <span>{{item.fansnum}}</span>
+                                     </aside>
+                                     <aside >
+                                         <span>账号类型</span>
+                                         <span v-if="item.type==1">订阅号</span>
+                                         <span v-else>服务号</span>
+                                     </aside>
+                                     <aside>
+                                         <span>单粉价格</span>
+                                         <span>{{item.oneprice}}粉/元</span>
+                                     </aside>
+                                 </div>
+                             </li>
+                             <li>
+                                 <div class="price">
+                                     <span>价格</span>
+                                     <span style="color: red;">￥{{item.price}}</span>
+                                 </div>
+                             </li>
+                         </ul>
+                     </a>
+                 </div>
+             </div>
+             </div>
+
+        <div class="weui-loadmore">
+            <i class="weui-loading"></i>
+            <span class="weui-loadmore__tips">正在加载</span>
+        </div>
+        <!-- nomore -->
+        <div class="nomore" style="display: none">
+            <span class="nomore-line"></span>
+            <span class="no-inf">没有更多了</span>
+            <span class="nomore-line"></span>
+        </div>
+    </div>
+    <!-- main end   -->
+
+    <!-- 回到顶部 -->
+    <div class="comeBack" id="comeTop">
+        <i class="icon-toTop"></i>
+        <span class="come-top">顶部</span>
+    </div>
+    <!-- footer start -->
+    <footer>
+        <!-- tabbar -->
+        <div class="weui-tabbar" id="footer-tabber">
+            <a href="./index.html" class="weui-tabbar__item weui-bar__item--on">
+                <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+                <div class="weui-tabbar__icon">
+                    <img src="./images/indexicon.png" alt="">
+                </div>
+                <p class="weui-tabbar__label" style="color: #36c7fe;">首页</p>
+            </a>
+            <!--<a href="javascript:;" class="weui-tabbar__item">-->
+            <a href="./buy.html" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="./images/bugicon.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">买号</p>
+            </a>
+            <a href="./order.html" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="./images/sellicon.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">卖号</p>
+            </a>
+            <a href="./mine.html" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="./images/usericon.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">我的</p>
+            </a>
+        </div>
+    </footer>
+    <!-- footer end   -->
+    <!-- jquery -->
+    <script src="./js/jquery-2.1.4.js"></script>
+    <script src="./js/jquery-weui.min.js"></script>
+    <script src="./js/swiper.min.js"></script>
+    <!-- common js -->
+    <script src="./js/common.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/axios.js"></script>
+    <script>
+        $(function () {
+            // alert(1)     // 测试jquery
+            var index = {
+                // 初始化函数
+                init: function(){
+                    this.bindEvents();
+                    this.swiperSlide();
+                    this.getScrollHeight();
+                    this.choiceness_bind();
+                    this.category_bind();
+                },
+                // 事件函数
+                bindEvents: function(){
+                    $("body").on("click",".weui-tabbar__item",index.clickTabbar);
+                    $("body").on("click","#comeTop",index.clickComeTop);
+                    $("body").on("keypress","#searchInput",index.searchKeypress)
+                },
+                // swiper slide
+                swiperSlide: function(){
+                    this.banner_bind();
+                    var indexBanner = new Swiper("#indexBanner",{
+                        autoplay: 3000,
+                        autoplayDisableOnInteraction: false,
+                        pagination: '.swiper-pagination',
+                        observer: true,
+                        // observeParents: true,
+
+
+                    });
+                    this.noticalBanner_bind();
+                    setTimeout(function () {
+                        var noticalBanner = new Swiper("#noticalBanner",{
+                            direction: "vertical",
+                            autoplay: 3000,
+                            initialSlide: 0,
+
+                        })
+                    },500)
+
+                },
+
+                // banner 数据渲染
+                banner_bind: function(){
+                    var bannerVue = new Vue({
+                        el: "#indexBanner",
+                        data:{
+                            data: []
+                        },
+                        methods:{
+                            getBanner(){
+                                //使用axios发送请求
+                                let that=this;
+                                axios.get('http://wxpay.possji.cn/yikehao/getbanner')
+                                //then里面跟一个成功回调函数
+                                    .then(function (resp) {
+                                        if (resp.data.code){
+                                            console.log(resp.data);
+                                            bannerVue.data=resp.data.data;
+                                        }else{
+                                            $.toast("轮播图无法加载", "text");
+                                        }
+
+                                    })
+                                    // catch中跟一个失败回调函数
+                                    .catch(function (error) {
+                                        console.log(error);
+                                    });
+                            },
+                            getjynotifi(){
+
+                            }
+                        },
+                        mounted(){
+                          this.getBanner();
+                        }
+
+                    })
+                },
+                noticalBanner_bind: function(){
+                    var jiaoYiVue = new Vue({
+                        el: "#noticalBanner",
+                        data:{
+                            data: []
+                        },
+                        methods:{
+                        getNotifi(){
+                            //使用axios发送请求
+                            let that=this;
+                            axios.get('http://wxpay.possji.cn/yikehao/sellnotifi')
+                            //then里面跟一个成功回调函数
+                                .then(function (resp) {
+                                    if (resp.data.code){
+                                        console.log('如下是交易动态的数据')
+                                        console.log(resp.data);
+                                        jiaoYiVue.data=resp.data.data
+                                    }else{
+                                        $.toast("交易动态无法加载", "text");
+                                    }
+
+                                })
+                                // catch中跟一个失败回调函数
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                        },
+
+                    },
+                    mounted(){
+                        this.getNotifi();
+                    }
+                    })
+                },
+                choiceness_bind: function(){
+                    var choicenessVue = new Vue({
+                        el: "#choiceness_bind",
+                        data:{
+                            data: []
+                        },
+                    })
+                    var mockData = returnJson('导航栏');
+                    choicenessVue.data = mockData.data;
+                },
+                category_bind: function(){
+                    var categoryVue = new Vue({
+                        el: "#category_bind",
+                        data:{
+                            data: [],
+                            page:1
+                        },
+                        methods:{
+                            getSelllist(){
+                                //使用axios发送请求
+                                let that=this;
+                                let loading = false;  //状态标记
+                                $(document.body).infinite().on("infinite", function() {
+                                    console.log('状态'+loading)
+                                        if(loading) return;
+                                        loading = true;
+                                        let newpage=that.page;
+                                        newpage++;
+                                        that.page=newpage;
+                                        axios.post('http://wxpay.possji.cn/yikehao/haolist', {
+                                            page: that.page
+                                        })
+                                        //then里面跟一个成功回调函数
+                                            .then(function (resp) {
+                                                if (resp.data.code){
+                                                    loading = false;
+                                                    let sellarr=that.data;
+                                                    let newdata=sellarr.concat(resp.data.data)
+                                                    that.data=newdata
+                                                    $(".weui-loadmore").hide()
+                                                }else{
+                                                    $('.nomore').css('display','')
+                                                    $(".weui-loadmore").hide()
+                                                    $(document.body).destroyInfinite()
+                                                    $.toast("已加载完毕", "text");
+                                                }
+
+                                            })
+                                            .catch(function (error) {
+                                                console.log(error);
+                                            });
+                                        //loading = false;
+
+                                });
+
+                                axios.post('http://wxpay.possji.cn/yikehao/haolist', {
+                                    // name: this.newName
+                                    page: that.page
+                                })
+                                //then里面跟一个成功回调函数
+                                    .then(function (resp) {
+                                        if (resp.data.code){
+                                            console.log('如下是账号的数据')
+                                            console.log(resp.data);
+                                            categoryVue.data=resp.data.data
+                                        }else{
+                                            $.toast("无法加载", "text");
+                                        }
+
+                                    })
+                                    // catch中跟一个失败回调函数
+                                    .catch(function (error) {
+                                        console.log(error);
+                                    });
+                            },
+
+                        },
+                        mounted(){
+                            this.getSelllist();
+                        }
+                    })
+
+                },
+
+                // 监听滚动条位置
+                getScrollHeight: function () {
+                    $(window).scroll(function() {
+                        var scrollHeight = $(document).scrollTop();
+                       // console.log(scrollHeight);
+                        if (scrollHeight > 500){
+                            $("#comeTop").fadeIn(500);
+                        }else{
+                            $("#comeTop").fadeOut(500);
+                        }
+                    });
+                },
+                // 点击返回顶部
+                clickComeTop: function () {
+                    $("html,body").animate({scrollTop:0}, 500);
+                },
+                searchKeypress: function (event) {
+                    if (event.keyCode == 13){
+                        event.preventDefault();
+                        // alert(1)
+                        location.href="html?search="+event.target.value;
+                    }
+                },
+                //请求封装
+                dohttp:function (action,data,type) {
+
+                }
+            }
+            // 执行函数
+            index.init();
+        })
+    </script>
+</body>
+</html>

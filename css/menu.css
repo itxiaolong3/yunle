@@ -1,0 +1,295 @@
+.menu-topbar-first .back {
+  background: none;
+}
+.main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+  justify-content: space-between;
+}
+.main .menu {
+  flex: 1 1 24%;
+  width: 24%;
+  min-height: 100%;
+  background-color: #f8f8f8;
+  position: fixed;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+}
+.main .menu .menu-item {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #f8f8f8;
+}
+.main .menu .menu-item li {
+  width: 100%;
+  height: .5rem;
+  line-height: .5rem;
+  text-align: center;
+  font-size: 12px;
+}
+.main .menu .menu-item li.active {
+  background-color: #fff;
+}
+.main .store-menu {
+  flex: 1 1 74%;
+  width: 74%;
+  position: absolute;
+  top: 5px;
+  right: 1%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: 100%;
+}
+.main .store-menu .menuBanner {
+  width: 100%;
+}
+.main .store-menu .menuBanner .swiper-slide {
+  width: 100%;
+}
+.main .store-menu .menuBanner .swiper-slide img {
+  width: 100%;
+}
+.main .store-menu .store-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 100px;
+}
+.main .store-menu .store-content .store-item {
+  margin-bottom: .2rem;
+}
+.main .store-menu .store-content .store-item h3 {
+  line-height: .3rem;
+  font-weight: normal;
+  padding-left: .2rem;
+  border-bottom: 2px solid #00bdff;
+}
+.main .store-menu .store-content .store-item .store-item-content li {
+  margin-top: .1rem;
+  padding: .15rem 0;
+  box-shadow: 1px 2px 1px #ccc;
+  position: relative;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.main .store-menu .store-content .store-item .store-item-content li .item-img {
+  flex: 1 1 30%;
+  width: 30%;
+  height: 30%;
+}
+.main .store-menu .store-content .store-item .store-item-content li .item-img img {
+  width: 100%;
+}
+.main .store-menu .store-content .store-item .store-item-content li .item-desc {
+  flex: 1 1 65%;
+  font-size: 12px;
+  margin-left: 5%;
+  color: #646464;
+}
+.main .store-menu .store-content .store-item .store-item-content li .item-desc .item-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.main .store-menu .store-content .store-item .store-item-content li .item-desc .item-des {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  width: 1.68rem;
+}
+.main .store-menu .store-content .store-item .store-item-content li .item-desc .item-price {
+  color: red;
+  margin-top: .06rem;
+  font-size: 14px;
+}
+.main .store-menu .store-content .store-item .store-item-content li .item-desc .item-price .item-oldPrice {
+  color: #646464;
+  text-decoration: line-through;
+}
+.main .store-menu .store-content .store-item .store-item-content li .bug {
+  font-size: 12px;
+  padding: 3px 5px;
+  position: absolute;
+  right: 5px;
+  bottom: 12px;
+  background-color: #00bdff;
+  border-radius: 10px;
+  color: #fff;
+}
+.detail-content {
+  display: flex;
+  background-color: #fff;
+  padding: .1rem;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: .5rem;
+}
+.detail-content .pro-title {
+  flex: 1;
+  line-height: .3rem;
+  font-size: 14px;
+}
+.detail-content .pro-desc {
+  flex: 1;
+  line-height: .3rem;
+}
+.detail-content .pro-price {
+  flex: 1;
+  height: .3rem;
+  line-height: .3rem;
+}
+.detail-content .pro-price .pro-oldPrice {
+  text-decoration: line-through;
+}
+.detail-content .detail-intro {
+  flex: 1;
+  line-height: .2rem;
+  padding: .2rem 0;
+}
+.detail-content .pro-item {
+  border-bottom: 1px solid #ccc;
+}
+.pro-buy {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: .4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2d9cff;
+  color: #FFF;
+  font-size: 14px;
+  border-radius: 5px;
+}
+.order-bar {
+  display: flex;
+  height: .4rem;
+  line-height: .4rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #CCC;
+}
+.order-bar .order-total {
+  flex: 1 1 1.6rem;
+  text-align: right;
+}
+.order-bar .order-totalPri {
+  flex: 1 1 .02rem;
+  color: #2d9cff;
+  font-size: 14px;
+}
+.order-bar .order-sub {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2d9cff;
+  color: #fff;
+  font-size: 14px;
+}
+.address-content {
+  background-color: #fff;
+  padding: .1rem;
+}
+.address-content .address-inf {
+  font-size: 0px;
+}
+.address-content .address-inf .user-name {
+  font-size: 14px;
+}
+.address-content .address-inf .user-tel {
+  font-size: 14px;
+}
+.address-content .address-inf .inf-item {
+  height: .3rem;
+  line-height: .3rem;
+}
+.address-content .user-add {
+  font-size: 0px;
+  position: relative;
+}
+.address-content .user-add .add-inf {
+  font-size: 14px;
+}
+.address-content .user-add .icon-right {
+  display: inline-block;
+  width: 16px;
+  height: 25px;
+  background: url(../images/icon-right.png) no-repeat;
+  background-size: 8px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -6px;
+}
+.pro-content {
+  display: flex;
+  flex-direction: row;
+  padding: .2rem .1rem .2rem;
+  background-color: #fff;
+  margin-top: .1rem;
+  position: relative;
+}
+.pro-content .pro-img {
+  width: .9rem;
+  margin-right: .1rem;
+}
+.pro-content .pro-img a img {
+  width: .9rem;
+}
+.pro-content .pro-intro {
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+}
+.pro-content .pro-intro .pro-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+.pro-content .pro-intro .pro-desc {
+  font-size: 12px;
+  color: #9a9a9a;
+}
+.pro-content .pro-intro .pro-pri {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: .1rem;
+}
+.pro-content .pro-intro .pro-pri .pro-price {
+  font-size: 12px;
+  color: red;
+}
+.pro-content .pro-intro .pro-pri .pro-num {
+  width: 1.15rem;
+  height: .3rem;
+  line-height: .3rem;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  font-size: 14px;
+  text-align: center;
+}
+.pro-content .pro-intro .pro-pri .pro-num .num {
+  flex: auto;
+}
+.pro-content .pro-intro .pro-pri .pro-num .symbol-item {
+  width: .3rem;
+  height: .3rem;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+.pro-content .pro-intro .pro-item {
+  line-height: .22rem;
+}

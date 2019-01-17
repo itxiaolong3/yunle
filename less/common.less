@@ -1,0 +1,136 @@
+
+body{
+    color: #646464;
+    font-size: 14px;
+    background-color: #f2f2f2;
+    min-height: 100%;
+    max-width: 750px;
+    margin:0 auto;
+}
+// 左右浮动
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+
+// 最大宽度 750px
+.maxWidth{
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+// 公共组件 css
+
+/* topbar-first */
+.topbar-first{
+    width: 100%;
+    height: .46rem;
+    //border-bottom: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #ccc;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    //left: 0;
+    background-color: #FFF;
+    z-index:10;
+    .back{
+        display: inline-block;
+        width: .2rem;
+        height: .2rem;
+        background:url("../images/icon-back.png") no-repeat;
+        background-size: 100% 100%;
+        margin: .13rem .13rem;
+    }
+    .search{
+        flex:1;
+        .weui-search-bar{
+            padding: 0;
+            margin: .08rem 0;
+        }
+    }
+    .omit{
+        display: inline-block;
+        width: .2rem;
+        height: .2rem;
+        background:url("../images/icon-omit.png") no-repeat;
+        background-size: .2rem;
+        margin: .2rem .12rem;
+    }
+}
+/* header end */
+
+// 顶部条2 topbar2
+.topbar-second{
+    width: 100%;
+    height: 0.44rem;
+    line-height: 0.44rem;
+    background-color: #2d9cff;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    .back{
+        position: absolute;
+        top: 0.11rem;
+        left: 0.14rem;
+        display: inline-block;
+        width: 0.27rem;
+        height: 0.42rem;
+        //background-color: pink;
+        background: url("../images/back.png") no-repeat;
+        background-size: 0.13rem;
+    }
+}
+
+// 底部 tabbar
+#footer-tabber{
+    position: fixed;
+    max-width: 750px;
+}
+
+// 回到顶部
+.comeBack{
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 10px;
+    bottom: 60px;
+    font-size: 12px;
+    //border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 2px 2px 10px #6464;
+    //opacity: 0;
+    //filter:alpha(opacity=0);
+    .icon-toTop{
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background-size: 30px 30px;
+        background: url("../images/icon-top.png") no-repeat;
+        flex: 1;
+
+    }
+    .come-top{
+        flex: 1;
+        color: #646464;
+    }
+}
+
+/* swiper */
+// .product_detail swiper
+.detailBanner{
+    //height: 1.75rem;
+    .swiper-slide{
+        img{
+            width: 100%;
+        }
+    }
+}
+
+
+

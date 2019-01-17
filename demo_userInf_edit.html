@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>住在</title>
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/weui.min.css">
+    <link rel="stylesheet" href="css/jquery-weui.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/myself.css">
+</head>
+
+<body>
+<div class="self-header">
+    <a href="mine.html" ><img src="./images/backUp.png" alt=""></a>
+    个人资料
+    <a href="javascript:;" style="width: 0.64rem;height: 0.64rem;">
+    </a>
+</div>
+<div class="self-bar"></div>
+<!--<form action="" method="post">-->
+<div class="per-name">
+    <label class="dd">
+        <input type="file" style="display: none;" id="pay-upload" name="avatar">
+        <p>头像<span></span></p>
+        <span class="perTxBox">
+                <img src="images/collage_default.jpg" alt="" class="perTx">
+            </span>
+    </label>
+    <div class="dd">
+        <p>昵称</p>
+        <input type="text" name="name" placeholder="" class="nicheng">
+    </div>
+</div>
+<div class="padding012">
+    <button class="per-gh-a per-bd-btn">更改资料</button>
+</div>
+<!--</form>-->
+</body>
+<script src="js/jquery-2.2.4.min.js"></script>
+<script src="js/jquery-weui.min.js"></script>
+<script src="js/flexible_css.debug.js"></script>
+<script src="js/flexible.debug.js"></script>
+<script src="js/public.js"></script>
+<script>
+    // console.log(user_data)
+    // $.alert("自定义的消息内容");
+    //禁止滚动
+    noMove()
+    jQuery(function($){
+        var myMain = {
+            init: function () {
+                this.showMes();
+                this.bindEvents();
+
+            },
+            data:{
+                avatar:'',
+                token:'',
+                member_id:''
+            },
+            bindEvents: function () {
+                // $(document).on('click','.perTxBox', $.proxy(this.clickTx,this))
+                $(document).on('change','#pay-upload', $.proxy(this.iChange,this));
+                $(document).on('click','.per-bd-btn', $.proxy(this.clickC,this))
+            },
+            showMes:function(){
+                fetchMemberInfo().then((userInfo)=> {
+                    if (userInfo) {
+                        console.log(userInfo);
+                        HTTP_REQUEST_MANAGER.post(URL_HEADER+'cloud_shop/member/default/info',{user_type:userInfo.user_type,member_id:userInfo.member_id,token:userInfo.token},function(res){
+                            console.log(res.data);
+                            if (userInfo) {
+                                $('.perTx').attr('src', res.data.avatar)
+                            } else {
+                                $('.perTx').attr('src', 'images/collage_default.jpg');
+                            }
+                            if (res.data.name) {
+                                $('.nicheng').attr('placeholder', res.data.name)
+                            } else {
+                                $('.nicheng').attr('placeholder', res.data.mobile)
+                            }
+                        },'json')
+
+                        myMain.data.token = userInfo.token;
+                        myMain.data.member_id = userInfo.member_id;
+                    } else {
+                        self.location = 'login.html'
+                    }
+                });
+            },
+            // clickTx:function(){
+            //     $('#pay-upload').trigger('touchstart');
+            // },
+            iChange:function(){
+                var _that = this;
+                var file = $("#pay-upload").get(0).files[0];
+                var formdata = new FormData();
+                var type = file.type.split("/");
+                var name = file.name;
+                if(type[0]=='image'){
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var base64Str = e.target.result;//获取base64
+                        // 下面是测试得到的base64串能否正常使用：
+                        $('.perTx').attr('src',base64Str);
+                        myMain.data.avatar = base64Str;;
+                    };
+                    reader.readAsDataURL(file);
+                }else{
+                    $.toptip('图片格式不符合','error');
+                    $("#pay-upload").val();
+                    return;
+                }
+            },
+            clickC:function(){
+                var image = $('.perTx').attr('src');
+                var name = $('.nicheng').val().trim()?$('.nicheng').val().trim():$('.nicheng').attr('placeholder');
+                console.log(image);
+                console.log(name);
+                $.post(URL_HEADER+'member/default/update-info',{member_id:myMain.data.member_id,token:myMain.data.token,avatar:image,name:name,access_token:ACCESS_TOKEN},function(data){
+                    if(data.code==200){
+                        console.log(data);
+                        // user_data.name = name;
+                        // user_data.avatar = myMain.data.avatar;
+                        $.toast("修改成功",1000,function(){
+                            window.location.reload();
+                        });
+                        // console.log(user_data
+
+                    }else{
+                        $.alert(data.msg)
+                    }
+                })
+
+            }
+        };
+        myMain.init();
+    });
+
+</script>
+
+</html>

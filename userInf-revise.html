@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+
+    <!-- weui -->
+    <link rel="stylesheet" href="./css/weui.css">
+    <link rel="stylesheet" href="./css/jquery-weui.css">
+    <!-- jquery -->
+    <script src="./js/jquery-2.1.4.js"></script>
+    <script src="./js/common.js"></script>
+    <!-- mine css -->
+    <link rel="stylesheet" href="./css/mine.css">
+    <title>Item_wrap 我的</title>
+</head>
+<body>
+
+<header>
+    <div class="topbar-second">
+        <span onclick="javascript:history.go(-1)"></span>
+        资料修改
+        <i class="back" onclick="javascript:history.go(-1)"></i>
+    </div>
+</header>
+<!-- 我的页面 -->
+<!--<div class="user-inf">-->
+    <!--<div class="user-pic">-->
+        <!--<a href="#">-->
+            <!--<img src="./images/user-pic.jpg" alt="">-->
+        <!--</a>-->
+    <!--</div>-->
+    <!--<div class="user-name">一缕阳光</div>-->
+    <!--<div class="change-inf"><i class="icon-right"></i></div>-->
+<!--</div>-->
+
+<!-- 主体 -->
+<ul class="inf-rev">
+    <li>
+        <label for="user-aver">头   像</label>
+        <img src="./images/user-pic.jpg" alt="">
+        <input id="user-aver" type="file" name="file" capture="camera">
+    </li>
+    <li>
+        <label for="user-name">昵   称</label>
+        <input id="user-name" type="text" value="一缕阳光">
+    </li>
+    <!--<li>-->
+        <!--<label for="user-sex">性   别</label>-->
+        <!--<input id="user-sex" type="text" value="男">-->
+    <!--</li>-->
+</ul>
+
+<!-- 退出 -->
+<a class="login-out inf-save" id="saveInf">保存</a>
+
+<!-- footer start -->
+<footer>
+    <!-- tabbar -->
+    <div class="weui-tabbar" id="footer-tabber">
+        <a href="./index.html" class="weui-tabbar__item weui-bar__item--on">
+            <span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <!--<a href="javascript:;" class="weui-tabbar__item">-->
+        <a href="./menu.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_msg.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">分类</p>
+        </a>
+        <a href="./order.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">发现</p>
+        </a>
+        <a href="./mine.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</footer>
+<!-- footer end   -->
+
+<script src="./js/jquery-weui.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<!-- common js -->
+<script src="./js/common.js"></script>
+<script>
+    $(function () {
+        // alert(1)     // 测试jquery
+        var index = {
+            // 初始化函数
+            init: function(){
+            },
+            // 事件函数
+            bindEvents: function(){
+                $("body").on("change","#user-aver",$.proxy(this.edit_aver,this));
+                $("body").on("click","#user-name",index.edit_name);
+                $("body").on("click","#saveInf",index.saveInf);
+            },
+            
+            // 获取用户信息
+            getUserInfo: function () {
+                fetchMemberInfo().then((userInfo)=> {
+                    if (userInfo) {
+                        console.log(userInfo);
+                        HTTP_REQUEST_MANAGER.post(URL_HEADER+'cloud_shop/member/default/info',{user_type:userInfo.user_type,member_id:userInfo.member_id,token:userInfo.token},function(res){
+                            console.log(res.data);
+                            if (userInfo) {
+                                $('.perTx').attr('src', res.data.avatar)
+                            } else {
+                                $('.perTx').attr('src', 'images/collage_default.jpg');
+                            }
+                            if (res.data.name) {
+                                $('.nicheng').attr('placeholder', res.data.name)
+                            } else {
+                                $('.nicheng').attr('placeholder', res.data.mobile)
+                            }
+                        },'json')
+
+                        myMain.data.token = userInfo.token;
+                        myMain.data.member_id = userInfo.member_id;
+                    }
+                    else {
+                        self.location = 'login.html'
+                    }
+                });
+
+            }
+            ,
+            // 修改头像
+            edit_aver: function(){
+                //FormData对象，
+                //可以把form中所有表单元素的name与value组成一个queryString，提交到后台。
+                //在使用Ajax提交时，使用FormData对象可以减少拼接queryString的工作量
+                var formData = new FormData();
+                formData.append("file",$("input[name='file']")[0].files[0]);
+                $.ajax({
+                    url:'upload-ajax.php',
+                    type:'post',
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success:function(data){
+                        console.log(data);
+                        if(data.status=="fail"){
+                            alert(data.message);
+                        }
+                        // #根据上传成功并返回压缩后的图片url，更新img标签src属性
+                        if(data.status=="success"){
+                            $(".avatar img").attr("src",data.url+"?"+new Date().getTime());
+                        }
+                    },error:function(e){
+                        console.log(e);
+                    }
+                });
+
+            },
+            // 修改昵称
+            edit_name: function(){
+
+            },
+            // 修改性别
+
+            // 点击保存
+            saveInf: function(){
+
+            }
+
+        }
+        // 执行函数
+        index.init();
+    })
+</script>
+</body>
+</html>

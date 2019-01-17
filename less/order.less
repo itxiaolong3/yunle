@@ -1,0 +1,143 @@
+/**
+ * order.html=> css
+ */
+body{
+    background-color: #f2f2f2;
+}
+.order{
+    // 订单导航
+    margin-bottom: .6rem;
+    .order_nav{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: .4rem;
+        line-height: .4rem;
+        border-bottom: 1px solid #ccc;
+        a.order_item{
+            flex:1 ;
+            width: 25%;
+            text-align: center;
+            border-right: 1px solid #cccccc;
+            background-color: #fff;
+            border-bottom: 2px solid transparent;
+        }
+        a.order_item:last-child{
+            border-right: none;
+        }
+        a.order_item_active{
+            border-bottom: 2px solid #2d9cff;
+        }
+    }
+    // 订单内容
+    .order_content{
+        display: flex;
+        flex-direction: column;
+        .order_product{
+            margin: .05rem 0 0;
+            //border: 1px solid #CCC;
+            background-color: #fff;
+
+            .store_inf{
+                line-height: .4rem;
+                border-bottom: 1px solid #cccccc;
+                display: flex;
+                flex-direction: row;
+                text-align: center;
+                padding: .05rem;
+                .store_logo{
+                    //flex: 1 1 .5rem;
+                    width: .5rem;
+                   a{
+                       img{
+                           display: inline-block;
+                           width: 80%;
+                           border-radius: 50%;
+                       }
+                   }
+                }
+                .store_name{
+                    flex: 1 1 auto;
+                    text-align: left;
+                    padding-left: .1rem;
+                }
+                .pro_status{
+                    //flex: 1 1 .6rem;
+                    width: .8rem;
+                    color: red;
+                }
+            }
+            // 商品内容
+            .pro_content{
+                display: flex;
+                flex-direction: row;
+                padding: .1rem 0;
+                //background-color: #f2f2f2;
+                border-bottom: 1px solid #ccc;
+                .pro_img{
+                    flex: 1 1 30%;
+                    width: 30%;
+                    a{
+                        display: flex;
+                        justify-content: center;
+                        //margin: .1rem 0;
+                        img{
+                            width: 80%;
+                            height: 80%;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    }
+                }
+                .pro_inf{
+                    width: 70%;
+                    .pro_name{
+                        width: 90%;
+                        margin-right: .15rem;
+                        overflow: hidden;
+                        text-overflow:ellipsis;
+                        white-space: nowrap;
+                        font-size: 14px;
+                        font-weight: 700;
+                        margin-bottom: .1rem;
+                    }
+                    .pro_desc{
+                        width: 90%;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        overflow: hidden;
+                        font-size: 12px;
+
+                    }
+                }
+
+            }
+            // 单个商品总价
+            .pro_total_price{
+                line-height: .3rem;
+                text-align: right;
+                font-size: 14px;
+                border-bottom: 1px solid #ccc;
+                padding-right: .2rem;
+            }
+            // 商品编辑按钮
+            .pro_operation{
+                margin: .1rem;
+                text-align: right;
+                font-size: 0;
+                a{
+                    display: inline-block;
+                    padding: .05rem .15rem;
+                    background-color: #2d9cff;
+                    color: #fff;
+                    border-radius:.05rem;
+                    font-size: 12px;
+                    margin-left: 0.1rem;
+                }
+            }
+        }
+
+    }
+}
+

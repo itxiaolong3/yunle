@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!--<meta name="viewport"   content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- index.css -->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/mine.css">
+    <!-- 插件样式.css -->
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/bootstrapValidator.css">
+    <!-- common -->
+    <script src="./js/jquery-2.1.4.js"></script>
+    <script src="./js/common.js"></script>
+    <title>Item_wrap 地址列表</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<header>
+    <div class="topbar-second">
+        <span onclick="javascript:history.go(-1)"></span>添加地址
+        <i class="back" onclick="javascript:history.go(-1)"></i>
+    </div>
+</header>
+
+<form class="address-content address-revise-content save-address" id="save-address">
+    <div class="form-group">
+        <label for="user-name" class="address-lab">收货人姓名:</label>
+        <input id="user-name" type="text" name="username" placeholder="请填写收货人姓名">
+    </div>
+    <div class="form-group">
+        <label for="user-tel" class="address-lab">手机号:</label>
+        <input id="user-tel" type="text" name="mobile" placeholder="请填写手机号">
+    </div>
+    <div class="form-group">
+        <label for="city-picker" class="address-lab">地址:</label>
+        <input id="city-picker"  type="text" name="address" placeholder="请填写地址">
+    </div>
+    <div class="form-group">
+        <label for="add-inf" class="address-lab">详细地址:</label>
+        <input id="add-inf" type="text" name="address-inf" placeholder="请填写详细地址">
+    </div>
+    <div class="form-group">
+        <input type="submit" value="保存" id="save">
+    </div>
+</form>
+
+<!---->
+
+
+
+<!-- jquery -->
+<script src="./js/jquery-weui.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/bootstrapValidator.js"></script>
+<script>
+    $(function () {
+        // alert(1)     // 测试jquery
+        var index = {
+            // 初始化函数
+            init: function(){
+                this.bindEvents();
+                this.addressReg();
+            },
+            // 事件函数
+            bindEvents: function(){
+                $("body").on("click",".weui-tabbar__item",index.clickTabbar);
+                $("body").on("click","#save",index.saveAddress)
+            },
+            clickTabbar: function () {
+                $(this).addClass("weui-bar__item--on").siblings().removeClass("weui-bar__item--on")
+            },
+            // swiper slide
+           addressReg: function(){
+               $('#defaultForm').bootstrapValidator({
+                   // live: 'disabled',
+                   // message: 'This value is not valid',
+                   feedbackIcons: {
+                       valid: 'glyphicon glyphicon-ok',
+                       invalid: 'glyphicon glyphicon-remove',
+                       validating: 'glyphicon glyphicon-refresh'
+                   },
+                   fields: {
+                       username: {
+                           message: 'username不能为空',
+                           validators: {
+                               notEmpty: {
+                                   message: 'username不能为空'
+                               }
+                           }
+                       },
+                       password: {
+                           validators: {
+                               notEmpty: {
+                                   message: '密码不能为空'
+                               }
+
+
+                           }
+                       }
+                   }
+
+               });
+           },
+            saveAddress: function () {
+                var usernameValue = $("#user-name").val();
+                var telValue = $("#user-tel").val();
+                var ciryValue = $("#city-picker").val();
+                var addressValue = $("#add-inf").val();
+                if(usernameValue == ""){
+                    confirm("请输入收获人姓名")
+                }
+                if(telValue == ""){
+                    confirm("请输入手机号")
+                }
+                if(ciryValue == ""){
+                    confirm("请输入地址")
+                }
+                if(addressValue == ""){
+                    confirm("请输入详细信息")
+                }
+
+                if(usernameValue !== "" && telValue == "" && ciryValue == "" && addressValue == ""){
+
+                }
+            }
+
+        }
+        // 执行函数
+        index.init();
+    })
+</script>
+</body>
+</html>

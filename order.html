@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- weui -->
+    <link rel="stylesheet" href="./css/weui.css">
+    <link rel="stylesheet" href="./css/jquery-weui.css">
+    <!-- index.css -->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="css/order.css">
+    <!-- rem 适配 -->
+    <script src="./js/jquery-2.1.4.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/vue.js"></script>
+
+    <title>Item_wrap 我的订单</title>
+</head>
+<body>
+<!-- header start -->
+    <div class="topbar-second">
+        订单列表
+        <!--<i class="back" onclick="javascript:history.go(-1)"></i>-->
+    </div>
+
+ <!--main start -->
+    <div class="order">
+        <div class="order_nav" id="order-menu-bind">
+            <a class="order_item"
+               v-for="(item,index) in orderMenus"
+               :href="'order.html?status='+item.id"
+               :class="{'order_item_active':orderStatus==item.id}">
+               {{item.name}}
+            </a>
+        </div>
+        <div class="order_content" id="order-content-bind">
+            <div class="order_product" v-for="(item,index) in order_product_list">
+                <div class="store_inf">
+                    <div class="store_logo">
+                        <a href="#">
+                            <img v-if="item.business !=''" :src="item.business[0].logo" alt="">
+                        </a>
+                    </div>
+                    <div class="store_name" v-if="item.business !=''">{{item.business[0].business_name}}</div>
+                    <div class="pro_status">{{item.order_status_name}}</div>
+                </div>
+                <div class="pro_content">
+                    <div class="pro_img">
+                        <a href="#">
+                            <img :src=" item.products[0].image_url " alt="">
+                        </a>
+                    </div>
+                    <div class="pro_inf">
+                        <div class="pro_name">{{ item.products[0].name }}</div>
+                        <div class="pro_desc">{{ item.products[0].desc }}</div>
+                    </div>
+                </div>
+                <div class="pro_total_price" v-if="item.products !=''">共计：￥ <span>600</span>元</div>
+
+                <div class="pro_operation" v-if="item.order_status == 0">
+                    <a href="#">所有订单</a>
+                </div>
+                <div class="pro_operation" v-if="item.order_status == 1">
+                    <a href="#">待付款</a>
+                    <a class="deleteOrder">删除订单</a>
+                </div>
+                <div class="pro_operation" v-if="item.order_status == 2">
+                    <a href="#">待收货</a>
+                </div>
+                <div class="pro_operation" v-if="item.order_status == 3">
+                    <a href="#">已完成</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--main end -->
+
+    <footer>
+    <!-- tabbar -->
+    <div class="weui-tabbar" id="footer-tabber">
+        <a href="./index.html" class="weui-tabbar__item ">
+            <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <!--<a href="javascript:;" class="weui-tabbar__item">-->
+        <a href="./menu.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_msg.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">分类</p>
+        </a>
+        <a href="./order.html" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">发现</p>
+        </a>
+        <a href="./mine.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</footer>
+
+<!-- jquery -->
+<script src="./js/jquery-weui.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<!-- common js -->
+<script src="./js/common.js"></script>
+<script src="./js/public.js"></script>
+<script src="./js/data.js"></script>
+<script src="./js/request.js"></script>
+
+
+<script>
+    $(function () {
+       var order = {
+           init: function(){
+               this.renderOrder();
+               this.bindEvents();
+               // this.renderStatusOrder();
+           },
+           bindEvents: function(){
+                $("body").on("click",".deleteOrder",order.deleteOrder);
+           },
+           // 渲染order-menus
+           renderOrder: function(){
+               // alert(1)
+               var status = getUrl("status");
+               status = status ? status : 0;
+               console.log(status)
+               var orderMenuVue = new Vue({
+                   el: "#order-menu-bind",
+                   data:{
+                       orderMenus:[
+                           {id:0,name:"所有订单"},
+                           {id:1,name:"待付款"},
+                           {id:2,name:"待收货"},
+                           {id:3,name:"已完成"},
+                       ],
+                       orderStatus:status,     // 订单选中状态
+                   }
+               });
+               this.renderStatusOrder(status);
+
+           },
+           // 渲染订单
+           renderStatusOrder: function(status){
+               // 先验证用户是否登录
+               // fetchMemberInfo().then((userInfo) =>{
+                   var orderContentVue = new Vue({
+                           el: "#order-content-bind",
+                           data:{
+                               order_product_list:[],    // 产品列表
+                           },
+                       })
+
+                   // 模拟数据渲染
+                   var statusKeyMap = {0: '所有订单', 1: '待付款', 2: '待收货', 3: '已完成'};
+                   var mockData = getOrderList(statusKeyMap[status]);
+                   console.log(mockData)
+                   console.log(status)
+                   orderContentVue.order_product_list = mockData.data.order_list;
+
+                   // 接口数据渲染
+
+               // })
+           },
+
+           // 订单操作
+           // 删除订单
+           deleteOrder: function(){
+               // console.log(this)
+               // console.log($(this));
+               // $(this).parents(".order_product").empty();
+               //如果参数过多，建议通过 object 方式传入
+               var _that = $(this)
+               $.confirm({
+                   // title: '标题',
+                   text: '确认删除订单',
+                   onOK: function () {
+                       //点击确认
+                       // console.log($(this))
+                       _that.parents(".order_product").fadeOut(500).empty();
+                   },
+                   onCancel: function () {
+                   }
+               });
+           },
+           // 支付订单
+
+
+       }
+       order.init();
+    })
+</script>
+</body>
+</html>

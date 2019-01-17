@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!--<meta name="viewport"   content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- index.css -->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/mine.css">
+    <!-- common -->
+    <script src="./js/jquery-2.1.4.js"></script>
+    <script src="./js/common.js"></script>
+    <title>Item_wrap 地址列表</title>
+</head>
+<body>
+    <header>
+        <div class="topbar-second">
+            <span onclick="javascript:history.go(-1)"></span>收获地址
+            <i class="back" onclick="javascript:history.go(-1)"></i>
+        </div>
+    </header>
+
+    <ul class="address-content">
+        <li class="address-item">
+            <div class="user">
+                <div class="user-name">用户1</div>
+                <div class="user-tel">17621684623</div>
+            </div>
+            <div class="user-add">上海市浦东新区阳光花城</div>
+            <div class="revise-add">
+                <div class="default-add">
+                    <input type="radio" checked="checked" name="add-choice" class="select-add active" value="111">
+                    <i ></i>
+                    默认地址
+                </div>
+                <div class="operation-add">
+                    <a href="./address_revise.html" class="edit-add">编辑</a>
+                    <a class="remove-add">删除</a>
+                </div>
+            </div>
+        </li>
+        <li class="address-item">
+            <div class="user">
+                <div class="user-name">用户1</div>
+                <div class="user-tel">17621684623</div>
+            </div>
+            <div class="user-add">上海市浦东新区阳光花城</div>
+            <div class="revise-add">
+                <div class="default-add">
+                    <input type="radio" name="add-choice" class="select-add active" value="111">
+                    <i ></i>
+                    默认地址
+                </div>
+                <div class="operation-add">
+                    <a href="./address_revise.html" class="edit-add">编辑</a>
+                    <a class="remove-add">删除</a>
+                </div>
+            </div>
+        </li>
+        <li class="address-item">
+            <div class="user">
+                <div class="user-name">用户1</div>
+                <div class="user-tel">17621684623</div>
+            </div>
+            <div class="user-add">上海市浦东新区阳光花城</div>
+            <div class="revise-add">
+                <div class="default-add">
+                    <input type="radio" name="add-choice" class="select-add active" value="111">
+                    <i ></i>
+                    默认地址
+                </div>
+                <div class="operation-add">
+                    <a href="./address_revise.html" class="edit-add">编辑</a>
+                    <a class="remove-add">删除</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <!---->
+    <a class="append-add" href="./address-add.html">添加地址</a>
+
+
+<!-- jquery -->
+<script src="./js/jquery-weui.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<script>
+    $(function () {
+        // alert(1)     // 测试jquery
+        var index = {
+            // 初始化函数
+            init: function(){
+                this.bindEvents();
+                this.swiperSlide();
+            },
+            // 事件函数
+            bindEvents: function(){
+                $("body").on("click",".weui-tabbar__item",index.clickTabbar)
+            },
+            clickTabbar: function () {
+                $(this).addClass("weui-bar__item--on").siblings().removeClass("weui-bar__item--on")
+            },
+            // swiper slide
+            swiperSlide: function(){
+                var indexBanner = new Swiper("#indexBanner",{
+                    loop: true,
+                    autoplay: 3000,
+                    pagination : '.swiper-pagination'
+                })
+            }
+        }
+        // 执行函数
+        index.init();
+    })
+</script>
+</body>
+</html>

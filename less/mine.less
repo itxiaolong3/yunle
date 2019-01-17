@@ -1,0 +1,434 @@
+body {
+    background-color: #f2f2f2;
+    font-size: 14px;
+}
+// 用户信息
+.user-inf{
+    display: flex;
+    flex-direction: row;
+    height: 1rem;
+    align-items: center;
+    box-shadow: 2px 2px 1px #ccc;
+    margin-bottom: .2rem;
+    background-color: #fff;
+    position: relative;
+    .user-pic{
+        width: .6rem;
+        height: .6rem;
+        background-color: pink;
+        margin: 0 .2rem;
+        border-radius: 50%;
+        overflow: hidden;
+        a{
+            display: inline-block;
+            img{
+                width: .6rem;
+                height: .6rem;
+            }
+        }
+    }
+    .user-name{
+        width: 2rem;
+        font-size: 16px;
+    }
+    .change-inf{
+        flex: 1;
+        height: .8rem;
+        //background-color: yellow;
+        i.icon-right{
+            display: inline-block;
+            width: 16px;
+            height: 25px;
+            background: url("../images/icon-right.png") no-repeat;
+            //background-size: 8px;
+            position: absolute;
+            top:50%;
+            margin-top: -10px;
+            right: 16px;
+            //background-color: pink;
+        }
+    }
+
+}
+
+// 我的列表
+.inf-container{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 1px #ccc;
+    li{
+        height: .5rem;
+        line-height: .5rem;
+        background-color: #fff;
+        padding-left: 40px;
+        margin-bottom: 1px;
+        position: relative;
+        font-size: 14px;
+        a{
+            display: inline-block;
+            width: 100%;
+            i.icon-inf-item{
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                background: url("../images/icon-inf-item.png") no-repeat;
+                background-size:20px 20px;
+                position: absolute;
+                top:50%;
+                margin-top:-10px;
+                left: 10px;
+            }
+            i.icon-right{
+                display: inline-block;
+                width: 16px;
+                height: 25px;
+                background: url("../images/icon-right.png") no-repeat;
+                background-size: 8px;
+                position: absolute;
+                top:50%;
+                margin-top:-5px;
+                right: 10px;
+
+            }
+        }
+    }
+}
+
+// 退出登录
+.login-out{
+    width: 90%;
+    height: .4rem;
+    line-height: .4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:#fff;
+    font-size: 14px;
+    background-color: #2d9cff;
+    border-radius: 5px;
+    margin: .2rem auto;
+}
+
+/* 个人资料修改 */
+.inf-rev{
+    margin-top: .2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    li{
+        height: .5rem;
+        line-height: .5rem;
+        background-color: #fff;
+        border-bottom: 1px solid #f2f2f2;
+        padding: 0 .15rem;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        font-size: 14px;
+        label{
+            display: inline-block;
+            width: .8rem;
+            //font-size: 12px;
+        }
+        img{
+            width: .4rem;
+            height: .4rem;
+            border-radius:50%;
+            position: absolute;
+            right: .1rem;
+            top:50%;
+            margin-top: -.2rem;
+        }
+        input{
+            text-align: right;
+        }
+        #user-aver{
+            opacity: 0;
+        }
+    }
+}
+.inf-save{
+    width: 90%;
+    border-radius: 5px;
+    margin: .2rem auto;
+}
+
+// 地址列表
+.address-content{
+    display: flex;
+    flex-direction: column;
+    .address-item{
+        //flex: 1;
+        margin-top: .1rem;
+        background-color: #fff;
+        //width: 97%;
+        padding: .1rem .15rem;
+        font-size: 14px;
+        .user{
+            height: .3rem;
+            line-height: .3rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .user-name{
+
+            }
+            .user-tel{
+
+            }
+        }
+        .user-add{
+            line-height: .3rem;
+            margin-bottom: .1rem;
+        }
+        .revise-add{
+            display: flex;
+            justify-content: space-between;
+            .default-add{
+                //flex: 1 1 60%;
+                width: 2rem;
+                position: relative;
+                padding-left: 26px;
+                .select-add{
+                    width: 15px;
+                    height: 15px;
+                    border: 1px solid #ccc;
+                    border-radius: 50%;
+                    margin: 2px 3px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+            .operation-add{
+                width: .8rem;
+                display: flex;
+                justify-content: space-between;
+                .edit-add{}
+                .remove-add{}
+            }
+
+        }
+
+    }
+}
+
+// 添加地址
+.append-add{
+    width: 90%;
+    height: .4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2d9cff;
+    color: #fff;
+    margin: .2rem auto;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+//
+.address-revise-content{
+    margin-top: .15rem;
+    li{
+        height: .4rem;
+        line-height: .4rem;
+        background-color: #fff;
+        margin-bottom: 1px;
+        font-size: 14px;
+        padding: 0 15px;
+        .address-lab{
+            display: inline-block;
+            width: 1rem;
+        }
+    }
+}
+.achieve{
+    display: flex;
+    width: 90%;
+    height: .4rem;
+    line-height: .4rem;
+    align-items: center;
+    justify-content: center;
+    margin: .2rem auto;
+    background-color: #2d9cff;
+    color: #fff;
+    border-radius: 5px;
+}
+
+/* 忘记密码 forget */
+.login-main{
+    display: flex;
+    flex-direction: column;
+    width: 3.35rem;
+    margin: 0 auto;
+    .logo{
+        height: .8rem;
+        margin: 0.4rem auto;
+        width: .8rem;
+        /*background-color: #fff;
+        background-image: url("../images/logo.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: .4rem;*/
+        border-radius:50%;
+        background: #fff
+        url("../images/logo.png")
+        no-repeat
+        center center;
+        background-size: .4rem;
+    }
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        input[type='text'], input[type='password'],input[type="submit"]{
+            width: 3.35rem;
+            height: 0.44rem;
+            margin-top: .1rem;
+            border: none;
+            font-size: 14px;
+            padding: 0 0 0 .1rem;
+        }
+        input[type="submit"]{
+            width: 3.45rem;
+            color: #fff;
+            background-color: #2d9cff;
+            border-radius: 0.05rem;
+            margin-bottom: 0;
+            margin-top: .1rem;
+        }
+        .form-group{
+            margin: 0;
+        }
+    }
+    .form-control-feedback{
+        top: 0.15rem;
+    }
+    .reg-login{
+        height: .2rem;
+        font-size: 14px;
+        margin: .05rem;
+        a{
+            color: #2d9cff;
+        }
+
+    }
+    .third-party{
+        h3{
+            text-align: center;
+            color: #646464;
+            margin-bottom: .3rem;
+        }
+        .third-icon{
+            display: flex;
+            flex-direction: row;
+            //background-color: pink;
+            li{
+                flex: 1;
+                //background-color: blue;
+                margin-right: .2rem;
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                i{
+                    display: inline-block;
+                    width: .56rem;
+                    height: .56rem;
+                    background-size:0.56rem;
+                    margin-bottom: .1rem;
+                }
+                .icon-qq{background-image: url("../images/icon-qq.png");}
+                .icon-wx{background-image: url("../images/icon-wx.png");}
+                .icon-wb{background-image: url("../images/icon-wb.png");}
+                .third-icon-desc{
+                    display: block;
+                }
+            }
+        }
+    }
+
+}
+
+/* 账号注册 register */
+.reg-main{
+    .security-code{
+        position: relative;
+        .get-code{
+            width: 1rem;
+            height: .3rem;
+            line-height: .3rem;
+            position: absolute;
+            top: .17rem;
+            right: .1rem;
+            background-color: #2d9cff;
+            font-size: 14px;
+            text-align: center;
+            color:#fff;
+            border-radius: 5px;
+        }
+    }
+
+}
+
+/* 账号登陆 login */
+
+// 地址
+.save-address{
+    background-color: #fff;
+    width: 98%;
+    margin: .05rem 1%;
+    .form-group{
+        display: flex;
+        height: 0.4rem;
+        line-height: .4rem;
+        border-bottom: 1px solid #f2f2f2;
+        margin-bottom: 0;
+        label{
+            width: .8rem;
+            margin-bottom: 0;
+            font-size: 12px;
+            text-align: right;
+            font-weight: normal;
+
+        }
+        input{
+            flex: 1 1 auto;
+            height: 0.4rem;
+            line-height: .4rem;
+            padding-left: .1rem;
+            background-color: #fff;
+            font-size: 12px;
+            //border: 1px solid #f2f2f2;
+            color:#ccc;
+        }
+    }
+    input[type="submit"]{
+        width: 80%;
+        background-color: #2d9cff;
+        margin: .2rem 0;
+        color: #fff;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

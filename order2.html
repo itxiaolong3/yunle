@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- weui -->
+    <link rel="stylesheet" href="./css/weui.css">
+    <link rel="stylesheet" href="./css/jquery-weui.css">
+    <!-- index.css -->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="css/order2.css">
+    <!-- rem 适配 -->
+    <script src="./js/jquery-2.1.4.js"></script>
+    <script src="./js/common.js"></script>
+
+    <title>Item_wrap 我的订单</title>
+</head>
+<body>
+<!-- header start -->
+    <div class="topbar-second">
+        订单列表
+        <!--<i class="back" onclick="javascript:history.go(-1)"></i>-->
+    </div>
+<!-- header end   -->
+
+    <!--<div class="order-wrap">-->
+        <!--<div class="order-nav">-->
+            <!--<a href=""></a>-->
+            <!--<a href=""></a>-->
+            <!--<a href=""></a>-->
+            <!--<a href=""></a>-->
+            <!--<a href=""></a>-->
+        <!--</div>-->
+        <!--<div class="order-content">-->
+
+        <!--</div>-->
+    <!--</div>-->
+
+ <!--main start -->
+    <div class="weui-tab order">
+        <div class="weui-navbar order-nav">
+            <a class="weui-navbar__item order-nav-item-on all-order order-nav-item active" href="#tab1">所有订单</a>
+            <a class="weui-navbar__item wait-pay order-nav-item" href="#tab2">待付款</a>
+            <a class="weui-navbar__item wait-receipt order-nav-item" href="#tab3">待收货</a>
+            <a class="weui-navbar__item achieve-order order-nav-item" href="#tab4">已完成</a>
+        </div>
+        <div class="order-content weui-tab__bd">
+            <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+                <div class="order-item-content">
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>1</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tab2" class="weui-tab__bd-item ">
+                <div class="order-item-content">
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>2</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tab3" class="weui-tab__bd-item ">
+                <div class="order-item-content">
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>3</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tab4" class="weui-tab__bd-item ">
+                <div class="order-item-content">
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>4</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-num item-pd">订单号:
+                            <span>950815</span>
+                            <i class="close-order"></i>
+                        </div>
+                        <div class="order-state item-pd">状&nbsp;&nbsp;&nbsp;&nbsp;态: <span>已签收</span></div>
+                        <div class="order-inf item-pd">
+                            <div class="product-img">
+                                <a href="#">
+                                    <img src="./images/item-img01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product-inf">商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,商品描述,</div>
+                        </div>
+                        <div class="order-more item-pd">
+                            <a href="#">去评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!--main end -->
+
+<footer>
+    <!-- tabbar -->
+    <div class="weui-tabbar" id="footer-tabber">
+        <a href="./index.html" class="weui-tabbar__item ">
+            <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <!--<a href="javascript:;" class="weui-tabbar__item">-->
+        <a href="./menu.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_msg.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">分类</p>
+        </a>
+        <a href="./order.html" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">发现</p>
+        </a>
+        <a href="./mine.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</footer>
+
+<!-- jquery -->
+<script src="./js/jquery-weui.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<!-- common js -->
+<script src="./js/common.js"></script>
+
+<script>
+    $(function () {
+        // alert(1)     // 测试jquery
+        var order = {
+            // 初始化函数
+            init: function(){
+                this.bindEvents();
+                this.regUserLogin();
+            },
+            // 事件函数
+            bindEvents: function(){
+                $("body").on("click",".order-nav-item",order.clickTabbar)
+            },
+            clickTabbar: function () {
+                $(this).addClass("active").siblings().removeClass("active")
+            },
+
+            // regUser
+            regUserLogin: function () {
+                // 判断用户是否登录
+                $.get("/api/v1_0/sessions", function(resp) {
+                    if ("0" != resp.errno) {
+                        location.href = "/login.html";
+                    }
+                }, "json");
+            }
+        }
+        // 执行函数
+        order.init();
+    })
+</script>
+</body>
+</html>

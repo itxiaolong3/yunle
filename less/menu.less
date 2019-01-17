@@ -1,0 +1,329 @@
+
+.menu-topbar-first{
+    .back{
+        background: none;
+    }
+}
+.main{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100%;
+    position: relative;
+    //margin-top: .46rem;
+    justify-content: space-between;
+    .menu{
+        flex: 1 1 24%;
+        width: 24%;
+        min-height: 100%;
+        background-color: #f8f8f8;
+        position: fixed;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        height: 100%;
+        .menu-item{
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #f8f8f8;
+            li{
+                width: 100%;
+                height: .5rem;
+                line-height: .5rem;
+                text-align: center;
+                font-size: 12px;
+            }
+            li.active{
+                background-color: #fff;
+            }
+        }
+    }
+    .store-menu{
+        flex: 1 1 74%;
+        width: 74%;
+        position: absolute;
+        top: 5px;
+        right: 1%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        min-height: 100%;
+        .menuBanner{
+            width: 100%;
+            .swiper-slide{
+                width: 100%;
+                img{
+                    width: 100%;
+                }
+            }
+        }
+        .store-content{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: 100px;
+            .store-item{
+                margin-bottom: .2rem;
+                h3{
+                    line-height: .3rem;
+                    font-weight: normal;
+                    padding-left: .2rem;
+                    border-bottom: 2px solid #00bdff;
+                }
+                .store-item-content{
+                    li{
+                        margin-top: .1rem;
+                        padding: .15rem 0;
+                        box-shadow: 1px 2px 1px #ccc;
+                        position: relative;
+                        background-color: #fff;
+                        display: flex;
+                            flex-direction: row;
+                            width: 100%;
+                        .item-img{
+                            flex:1 1 30%;
+                            width: 30%;
+                            height: 30%;
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        .item-desc{
+                            flex:1 1 65%;
+                            font-size: 12px;
+                            margin-left: 5%;
+                            color:#646464;
+                            .item-title{
+                                font-size: 16px;
+                                font-weight: bold;
+                            }
+                            .item-des{
+                                overflow : hidden;
+                                text-overflow: ellipsis;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                width: 1.68rem;
+                            }
+                            .item-price{
+                                color:red;
+                                margin-top: .06rem;
+                                font-size: 14px;
+                                .item-oldPrice{
+                                    color:#646464;
+                                    text-decoration: line-through;
+                                }
+                            }
+                        }
+                        //a{
+                        //    display: inline-flex;
+                        //    flex-direction: row;
+                        //    width: 100%;
+                        //}
+                        .bug{
+                            font-size: 12px;
+                            padding: 3px 5px;
+                            position: absolute;
+                            right: 5px;
+                            bottom: 12px;
+                            background-color: #00bdff;
+                            border-radius:10px;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+// 产品详情
+.detail-content{
+    display: flex;
+    background-color: #fff;
+    padding: .1rem;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: .5rem;
+    .pro-title{
+        flex: 1;
+        //height: .3rem;
+        line-height: .3rem;
+        font-size: 14px;
+    }
+    .pro-desc{
+        flex: 1;
+        line-height: .3rem;
+    }
+    .pro-price{
+        flex: 1;
+        height: .3rem;
+        line-height: .3rem;
+        .pro-newPrice{}
+        .pro-oldPrice{
+            text-decoration: line-through;
+        }
+    }
+    .detail-intro{
+        flex: 1;
+        line-height: .2rem;
+        padding: .2rem 0;
+    }
+    .pro-item{
+        border-bottom: 1px solid #ccc;
+    }
+}
+
+.pro-buy{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: .4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2d9cff;
+    color: #FFF;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+// 订单详情
+.order-bar{
+    display: flex;
+    height: .4rem;
+    line-height: .4rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #CCC;
+    .order-total{
+        flex: 1 1 1.6rem;
+        text-align: right;
+    }
+    .order-totalPri{
+        flex: 1 1 .02rem;
+        color: #2d9cff;
+        font-size: 14px;
+    }
+    .order-sub{
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #2d9cff;
+        color: #fff;
+        font-size: 14px;
+    }
+
+}
+
+// 确认订单详情页面 order_confirm.html
+.address-content{
+    background-color: #fff;
+    padding: .1rem;
+    .address-inf{
+        font-size: 0px;
+        .user-name{
+            font-size: 14px;
+        }
+        .user-tel{
+            font-size: 14px;
+        }
+        .inf-item{
+            height: .3rem;
+            line-height: .3rem;
+        }
+    }
+    .user-add{
+        font-size: 0px;
+        position: relative;
+        .add-inf{
+            font-size: 14px;
+        }
+        .icon-right{
+            display: inline-block;
+            width: 16px;
+            height: 25px;
+            background: url(../images/icon-right.png) no-repeat;
+            background-size: 8px;
+            position: absolute;
+            top:50%;
+            right: 10px;
+            margin-top: -6px;
+        }
+    }
+}
+.pro-content{
+    display: flex;
+    flex-direction: row;
+    padding: .2rem .1rem .2rem;
+    background-color: #fff;
+    margin-top: .1rem;
+    position: relative;
+  .pro-img{
+      width: .9rem;
+      margin-right: .1rem;
+      a{
+          img{
+              width: .9rem;
+          }
+      }
+  }
+  .pro-intro{
+      flex: auto;
+      display: flex;
+      flex-direction: column;
+      .pro-name{
+          font-size: 14px;
+          font-weight: 700;
+      }
+      .pro-desc{
+          font-size: 12px;
+          color: #9a9a9a;
+      }
+      .pro-pri{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          margin-top: .1rem;
+          .pro-price{
+              font-size: 12px;
+              color: red;
+          }
+          .pro-num{
+              width: 1.15rem;
+              height: .3rem;
+              line-height: .3rem;
+              border-top: 1px solid #ccc;
+              border-bottom: 1px solid #ccc;
+              display: flex;
+              font-size: 14px;
+              text-align: center;
+              .reduct{}
+              .num{
+                  flex: auto;
+              }
+              .add{}
+              .symbol-item{
+                  //display: inline-block;
+                  //flex: 1 1 .3rem;
+                  width: .3rem;
+                  height: .3rem;
+                  border-left: 1px solid #ccc;
+                  border-right: 1px solid #ccc;
+              }
+          }
+      }
+      .pro-item{
+          line-height: .22rem;
+      }
+  }
+
+}
+
+
+
+
