@@ -38,6 +38,9 @@
                 <div class="showcon con0" v-if="willShow==0">
                     <ul>
                         <li>
+                            <a @click="checks(0,1)">全部</a>
+                        </li>
+                        <li>
                             <a @click="checks(1,1)">订阅号</a>
                         </li>
                         <li>
@@ -47,7 +50,7 @@
                 </div>
                 <div class="showcon con1" v-if="willShow==1">
                     <ul>
-
+                        <a @click="checks(0,2)" style="color: #363636;padding: 0px 6px;font-size: 15px;">不限</a>
                         <li v-for="( item,index) in list">
                             <a @click="checks(item.tid,2)">{{item.name}}</a>
                         </li>
@@ -55,6 +58,9 @@
                 </div>
                 <div class="showcon con2" v-if="willShow==2">
                     <ul>
+                        <li>
+                            <a @click="checks(0,3)">不限</a>
+                        </li>
                         <li>
                             <a @click="checks(1,3)">1万以内</a>
                         </li>
@@ -81,7 +87,10 @@
                 <div class="showcon con3" v-if="willShow==3">
                     <ul>
                         <li>
-                            <a @click="checks(3,4)">未认证</a>
+                            <a @click="checks(3,4)">不限</a>
+                        </li>
+                        <li>
+                            <a @click="checks(0,4)">未认证</a>
                         </li>
                         <li>
                             <a @click="checks(1,4)">个体认证</a>
@@ -98,17 +107,12 @@
 
         <!-- item -->
         <div class="category main-item">
-<<<<<<< HEAD
-            <div class="category-content" >
-                <div class="category-item" v-for="(item,index) in data" style="height: 220px;">
-                    <a :href="'product_detail.html?business_id='+item.business_id+'&id='+2">
-                        <ul>
-                            <li>
-                                <div class="li_top">
-                                    <img src="./images/sicon_wx.png" width="25" height="25">
-                                    <span>{{item.zhname}}</span>
-                                </div>
-=======
+            <div class="findtab">
+                <span>订阅号</span>
+                <span>娱乐</span>
+                <span>1-3万</span>
+                <span>个体认证</span>
+            </div>
              <div class="category-content" id="category_bind">
                  <div class="category-item" v-for="(item,index) in data" style="height: 220px;">
                      <a :href="'product_detail.html?id='+item.id">
@@ -118,8 +122,6 @@
                                      <img src="./images/sicon_wx.png" width="25" height="25">
                                      <span>{{item.zhname}}</span>
                                  </div>
->>>>>>> f01a8847882d51d53c4396eccc330fb1b483a7c3
-
                             </li>
                             <li>
                                 <div class="li_top">
@@ -163,7 +165,7 @@
         <!-- nomore -->
         <div class="nomore" style="display: none">
             <span class="nomore-line"></span>
-            <span class="no-inf">没有更多了</span>
+            <span class="no-inf">我是底线</span>
             <span class="nomore-line"></span>
         </div>
     </div>
@@ -245,8 +247,9 @@
                 htypeid: 0,
                 typeid: 0,
                 priceid: 0,
-                rzid: 0,
+                rzid: 3,
                 page: 1,
+                loading:false
             },
             mounted() {
                 this.gettypelist()
@@ -254,6 +257,7 @@
                 //                this.$refs.fuckLi.addClass('li_itme')
             },
             methods: {
+
                 got(index) {
                     $('body').css('overflow', 'hidden');
                     this.showmb = 1
@@ -289,6 +293,9 @@
                             break
                     }
                     console.log(that.htypeid,that.typeid,that.priceid,that.rzid);
+                    that.page=1;
+                    that.data=[];
+                    console.log('状态+'+that.loading)
                     this.getSelllist()
 
                 },
@@ -316,14 +323,15 @@
                     console.log(that.htypeid,that.typeid,that.priceid,that.rzid);
 
                     //分页加载开始
-                    let loading = false; //状态标记
+                    let loading = that.loading; //状态标记
                     $(document.body).infinite().on("infinite", function () {
                     console.log('状态' + loading)
                     if (loading) return;
-                    loading = true;
+                    that.loading = true;
                     let newpage = that.page;
                     newpage++;
                     that.page = newpage;
+                        $(".weui-loadmore").show()
                     axios.post('http://wxpay.possji.cn/yikehao/findhao', {
                             page: that.page,
                             htypeid:that.htypeid,
@@ -333,12 +341,14 @@
                         })
                         //then里面跟一个成功回调函数
                         .then(function (resp) {
-                            if (resp.data.code) {
-                                loading = false;
-
+                            if (resp.data.code==1) {
+                                that.loading = true;
                                 console.log(resp.data.data)
-
-                                that.data = resp.data.data
+                                //that.data = resp.data.data
+                                let sellarr = that.data;
+                                let newdata = sellarr.concat(resp.data
+                                    .data)
+                                that.data = newdata
                                 $(".weui-loadmore").hide()
                             } else {
                                 $('.nomore').css('display', '')
@@ -366,6 +376,7 @@
                         .then(function (resp) {
                             if (resp.data.code) {
                                 that.data = resp.data.data
+                                $(".weui-loadmore").hide()
                             } else {
                                 $.toast("无法加载", "text");
                             }
