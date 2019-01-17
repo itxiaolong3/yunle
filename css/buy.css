@@ -57,14 +57,20 @@ body {
   width: 100%;
 }
 .findtab span{
-  border: 1px red solid;
+  border: 1px #35CAFE solid;
   border-radius: 5px;
+  background-color: #35CAFE;
+  color: white;
   padding: 2px;
   text-align: center;
   display: flex;
   justify-content: center;
   width: 15%;
   margin-left: 10px;
+}
+.findtab label{
+  margin-left: 15px;
+
 }
 /* main start */
 .main {
