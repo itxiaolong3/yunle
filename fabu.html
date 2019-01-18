@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- css reset -->
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/common.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- weui -->
     <link rel="stylesheet" href="./css/weui.css">
     <link rel="stylesheet" href="./css/jquery-weui.css">
@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./css/fabu.css">
     <title>发布</title>
 </head>
+
 <body>
 
     <header>
@@ -29,6 +30,97 @@
         </div>
     </header>
     <!-- 我的页面 -->
+    <div class="main" id="main">
+        <div class="main_son">
+            公众号名称:
+            <el-input type="text" placeholder="公众号名称" v-model='form.name'></el-input>
+        </div>
+        <div class="main_son">
+            售价:
+            <el-input type="text" placeholder="售价" v-model='form.price'></el-input>
+        </div>
+        <div class="main_son">
+            粉丝数量:
+            <el-input type="text" placeholder="售价" v-model='form.fansNum'></el-input>
+        </div>
+        <div class="main_son">
+            注册日期:
+            <el-input type="text" placeholder="售价" v-model='form.createdTime'></el-input>
+        </div>
+        <div class="main_son">
+            账号类型:
+            <el-radio v-model="form.radio" :label=item.htid @change="radioChange(form.radio)" v-for='(item,index) of form.nameType'>{{item.name}}</el-radio>
+            <!-- <el-radio v-model="form.radio" label="2" @change="radioChange(form.radio)">服务号</el-radio> -->
+        </div>
+        <div class="main_son">
+            行业分类:
+            <el-checkbox-group v-model="form.checkList">
+                <el-checkbox :label="item.name" v-for='( item , index ) of form.checkList' @change='changeCheck(item.tid)'></el-checkbox>
+
+            </el-checkbox-group>
+        </div>
+        <div class="main_son">
+            认证主体:
+            <el-radio v-model="form.radio1" label="1" @change="radioChange1(form.radio1)">未认证</el-radio>
+            <el-radio v-model="form.radio1" label="2" @change="radioChange1(form.radio1)">个人认证</el-radio>
+            <el-radio v-model="form.radio1" label="2" @change="radioChange1(form.radio1)">企业认证</el-radio>
+        </div>
+        <div class="main_son">
+            开通原创:
+            <el-radio v-model="form.radio2" label="1" @change="radioChange2(form.radio2)">未开通</el-radio>
+            <el-radio v-model="form.radio2" label="2" @change="radioChange2(form.radio2)">原创</el-radio>
+            <el-radio v-model="form.radio2" label="3" @change="radioChange2(form.radio2)">赞赏</el-radio>
+            <el-radio v-model="form.radio2" label="4" @change="radioChange2(form.radio2)" style="margin-top: .15rem">原创赞赏</el-radio>
+        </div>
+        <div class="main_son">
+            粉丝偏向:
+            <el-radio v-model="form.radio3" label="1" @change="radioChange3(form.radio3)">男女平衡</el-radio>
+            <el-radio v-model="form.radio3" label="2" @change="radioChange3(form.radio3)">男居多</el-radio>
+            <el-radio v-model="form.radio3" label="3" @change="radioChange3(form.radio3)">女居多</el-radio>
+        </div>
+        <div class="main_son">
+            流量主:
+            <el-radio v-model="form.radio4" label="1" @change="radioChange4(form.radio4)">未开通</el-radio>
+            <el-radio v-model="form.radio4" label="2" @change="radioChange4(form.radio4)">已开通</el-radio>
+        </div>
+        <div class="main_son">
+            联系方式:
+            <el-input type="text" placeholder="联系方式" v-model='form.phoneNumber'></el-input>
+        </div>
+        <div class="main_son">
+            UV值:
+            <el-input type="text" placeholder="UV值" v-model='form.UV'></el-input>%
+        </div>
+        <div class="main_son">
+            头条阅读数:
+            <el-input type="text" placeholder="头条阅读数" v-model='form.headerNumber'></el-input>
+        </div>
+        <div class="main_son">
+            封号次数:
+            <el-input type="text" placeholder="0" v-model='form.fuckNum'></el-input>
+        </div>
+        <div class="main_son">
+            卖家描述:
+            <el-input type="textarea" :rows="16" placeholder="请输入描述内容" v-model='form.headerNumber'></el-input>
+        </div>
+        <div class="main_son">
+
+            <div class="imgDiv">
+                <img :src=item alt="" v-for='(item,index) of form.imageUrl' :key='index'>
+                <div class="file">
+                    +
+                    <!-- 选择图片 -->
+                    <input type="file" enctype="multipart/form-data" class="fileInput" accept="image/gif,image/jpeg,image/jpg,image/png" ref="avatarInput" @change="changeImage($event)">
+
+                </div>
+            </div>
+            <el-button @click='subImg'>确认</el-button>
+        </div>
+        <div class="main_son rightBtn">
+            <el-button type="primary">提交</el-button>
+        </div>
+
+    </div>
     <footer>
         <!-- tabbar -->
         <div class="weui-tabbar" id="footer-tabber">
@@ -61,38 +153,147 @@
         </div>
     </footer>
     <!-- footer end   -->
-
     <script src="./js/jquery-weui.min.js"></script>
     <script src="./js/swiper.min.js"></script>
     <!-- common js -->
     <script src="./js/common.js"></script>
     <script src="./js/cookie.js"></script>
     <script src="./js/request.js"></script>
-
+    <script src="./js/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/axios.js"></script>
     <script>
-        $(function () {
-            // alert(1)     // 测试jquery
-            var index = {
-                init: function () {
-                   this.regUserLogin();
+        var vm = new Vue({
+            el: "#main",
+
+            data: {
+                form: {
+                    name: '',
+                    price: '',
+                    fansNum: '',
+                    createdTime: '',
+                    radio: 1,
+                    nameType: [],
+                    checkList: [],
+                    newcheckList: [],
+                    radio1: 1,
+                    radio2: 1,
+                    radio3: 1,
+                    radio4: 1,
+                    phoneNumber: '',
+                    UV: '',
+                    headerNumber: '',
+                    fuckNum: '',
+                    imageUrl: []
+                }
+
+            },
+            mounted() {
+                this.getinfo()
+                this.getNameType()
+            },
+            methods: {
+                radioChange(value) {
+                    console.log(value);
+
                 },
-                // 验证用户是否登录
-                regUserLogin: function(){
-                    // fetchMemberInfo().then((userInfo) =>{
+                radioChange1(value) {
+                    console.log(value);
 
-                    // });
+                },
+                radioChange2(value) {
+                    console.log(value);
 
-                    // 获取用户信息并渲染到页面
-                    $.ajax(
+                },
 
-                    )
+                changeCheck(value) {
+                    console.log(value);
+                    this.form.newcheckList.push(value)
+                    console.log(this.form.newcheckList);
+
+                },
+                getinfo() {
+                    let that = this;
+                    axios.get('http://wxpay.possji.cn/yikehao/gettype', {})
+                        //then里面跟一个成功回调函数
+                        .then(function (resp) {
+                            if (resp.data.code) {
+                                console.log('多选框', resp.data.data);
+                                that.form.checkList = resp.data.data
+
+                            } else {
+                                $.toast("无法加载", "text");
+                            }
+
+                        })
+                        // catch中跟一个失败回调函数
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                getNameType() {
+                    let that = this;
+                    axios.get('http://wxpay.possji.cn/yikehao/gethaotype', {})
+                        //then里面跟一个成功回调函数
+                        .then(function (resp) {
+                            if (resp.data.code) {
+                                console.log('多选框', resp.data.data);
+                                that.form.nameType = resp.data.data
+
+                            } else {
+                                $.toast("无法加载", "text");
+                            }
+
+                        })
+                        // catch中跟一个失败回调函数
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                changeImage(e) {
+                    var file = e.target.files[0];
+                    // this.form = new FormData();
+
+                    // form.append("head", file);
+                    var reader = new FileReader();
+                    var that = this;
+                    console.log(that.form);
+
+                    reader.readAsDataURL(file);
+                    reader.onload = function (e) {
+                        that.form.imageUrl.push(this.result);
+                        console.log(this.result);
+                    };
+                },
+                // 
+                subImg() {
+                    let that = this
+                    let formd = new FormData();
+                    formd.append("file", that.$refs.avatarInput.files);
+                    console.log(formd,'信息',that.$refs.avatarInput.files);
+                    
+                    axios.post('http://wxpay.possji.cn/yikehao/apiLoadimg', {
+                        image:that.$refs.avatarInput.files
+                    })
+                        //then里面跟一个成功回调函数
+                        .then(function (resp) {
+                            if (resp.data.code) {
+                                console.log('图片', resp.data.data);
+
+                            } else {
+                                $.toast("无法加载", "text");
+                            }
+
+                        })
+                        // catch中跟一个失败回调函数
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                 }
             }
-            // 执行函数
-            index.init();
-            // fn();
         })
-
     </script>
 </body>
+
 </html>

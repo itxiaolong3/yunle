@@ -368,3 +368,51 @@ body {
   margin: .2rem 0;
   color: #fff;
 }
+.main {
+  padding: .15rem;
+  /* background-color: #333; */
+  box-sizing: border-box;
+  margin-bottom: .5rem;
+}
+.main_son {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: .15rem;
+}
+.file{
+  position: relative;
+  width: 49%;
+  height: 1.2rem;
+  /* background-color: #2d9cff; */
+  font-size: .5rem;
+  border-radius: .08rem;
+  border: .01rem solid #000;
+  line-height: 1.2rem;
+  text-align: center;
+}
+.fileInput {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+}
+.rightBtn {
+ display: flex;
+ justify-content: flex-end;
+}
+.imgDiv{
+  width: 100%;
+  margin-top: .15rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.imgDiv img {
+  width: 49%;
+}
