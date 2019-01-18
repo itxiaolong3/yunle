@@ -109,9 +109,20 @@
         <div class="category main-item">
 
             <div class="findtab">
-                <span>订阅号</span>
-                <span>娱乐</span>
-                <label><img src="./images/delicon.png" width="15" height="15">清空</label>
+                <span v-if="htypeid==1">订阅号</span>
+                <span v-if="htypeid==2">服务号</span>
+                <span v-for="( item,index) in list" v-if="item.tid==typeid">{{item.name}}</span>
+                <span v-if="priceid==1">1万以内</span>
+                <span v-if="priceid==2">1-3万</span>
+                <span v-if="priceid==3">3-5万</span>
+                <span v-if="priceid==4">5-7万</span>
+                <span v-if="priceid==5">7-10万</span>
+                <span v-if="priceid==6">10-20万</span>
+                <span v-if="priceid==7">20万以上</span>
+                <span v-if="rzid==1">个人认证</span>
+                <span v-if="rzid==2">企业认证</span>
+                <span v-if="rzid==0">未认证</span>
+                <label v-if="htypeid>0||typeid>0||priceid>0||rzid<3" style="margin-left: 5px;" @click="checks(0,5)"><img src="./images/delicon.png" width="15" height="15">清空条件</label>
             </div>
              <div class="category-content" id="category_bind">
                  <div class="category-item" v-for="(item,index) in data" style="height: 220px;">
@@ -290,6 +301,12 @@
                         case 4:
                             that.rzid = id
                             console.log('类型' + type + 'id=' + id)
+                            break
+                        case 5:
+                            that.htypeid=0;
+                            that.typeid= 0;
+                            that.priceid=0;
+                            that.rzid=3;
                             break
                     }
                     console.log(that.htypeid,that.typeid,that.priceid,that.rzid);
