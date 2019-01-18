@@ -437,8 +437,8 @@ li {
   height: .5rem;
   color: #2d9cff;
   font-size: .2rem;
-  border: 1px solid #000;
-  border-radius: .08rem;
+  /* border: 1px solid #000; */
+  /* border-radius: .08rem; */
   text-align: center;
   line-height: .5rem;
 }
