@@ -159,17 +159,27 @@
   flex: 1;
   line-height: .3rem;
   font-size: 14px;
+  color: #A0A0A0;
+}
+.pro-title span,.pro-price label{
+  padding: 5px;font-weight: bold;
+  color: #8E8E8E;
 }
 
+.pro-newPrice{
+  color: red;!important;
+}
 .detail-content .pro-desc {
   flex: 1;
   line-height: .3rem;
+  font-size: 14px;
 }
 
 .detail-content .pro-price {
   flex: 1;
   height: .3rem;
   line-height: .3rem;
+  font-size: 14px;
 }
 
 .detail-content .pro-price .pro-oldPrice {
@@ -180,10 +190,6 @@
   flex: 1;
   line-height: .2rem;
   padding: .2rem 0;
-}
-
-.detail-content .pro-item {
-  border-bottom: 1px solid #ccc;
 }
 
 .pro-buy {
@@ -204,7 +210,7 @@
 .order-bar {
   display: flex;
   height: .4rem;
-  line-height: .4rem;
+  line-height: .3rem;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -336,14 +342,6 @@
 .pro-content .pro-intro .pro-pri .pro-num .num {
   flex: auto;
 }
-
-.pro-content .pro-intro .pro-pri .pro-num .symbol-item {
-  width: .3rem;
-  height: .3rem;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-}
-
 .pro-content .pro-intro .pro-item {
   line-height: .22rem;
 }
@@ -371,13 +369,32 @@
 }
 
 .infoContentSon:nth-child(1) {
-  border-left: 0px solid #fff;
+  border-right: solid #fff 1px;
 }
-
+.infoContentSon:nth-child(2) {
+  border-right: solid #fff 1px;
+}
 .infoContentSon {
-  border-left: .01rem solid #333;
+  border: .01rem solid #D8D8D8;
+}
+.infocenter{
+  width: 100%;
+  margin-top: 10px;
 }
 
+.callqq,.sellcall{
+  border: 1px #2D9CFF solid;
+  background-color: #2D9CFF;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  width: 30%;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+.callqq a,.sellcall a{
+  color: white;
+}
 .infoContentSon_1_body {
   height: .8rem;
   display: flex;
@@ -386,7 +403,8 @@
 }
 
 .infoContentSon_1_bottom {
-  font-size: .2rem
+  font-size: .1rem;
+  font-weight: bold;
 }
 
 .special {

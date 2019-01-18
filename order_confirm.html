@@ -30,50 +30,73 @@
 <!-- header end   -->
 
 <!-- main start -->
-    <div class="address-content">
-        <div class="address-inf">
-            <span class="user-name inf-item">用户1  </span>
-            <span class="user-tel inf-item">17621684623</span>
+<div id="main">
+<div class="weui-form-preview">
+    <div class="weui-form-preview__hd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">付款金额</label>
+            <em class="weui-form-preview__value">¥2400.00</em>
         </div>
-        <div class="user-add">
-            <a href="./address_list.html">
-                <span class="add-inf">上海市浦东新区阳光花城</span>
-                <i class="icon-right"></i>
-            </a>
+    </div>
+    <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">商品</label>
+            <span class="weui-form-preview__value">电动打蛋机</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">标题标题</label>
+            <span class="weui-form-preview__value">名字名字名字</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">标题标题</label>
+            <span class="weui-form-preview__value">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">标题标题</label>
+            <span class="weui-form-preview__value">名字名字名字</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">标题标题</label>
+            <span class="weui-form-preview__value">名字名字名字</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">标题标题</label>
+            <span class="weui-form-preview__value">名字名字名字</span>
         </div>
     </div>
 
-    <div class="pro-content">
-        <div class="pro-img">
-            <a href="#">
-                <img src="./images/item-img01.jpg" alt="">
-            </a>
-        </div>
-        <div class="pro-intro">
-            <div class="pro-name pro-item">联想（Lenovo）IdeaPad 710S-13 13.3英寸超极本电脑(i3/....</div>
-            <div class="pro-desc pro-item">i3/4G内存/128固态/金色</div>
-            <div class="pro-pri pro-item">
-                <span><i>￥</i><span class="pro-price">6000</span></span>
-                <div class="pro-num">
-                    <i class="reduce symbol-item">-</i>
-                    <span class="num order_num">1</span>
-                    <i class="add symbol-item">+</i>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
+</div>
 <!-- main end   -->
+    <!--图片上传-->
+    <!--<div class="weui-cells weui-cells_form" id=uploader>-->
+        <!--<div class=weui-cell>-->
+            <!--<div class=weui-cell__bd>-->
+                <!--<div class=weui-uploader>-->
+                    <!--<div class=weui-uploader__hd><p class=weui-uploader__title>图片上传</p>-->
+                        <!--<div class=weui-uploader__info><span id=uploadCount>0</span>/5</div>-->
+                    <!--</div>-->
+                    <!--<div class=weui-uploader__bd>-->
+                        <!--<ul class=weui-uploader__files id=uploaderFiles></ul>-->
+                        <!--<div class=weui-uploader__input-box><input id=uploaderInput class=weui-uploader__input-->
+                                                                   <!--type=file accept=image/* capture=camera-->
+                                                                   <!--multiple="true"/></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
 <!-- footer start -->
 <footer>
     <div class="order-bar">
-        <span class="order-total">总计：￥</span>
-        <a href="#" class="order-totalPri">6000</a>
-        <a class="order-sub" >提交订单</a>
+        <label for="weuiAgree" class="weui-agree">
+            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+            <span class="weui-agree__text">阅读并同意<a :onclick="showxie()">《云乐互联用户协议》</a></span>
+        </label>
+        <a class="order-sub" >立即支付</a>
     </div>
 </footer>
+</div>
 <!-- footer end -->
 
 
@@ -84,57 +107,104 @@
 <scritp src="./js/public.js"></scritp>
 <script src="./js/vue.js"></script>
 <script src="./js/data.js"></script>
-
+<!---->
+<script src="./js/weui.min.js"></script>
 <script>
-    $(function(){
-        var index = {
-            init: function(){
-                this.bindEvents();
-                // console.log(pro_id)
+    $(function() {
+        var uploadCount = 0,
+            uploadList = [];
+        var uploadCountDom = document.getElementById("uploadCount");
+        weui.uploader('#uploader', {
+            url: 'http://wxpay.possji.cn/yikehao/apiLoadimg',
+            auto: true,
+            type: 'file',
+            fileVal: 'fileVal',
+            multiple:true,
+            compress: {
+                width: 1600,
+                height: 1600,
+                quality: .8
             },
-            data: {
-                order_num: 1,
-            },
-            bindEvents: function(){
-                //减去订单触发事件
-                $('.reduce').on('click',this.reduce);
-                //增加订单触发事件
-                $('.add').on('click',this.add);
-                // $('.order_num').on('change',this.order_num);
-            },
-
-            // 订单 点击 +
-            add: function(){
-                index.data.order_num++;
-                // $('.order_num').val(index.data.order_num);
-                $('.order_num').text(index.data.order_num);
-                // $('.order_num').html(index.data.order_num);
-                console.log(index.data.order_num)
-                var $price_s = $(".pro-price").text()
-                console.log($price_s)
-                var totalPri = Number($(".order-totalPri").text(index.data.order_num*$price_s))
-                console.log(typeof(parseInt(totalPri)))
-                $(".order-totalPri").val(totalPri)
-            },
-
-            // 订单 点击 -
-            reduce: function(){
-                index.data.order_num--;
-                if(index.data.order_num <= 1){
-                    index.data.order_num = 1;
+            onBeforeQueued: function onBeforeQueued(files) {
+                if (["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0) {
+                    _weui2.default.alert('请上传图片');
+                    return false;
                 }
-                // $('.order_num').val(index.data.order_num);
-                $('.order_num').text(index.data.order_num);
-                var $price_s = $(".pro-price").text()
-                console.log($price_s)
-                var totalPri = Number($(".order-totalPri").text(index.data.order_num*$price_s))
-                console.log(typeof(parseInt(totalPri)))
-                $(".order-totalPri").val(totalPri)
+                if (this.size > 10 * 1024 * 1024) {
+                    _weui2.default.alert('请上传不超过10M的图片');
+                    return false;
+                }
+                if (files.length > 5) {
+                    // 防止一下子选中过多文件
+                    _weui2.default.alert('最多只能上传5张图片，请重新选择');
+                    return false;
+                }
+                if (uploadCount + 1 > 5) {
+                    _weui2.default.alert('最多只能上传5张图片');
+                    return false;
+                }
 
+                ++uploadCount;
+                uploadCountDom.innerHTML = uploadCount;
+            },
+            onQueued: function onQueued() {
+                uploadList.push(this);
+                console.log(this);
+            },
+            onBeforeSend: function onBeforeSend(data, headers) {
+                console.log(this, data, headers);
+                // $.extend(data, { test: 1 }); // 可以扩展此对象来控制上传参数
+                // $.extend(headers, { Origin: 'http://127.0.0.1' }); // 可以扩展此对象来控制上传头部
 
+                // return false; // 阻止文件上传
+            },
+            onProgress: function onProgress(procent) {
+                console.log(this, procent);
+            },
+            onSuccess: function onSuccess(ret) {
+                console.log(this, ret);
+            },
+            onError: function onError(err) {
+                console.log(this, err);
             }
-        }
-        index.init();
+        });
+
+        // 缩略图预览
+        document.querySelector('#uploaderFiles').addEventListener('click', function (e) {
+            var target = e.target;
+
+            while (!target.classList.contains('weui-uploader__file') && target) {
+                target = target.parentNode;
+            }
+            if (!target) return;
+
+            var url = target.getAttribute('style') || '';
+            var id = target.getAttribute('data-id');
+
+            if (url) {
+                url = url.match(/url\((.*?)\)/)[1].replace(/"/g, '');
+            }
+            var gallery = _weui2.default.gallery(url, {
+                className: 'custom-name',
+                onDelete: function onDelete() {
+                    _weui2.default.confirm('确定删除该图片？', function () {
+                        --uploadCount;
+                        uploadCountDom.innerHTML = uploadCount;
+
+                        for (var i = 0, len = uploadList.length; i < len; ++i) {
+                            var file = uploadList[i];
+                            if (file.id == id) {
+                                file.stop();
+                                break;
+                            }
+                        }
+                        target.remove();
+                        gallery.hide();
+                    });
+                }
+            });
+        });
+
     })
 </script>
 </body>
