@@ -17,6 +17,8 @@
 
     <!-- 适配 -->
     <script src="./js/common.js"></script>
+    <!-- vant组件库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@1.5/lib/index.css">
     <title>Item_wrap</title>
 </head>
 
@@ -174,22 +176,31 @@
             </div>
             <div class="tabDiv">
                 <ul class="fuckUl">
-                    <li  v-for="( item , index ) of  test" :key="index" class="li_itme noactive" :class="[willShow == index && 'active']" >
+                    <li v-for="( item , index ) of  test" :key="index" class="li_itme noactive" :class="[willShow == index && 'active']">
                         <div class="fuckLiDiv" @click="got(index)">{{item.name}}</div>
                     </li>
                 </ul>
 
             </div>
-            <div class="detail_shop" v-if = 'willShow == 0'>
+            <div class="detail_shop" v-if='willShow == 0'>
                 <div class="maijiashuo">
                     <!-- 卖家说 -->
                     {{info.desc}}
                 </div>
 
             </div>
-            <div class="detail_pic" v-if = 'willShow == 1'>
-                    图文详情1
+            <div class="detail_pic" v-if='willShow == 1'>
+                <img class="detail_pic_" :src=item alt="" v-for="( item , index ) of  info.imgarr" :key="index" @click="showImagePreview(0)">
+            </div>
+            <!-- <div class="swiper-container indexBanner" id="indexBanner" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000"
+                v-if='showbanner == true'>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="(item,index) in info.imgarr">
+                        <img :src="item" alt="">
+                    </div>
                 </div>
+                <div class="swiper-pagination"></div>
+            </div> -->
         </div>
 
         <!--</div>-->
@@ -202,7 +213,8 @@
         <!-- footer end -->
 
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@1.5/lib/vant.min.js"></script>
     <!-- jquery -->
     <script src="./js/jquery-2.1.4.js"></script>
     <script src="./js/jquery-weui.min.js"></script>
@@ -210,12 +222,20 @@
     <!-- common js -->
     <script src="./js/common.js"></script>
     <script src="./js/public.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@1.5/lib/vant.min.js"></script>
     <script src="./js/vue.js"></script>
     <script src="./js/data.js"></script>
     <script src="./js/axios.js"></script>
+    <script src="./js/swiper.min.js"></script>
+
     <script>
+        // import {
+        //     ImagePreview
+        // } from 'https://cdn.jsdelivr.net/npm/vant@1.5/lib/vant.min.js';
         var vm = new Vue({
             el: "#product-detail",
+
             data: {
                 info: [],
                 test: [{
@@ -225,7 +245,13 @@
                         name: '附图'
                     }
                 ],
-                willShow:0
+                willShow: 0,
+                url: 'http://wxpay.possji.cn',
+                showbanner: false,
+                images :[
+                    
+                ]
+
             },
             mounted() {
                 this.getinfo();
@@ -245,6 +271,7 @@
                         .then(function (resp) {
                             if (resp.data.code) {
                                 that.info = resp.data.data
+                                that.images = resp.data.data.imgarr
                                 console.log(that.info);
 
                             } else {
@@ -256,6 +283,20 @@
                         .catch(function (error) {
                             console.log(error);
                         });
+                },
+                showImagePreview: function(position, timer) {
+                    console.log(vant);
+                    
+                    
+                   vant.ImagePreview({
+                        images:this.images,
+                        startPosition: position
+                    });
+                    // if (timer) {
+                    //     setTimeout(() => {
+                    //         instance.close();
+                    //     }, timer);
+                    // }
                 }
             }
         })
