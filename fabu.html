@@ -62,7 +62,7 @@
             认证主体:
             <el-radio v-model="form.radio1" label="1" @change="radioChange1(form.radio1)">未认证</el-radio>
             <el-radio v-model="form.radio1" label="2" @change="radioChange1(form.radio1)">个人认证</el-radio>
-            <el-radio v-model="form.radio1" label="2" @change="radioChange1(form.radio1)">企业认证</el-radio>
+            <el-radio v-model="form.radio1" label="3" @change="radioChange1(form.radio1)">企业认证</el-radio>
         </div>
         <div class="main_son">
             开通原创:
@@ -177,10 +177,10 @@
                     nameType: [],
                     checkList: [],
                     newcheckList: [],
-                    radio1: 1,
-                    radio2: 1,
-                    radio3: 1,
-                    radio4: 1,
+                    radio1: null,
+                    radio2: null,
+                    radio3: null,
+                    radio4: null,
                     phoneNumber: '',
                     UV: '',
                     headerNumber: '',
@@ -209,7 +209,14 @@
                     console.log(value);
 
                 },
+                radioChange3(value) {
+                    console.log(value);
 
+                },
+                radioChange4(value) {
+                    console.log(value);
+
+                },
                 changeCheck(value) {
                     console.log(this.form.checkValue);
 
