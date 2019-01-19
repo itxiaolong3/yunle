@@ -306,6 +306,7 @@
                                     console.log('图片', resp.data.data);
                                     this.form.imageUrl = []
                                     this.form.imageUrl.push(this.url+resp.data.data)
+                                    $.toast("成功", "text");
                                 } else {
                                     $.toast("无法加载", "text");
                                 }
