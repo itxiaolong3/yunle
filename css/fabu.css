@@ -383,13 +383,13 @@ body {
 }
 .file{
   position: relative;
-  width: 49%;
-  height: 1.2rem;
+  width: 25%;
+  height: 0.8rem;
   /* background-color: #2d9cff; */
   font-size: .5rem;
   border-radius: .08rem;
   border: .01rem solid #000;
-  line-height: 1.2rem;
+  line-height: 0.8rem;
   text-align: center;
 }
 .fileInput {
@@ -414,5 +414,5 @@ body {
   align-items: center;
 }
 .imgDiv img {
-  width: 49%;
+  width: 45%;
 }
