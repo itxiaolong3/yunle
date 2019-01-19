@@ -272,9 +272,8 @@
                     let formd = new FormData();
                     formd.append("file", that.$refs.avatarInput.files);
                     console.log(formd,'信息',that.$refs.avatarInput.files);
-                    
                     axios.post('http://wxpay.possji.cn/yikehao/apiLoadimg', {
-                        image:that.$refs.avatarInput.files
+                        formd
                     })
                         //then里面跟一个成功回调函数
                         .then(function (resp) {

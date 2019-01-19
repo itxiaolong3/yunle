@@ -59,12 +59,146 @@
 	// import 'weui';
 	_fastclick2.default.attach(document.body);
 
+	/* dialog */
+
+
+
+	/* toast */
+
+
+	/* loading */
+
+	/* actionSheet */
+
+
+	/* topTips */
+
+
+	/* picker */
+	// 普通选择器
+
+
+	// 时间选择器
+
+
+	// 多列选择器
+
+
+	// 级联选择器
+
+
+	/* searchbar */
+	_weui2.default.searchBar('#searchBar');
+
+	/* slider 因为需要获取长度，所以必须要在slider显示的时候才调用weui.slider*/
+	var isSetSlider = false;
+	function setSlider() {
+	    if (isSetSlider) return;
+	    isSetSlider = true;
+
+	    // 普通slider
+
+
+	    // 带step的slider
+
+
+	    // 分块的slider
+
+	}
+
+	/* tab */
+	_weui2.default.tab('#tab', {
+	    defaultIndex: 0,
+	    onChange: function onChange(index) {
+	        console.log(index);
+
+	        if (index == 3) {
+	            setSlider(); // 设置slider
+	        }
+	    }
+	});
+
+	/* form */
+	// 约定正则
+	var regexp = {
+	    regexp: {
+	        IDNUM: /(?:^\d{15}$)|(?:^\d{18}$)|^\d{17}[\dXx]$/,
+	        VCODE: /^.{4}$/
+	    }
+	};
+
+	// 失去焦点时检测
+	_weui2.default.form.checkIfBlur('#form', regexp);
+
+	// 表单提交
+
+	/* 图片自动上传 */
+	var uploadCount = 0,
+	    uploadList = [];
+	var uploadCountDom = document.getElementById("uploadCount");
+	_weui2.default.uploader('#uploader', {
+	    url: 'http://' + location.hostname + ':8002/upload',
+	    auto: true,
+	    type: 'file',
+	    fileVal: 'fileVal',
+	    compress: {
+	        width: 1600,
+	        height: 1600,
+	        quality: .8
+	    },
+	    onBeforeQueued: function onBeforeQueued(files) {
+	        if (["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0) {
+	            _weui2.default.alert('请上传图片');
+	            return false;
+	        }
+	        if (this.size > 10 * 1024 * 1024) {
+	            _weui2.default.alert('请上传不超过10M的图片');
+	            return false;
+	        }
+	        if (files.length > 5) {
+	            // 防止一下子选中过多文件
+	            _weui2.default.alert('最多只能上传5张图片，请重新选择');
+	            return false;
+	        }
+	        if (uploadCount + 1 > 5) {
+	            _weui2.default.alert('最多只能上传5张图片');
+	            return false;
+	        }
+
+	        ++uploadCount;
+	        uploadCountDom.innerHTML = uploadCount;
+	    },
+	    onQueued: function onQueued() {
+	        uploadList.push(this);
+	        console.log(this);
+	    },
+	    onBeforeSend: function onBeforeSend(data, headers) {
+	        console.log(this, data, headers);
+	        // $.extend(data, { test: 1 }); // 可以扩展此对象来控制上传参数
+	        // $.extend(headers, { Origin: 'http://127.0.0.1' }); // 可以扩展此对象来控制上传头部
+
+	        // return false; // 阻止文件上传
+	    },
+	    onProgress: function onProgress(procent) {
+	        console.log(this, procent);
+	    },
+	    onSuccess: function onSuccess(ret) {
+	        console.log(this, ret);
+	    },
+	    onError: function onError(err) {
+	        console.log(this, err);
+	    }
+	});
+
+	// 缩略图预览
+
+
 	/* 图片手动上传 */
 	var uploadCustomFileList = [];
 
 	// 这里是简单的调用，其余api请参考文档
 	_weui2.default.uploader('#uploaderCustom', {
-	    url: 'http://wxpay.possji.cn/yikehao/upmoreimg',
+	    url: 'http://wxpay.possji.cn/yikehao/apiLoadimg',
 	    auto: false,
 	    onQueued: function onQueued() {
 	        uploadCustomFileList.push(this);
@@ -95,7 +229,8 @@
 	    }
 	    var gallery = _weui2.default.gallery(url, {
 	        onDelete: function onDelete() {
-	            _weui2.default.confirm('确定删除该图片？', function () {
+	        	console.log(_weui2.default,'什么鬼')
+                _weui2.default.confirm('确定删除该图片？', function () {
 	                var index;
 	                for (var i = 0, len = uploadCustomFileList.length; i < len; ++i) {
 	                    var file = uploadCustomFileList[i];
