@@ -54,9 +54,8 @@
         </div>
         <div class="main_son">
             行业分类:
-            <el-checkbox-group v-model="form.checkList">
-                <el-checkbox :label="item.name" v-for='( item , index ) of form.checkList' @change='changeCheck(item.tid)'></el-checkbox>
-
+            <el-checkbox-group v-model="form.checkValue">
+                <el-checkbox v-for='data  of form.checkList' :key='data.tid' :label='data.tid' @change='changeCheck(data.tid)'>{{data.name}}</el-checkbox>
             </el-checkbox-group>
         </div>
         <div class="main_son">
@@ -106,15 +105,16 @@
         <div class="main_son">
 
             <div class="imgDiv">
-                <img :src=item alt="" v-for='(item,index) of form.imageUrl' :key='index'>
+                <img :src=item alt="" v-for='(item,index) of form.imageUrl' :key='index' @click='delImg(index)'>
                 <div class="file">
                     +
                     <!-- 选择图片 -->
-                    <input type="file" enctype="multipart/form-data" class="fileInput" accept="image/gif,image/jpeg,image/jpg,image/png" ref="avatarInput" @change="changeImage($event)">
+                    <input type="file" enctype="multipart/form-data" class="fileInput" accept="image/gif,image/jpeg,image/jpg,image/png" ref="avatarInput"
+                        @change="changeImage($event)">
 
                 </div>
             </div>
-            <el-button @click='subImg'>确认</el-button>
+            <el-button @click='subImg' style="margin-top:.15rem">确认</el-button>
         </div>
         <div class="main_son rightBtn">
             <el-button type="primary">提交</el-button>
@@ -185,8 +185,11 @@
                     UV: '',
                     headerNumber: '',
                     fuckNum: '',
-                    imageUrl: []
-                }
+                    imageUrl: [],
+                    checkValue: [],
+                },
+                imgInfo: [],
+                url: 'http://wxpay.possji.cn',
 
             },
             mounted() {
@@ -208,9 +211,7 @@
                 },
 
                 changeCheck(value) {
-                    console.log(value);
-                    this.form.newcheckList.push(value)
-                    console.log(this.form.newcheckList);
+                    console.log(this.form.checkValue);
 
                 },
                 getinfo() {
@@ -252,44 +253,62 @@
                         });
                 },
                 changeImage(e) {
-                    var file = e.target.files[0];
+                    this.file = e.target.files[0];
                     // this.form = new FormData();
 
                     // form.append("head", file);
                     var reader = new FileReader();
                     var that = this;
                     console.log(that.form);
+                    that.imgInfo.push(e.target.files[0])
 
-                    reader.readAsDataURL(file);
+                    reader.readAsDataURL(that.file);
                     reader.onload = function (e) {
                         that.form.imageUrl.push(this.result);
                         console.log(this.result);
                     };
                 },
-                // 
-                subImg() {
+                // 删除图片
+                delImg(index) {
+                    this.form.imageUrl.shift(index);
+                    this.imgInfo.shift(index)
+                },
+                // 确认上传
+                subImg(e) {
+                    console.log(this.form.imageUrl, this.imgInfo, '图片数组');
+
                     let that = this
-                    let formd = new FormData();
-                    formd.append("file", that.$refs.avatarInput.files);
-                    console.log(formd,'信息',that.$refs.avatarInput.files);
-                    
-                    axios.post('http://wxpay.possji.cn/yikehao/apiLoadimg', {
-                        image:that.$refs.avatarInput.files
-                    })
-                        //then里面跟一个成功回调函数
-                        .then(function (resp) {
-                            if (resp.data.code) {
-                                console.log('图片', resp.data.data);
+                    for (let item of that.imgInfo) {
+                        const formd = new FormData();
+                        formd.append("image", item);
+                        formd.append("image1", 222);
+                        console.log(formd);
+                        axios({
+                                url: 'http://wxpay.possji.cn/yikehao/apiLoadimg',
+                                method: 'post',
+                                data: formd,
+                                headers: {
+                                    'Content-Type': 'multipart/form-data'
+                                }
 
-                            } else {
-                                $.toast("无法加载", "text");
-                            }
+                            })
 
-                        })
-                        // catch中跟一个失败回调函数
-                        .catch(function (error) {
-                            console.log(error);
-                        });
+                            //then里面跟一个成功回调函数
+                            .then(function (resp) {
+                                if (resp.data.code == 1) {
+                                    console.log('图片', resp.data.data);
+                                    this.form.imageUrl = []
+                                    this.form.imageUrl.push(this.url+resp.data.data)
+                                } else {
+                                    $.toast("无法加载", "text");
+                                }
+
+                            })
+                            // catch中跟一个失败回调函数
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    }
                 }
             }
         })
