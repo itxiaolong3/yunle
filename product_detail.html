@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="./css/menu.css">
 
     <!-- weui -->
-    <!-- <link rel="stylesheet" href="./css/weui.css"> -->
-    <!-- <link rel="stylesheet" href="./css/jquery-weui.css"> -->
+     <link rel="stylesheet" href="./css/weui.css">
+     <link rel="stylesheet" href="./css/jquery-weui.css">
 
     <!-- 适配 -->
     <script src="./js/common.js"></script>
     <!-- vant组件库 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@1.5/lib/index.css">
-    <title>Item_wrap</title>
+    <title>云乐互联</title>
 </head>
 
 <body>
@@ -206,11 +206,9 @@
         <!-- footer end -->
 
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vant@1.5/lib/vant.min.js"></script>
     <!-- jquery -->
-    <!-- <script src="./js/jquery-2.1.4.js"></script> -->
-    <!-- <script src="./js/jquery-weui.min.js"></script> -->
+     <script src="./js/jquery-2.1.4.js"></script>
+     <script src="./js/jquery-weui.min.js"></script>
 
     <!-- common js -->
     <script src="./js/common.js"></script>
@@ -283,15 +281,20 @@
                 },
                 showImagePreview: function(position, timer) {
                     console.log(vant);
-                    
-                    
                    vant.ImagePreview({
                         images:this.images,
                         startPosition: position
                     });
                 },
                 callqq:function (qq) {
-                    window.open("http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes");
+                    if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+                        /*window.location.href="你的手机版地址";*/
+                        window.open("mqqwpa://im/chat?chat_type=wpa&uin="+qq+"&version=1&src_type=web&web_src=oicqzone.com");
+                    }
+                    else {
+                        /*window.location.href="你的电脑版地址";    */
+                        window.open("http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes");
+                    }
                 },
                 showcall:function () {
                     $.confirm('<label style="color: red;">重点提示</label>  一定要经过云乐互联担保交易，保证资金100%安全。普通会员最多免费看3个商家，是否继续', function() {
