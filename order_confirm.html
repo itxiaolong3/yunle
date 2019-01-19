@@ -30,50 +30,72 @@
 <!-- header end   -->
 
 <!-- main start -->
-    <div class="address-content">
-        <div class="address-inf">
-            <span class="user-name inf-item">用户1  </span>
-            <span class="user-tel inf-item">17621684623</span>
+<div id="main">
+<div class="weui-form-preview">
+    <div class="weui-form-preview__hd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">付款金额</label>
+            <em class="weui-form-preview__value">¥2400.00</em>
         </div>
-        <div class="user-add">
-            <a href="./address_list.html">
-                <span class="add-inf">上海市浦东新区阳光花城</span>
-                <i class="icon-right"></i>
-            </a>
+    </div>
+    <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">商品</label>
+            <span class="weui-form-preview__value">电动打蛋机</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">标题标题</label>
+            <span class="weui-form-preview__value">名字名字名字</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">标题标题</label>
+            <span class="weui-form-preview__value">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">标题标题</label>
+            <span class="weui-form-preview__value">名字名字名字</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">标题标题</label>
+            <span class="weui-form-preview__value">名字名字名字</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">标题标题</label>
+            <span class="weui-form-preview__value">名字名字名字</span>
         </div>
     </div>
 
-    <div class="pro-content">
-        <div class="pro-img">
-            <a href="#">
-                <img src="./images/item-img01.jpg" alt="">
-            </a>
-        </div>
-        <div class="pro-intro">
-            <div class="pro-name pro-item">联想（Lenovo）IdeaPad 710S-13 13.3英寸超极本电脑(i3/....</div>
-            <div class="pro-desc pro-item">i3/4G内存/128固态/金色</div>
-            <div class="pro-pri pro-item">
-                <span><i>￥</i><span class="pro-price">6000</span></span>
-                <div class="pro-num">
-                    <i class="reduce symbol-item">-</i>
-                    <span class="num order_num">1</span>
-                    <i class="add symbol-item">+</i>
+</div>
+<!-- main end   -->
+    <!--图片上传-->
+    <div class="weui-cells weui-cells_form" id=uploaderCustom>
+        <div class=weui-cell>
+            <div class=weui-cell__bd>
+                <div class=weui-uploader>
+                    <div class=weui-uploader__hd><p class=weui-uploader__title>图片上传</p></div>
+                    <div class=weui-uploader__bd>
+                        <ul class=weui-uploader__files id=uploaderCustomFiles></ul>
+                        <div class=weui-uploader__input-box><input id=uploaderCustomInput
+                                                                   class=weui-uploader__input type=file
+                                                                   accept=image/* multiple=""></div>
+                    </div>
                 </div>
             </div>
         </div>
-
+        <div class=weui-btn-area><a id=uploaderCustomBtn href=javascript: class="weui-btn weui-btn_primary">上传</a>
     </div>
-
-<!-- main end   -->
 
 <!-- footer start -->
 <footer>
     <div class="order-bar">
-        <span class="order-total">总计：￥</span>
-        <a href="#" class="order-totalPri">6000</a>
-        <a class="order-sub" >提交订单</a>
+        <label for="weuiAgree" class="weui-agree">
+            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+            <span class="weui-agree__text">阅读并同意<a :onclick="showxie()">《云乐互联用户协议》</a></span>
+        </label>
+        <a class="order-sub" >立即支付</a>
     </div>
 </footer>
+</div>
 <!-- footer end -->
 
 
@@ -84,58 +106,8 @@
 <scritp src="./js/public.js"></scritp>
 <script src="./js/vue.js"></script>
 <script src="./js/data.js"></script>
-
-<script>
-    $(function(){
-        var index = {
-            init: function(){
-                this.bindEvents();
-                // console.log(pro_id)
-            },
-            data: {
-                order_num: 1,
-            },
-            bindEvents: function(){
-                //减去订单触发事件
-                $('.reduce').on('click',this.reduce);
-                //增加订单触发事件
-                $('.add').on('click',this.add);
-                // $('.order_num').on('change',this.order_num);
-            },
-
-            // 订单 点击 +
-            add: function(){
-                index.data.order_num++;
-                // $('.order_num').val(index.data.order_num);
-                $('.order_num').text(index.data.order_num);
-                // $('.order_num').html(index.data.order_num);
-                console.log(index.data.order_num)
-                var $price_s = $(".pro-price").text()
-                console.log($price_s)
-                var totalPri = Number($(".order-totalPri").text(index.data.order_num*$price_s))
-                console.log(typeof(parseInt(totalPri)))
-                $(".order-totalPri").val(totalPri)
-            },
-
-            // 订单 点击 -
-            reduce: function(){
-                index.data.order_num--;
-                if(index.data.order_num <= 1){
-                    index.data.order_num = 1;
-                }
-                // $('.order_num').val(index.data.order_num);
-                $('.order_num').text(index.data.order_num);
-                var $price_s = $(".pro-price").text()
-                console.log($price_s)
-                var totalPri = Number($(".order-totalPri").text(index.data.order_num*$price_s))
-                console.log(typeof(parseInt(totalPri)))
-                $(".order-totalPri").val(totalPri)
-
-
-            }
-        }
-        index.init();
-    })
-</script>
+<!---->
+<script src="./js/weui.min.js"></script>
+<script src="./js/example.js"></script>
 </body>
 </html>

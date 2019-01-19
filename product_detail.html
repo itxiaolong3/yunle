@@ -27,7 +27,7 @@
         <!-- header start -->
         <header>
             <div class="topbar-second">
-                <span onclick="javascript:history.go(-1)"></span>商品详情
+                <span onclick="javascript:history.go(-1)"></span>账号详情
                 <i class="back" onclick="javascript:history.go(-1)"></i>
             </div>
         </header>
@@ -35,19 +35,12 @@
 
         <!--<div class="main">-->
         <div class="detail-content">
-            <div class="pro-title pro-item">{{info.zhname}}</div>
-            <div class="pro-desc pro-item">{{info.desc}}</div>
-            <div class="pro-price pro-item">价格：
+            <div class="pro-title pro-item"><span>标题：</span>{{info.zhname}}</div>
+            <div class="pro-price pro-item"><label>价格：</label>
                 <span class="pro-newPrice">￥{{info.oneprice}}</span>
-                <span class="pro-oldPrice">￥{{info.price}}</span>
+                <span class="callqq" @click="callqq(info.kfqq)">联系客服</span>
+                <span class="sellcall" @click="showcall()">卖家联系方式</span>
             </div>
-            <!-- <div class="detail-intro pro-item">商品介绍：
-                <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
-                <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
-                <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
-                <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
-                <p>商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,商品介绍,</p>
-            </div> -->
             <div class="infoContent">
                 <div class="infoContentSon">
                     <div class="infoContentSon_1">
@@ -207,7 +200,7 @@
 
         <!-- footer start -->
         <footer>
-            <a class="pro-buy" href="order_confirm.html">立即购买
+            <a class="pro-buy" :href="'order_confirm.html?gid='+info.id">立即购买
             </a>
         </footer>
         <!-- footer end -->
@@ -222,7 +215,7 @@
     <!-- common js -->
     <script src="./js/common.js"></script>
     <script src="./js/public.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vant@1.5/lib/vant.min.js"></script>
     <script src="./js/vue.js"></script>
     <script src="./js/data.js"></script>
@@ -260,6 +253,10 @@
             methods: {
                 got(index) {
                     this.willShow = index
+                    $.showLoading();
+                    setTimeout(function() {
+                        $.hideLoading();
+                    }, 300)
                 },
                 getinfo() {
                     let that = this;
@@ -292,12 +289,19 @@
                         images:this.images,
                         startPosition: position
                     });
-                    // if (timer) {
-                    //     setTimeout(() => {
-                    //         instance.close();
-                    //     }, timer);
-                    // }
+                },
+                callqq:function (qq) {
+                    window.open("http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes");
+                },
+                showcall:function () {
+                    $.confirm('<label style="color: red;">重点提示</label>  一定要经过云乐互联担保交易，保证资金100%安全。普通会员最多免费看3个商家，是否继续', function() {
+                        //这里发送请求显示商家联系电话，待上uid。如果没登录先去登录才可以查看
+                        $.alert("商家联系方式：18319409222", "信息");
+                    }, function() {
+                        //取消操作
+                    });
                 }
+
             }
         })
     </script>
