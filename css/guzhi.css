@@ -1,0 +1,204 @@
+.menu-topbar-first .back {
+  background: none;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+  justify-content: space-between;
+}
+
+.main .menu {
+  flex: 1 1 24%;
+  width: 24%;
+  min-height: 100%;
+  background-color: #f8f8f8;
+  position: fixed;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+}
+
+.main .menu .menu-item {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #f8f8f8;
+}
+
+.main .menu .menu-item li {
+  width: 100%;
+  height: .5rem;
+  line-height: .5rem;
+  text-align: center;
+  font-size: 12px;
+}
+
+.main .menu .menu-item li.active {
+  background-color: #fff;
+}
+
+.main .store-menu {
+  flex: 1 1 74%;
+  width: 74%;
+  position: absolute;
+  top: 5px;
+  right: 1%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: 100%;
+}
+
+.main .store-menu .menuBanner {
+  width: 100%;
+}
+
+.main .store-menu .menuBanner .swiper-slide {
+  width: 100%;
+}
+
+.main .store-menu .menuBanner .swiper-slide img {
+  width: 100%;
+}
+
+.main .store-menu .store-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+.main .store-menu .store-content .store-item {
+  margin-bottom: .2rem;
+}
+
+.main .store-menu .store-content .store-item h3 {
+  line-height: .3rem;
+  font-weight: normal;
+  padding-left: .2rem;
+  border-bottom: 2px solid #00bdff;
+}
+
+.main .store-menu .store-content .store-item .store-item-content li {
+  margin-top: .1rem;
+  padding: .15rem 0;
+  box-shadow: 1px 2px 1px #ccc;
+  position: relative;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.main .store-menu .store-content .store-item .store-item-content li .item-img {
+  flex: 1 1 30%;
+  width: 30%;
+  height: 30%;
+}
+
+.main .store-menu .store-content .store-item .store-item-content li .item-img img {
+  width: 100%;
+}
+
+.main .store-menu .store-content .store-item .store-item-content li .item-desc {
+  flex: 1 1 65%;
+  font-size: 12px;
+  margin-left: 5%;
+  color: #646464;
+}
+
+.main .store-menu .store-content .store-item .store-item-content li .item-desc .item-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.main .store-menu .store-content .store-item .store-item-content li .item-desc .item-des {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  width: 1.68rem;
+}
+
+.main .store-menu .store-content .store-item .store-item-content li .item-desc .item-price {
+  color: red;
+  margin-top: .06rem;
+  font-size: 14px;
+}
+
+.main .store-menu .store-content .store-item .store-item-content li .item-desc .item-price .item-oldPrice {
+  color: #646464;
+  text-decoration: line-through;
+}
+
+.main .store-menu .store-content .store-item .store-item-content li .bug {
+  font-size: 12px;
+  padding: 3px 5px;
+  position: absolute;
+  right: 5px;
+  bottom: 12px;
+  background-color: #00bdff;
+  border-radius: 10px;
+  color: #fff;
+}
+#gushires{
+  width: 100%;height: 640px;background-image: url('../images/zsbj1.jpg');
+  background-repeat:no-repeat; background-size:100% 100%;-moz-background-size:100% 100%;
+  padding-bottom: 10px;
+}
+.con ul li{
+  border-bottom: 2px lavender dashed;
+  line-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 45px;
+  font-size: 16px;
+}
+.con ul li:last-child{
+  line-height: 45px;
+  border:none;
+}
+.order-bar {
+  display: flex;
+  height: .4rem;
+  line-height: .3rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #CCC;
+}
+
+.order-bar .order-total {
+  flex: 1 1 1.6rem;
+  text-align: right;
+}
+
+.order-bar .order-totalPri {
+  flex: 1 1 .02rem;
+  color: #2d9cff;
+  font-size: 14px;
+}
+
+.order-bar .order-sub {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2d9cff;
+  color: #fff;
+  font-size: 14px;
+}
+
+
+li {
+  list-style: none;
+}
+
+.active {
+  background-color: #2d9cff;
+  color: #fff
+}

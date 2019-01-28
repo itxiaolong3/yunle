@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- 公共common.css -->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/guzhi.css">
+
+    <!-- weui -->
+    <link rel="stylesheet" href="./css/weui.min.css">
+    <link rel="stylesheet" href="./css/jquery-weui.css">
+
+    <!-- 适配 -->
+    <script src="./js/common.js"></script>
+    <title>云乐互联</title>
+</head>
+<body>
+<!-- header start -->
+<header>
+    <div class="topbar-second">
+        <span onclick="javascript:history.go(-1)"></span>账号估值
+        <i class="back" onclick="javascript:history.go(-1)"></i>
+    </div>
+</header>
+<!-- header end   -->
+
+<!-- main start -->
+<div id="main">
+    <div id="form_main" v-if="!isshow">
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">公众微信号</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" v-model='name' placeholder="请输入微信号">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">粉丝数量</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" v-model='fsnum' placeholder="请输入粉丝数量">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">头条阅读数</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" v-model='ttnum'  placeholder="请输头条阅读数">
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_select">
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="select1" v-model="isyuan">
+                        <option selected="" value="1">未开通原创</option>
+                        <option value="2">已开通原创</option>
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_select">
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="select1" v-model="issan">
+                        <option selected="" value="1">未开通赞赏功能</option>
+                        <option value="2">已开通赞赏功能</option>
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_select">
+            <div class="weui-cell__bd">
+                <select class="weui-select" name="select1" v-model="ischange">
+                    <option selected="" value="1">可通过认证来变更</option>
+                    <option value="2">不可通过认证来变更</option>
+                </select>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="gushires" v-if="isshow">
+        <div class="cons" style="height: 260px;width: 100%;"></div>
+        <div class="con">
+            <ul>
+                <li>
+                    <label>公众号微信号:</label>
+                    <span>{{name}}</span>
+                </li>
+                <li>
+                    <label>粉丝数量:</label>
+                    <span>{{fsnum}}</span>
+                </li>
+                <li>
+                    <label>头条阅读:</label>
+                    <span>{{ttnum}}</span>
+                </li>
+                <li>
+                    <label style="width: 80px;">原创功能:</label>
+                    <span>
+                        <label v-if="isyuan==1">未开通原创</label>
+                        <label v-if="isyuan==2">已开通原创</label>
+                    </span>
+                </li>
+                <li>
+                    <label style="width: 80px;">赞赏功能:</label>
+                    <span>
+                        <label v-if="issan==1">未开赞赏功能</label>
+                        <label v-if="issan==2">已开赞赏功能</label>
+                    </span>
+                </li>
+                <li>
+                    <label style="width: 80px;">主体变更:</label>
+                    <span v-if="ischange==1">可通过认证来变更</span>
+                    <span v-if="ischange==2">不可通过认证来变更</span>
+                </li>
+                <li>
+                    <label style="width: 100px;">市场价值:</label>
+                    <span style="font-size: 25px;color: #AB7D3F;">{{price}}</span>
+                </li>
+                <li>
+                    <label style="width: 100px;">世界排名:</label>
+                    <span style="font-size: 25px;">{{wordnum}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- footer start -->
+    <footer>
+        <div class="order-bar" v-if="!isshow">
+            <a class="order-sub" @click="doguzhi()" >立即估值</a>
+            <!--<a class="order-sub" @click="createimg()" v-if="isshow==1&&isdown==0">生成图片</a>-->
+            <!--<a class="order-sub" id="dow" download="downImg"  v-if="isdown">下载图片</a>-->
+        </div>
+    </footer>
+</div>
+<!-- footer end -->
+<!-- jquery -->
+<script src="./js/jquery-2.1.4.js"></script>
+<script src="./js/jquery-weui.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<scritp src="./js/public.js"></scritp>
+<script src="./js/vue.js"></script>
+<script src="./js/data.js"></script>
+<script src="./js/axios.js"></script>
+<!---->
+<script src="./js/weui.min.js"></script>
+
+<script src="https://cdn.bootcss.com/html2canvas/0.4.1/html2canvas.js"></script>
+<script>
+    // import {
+    //     ImagePreview
+    // } from 'https://cdn.jsdelivr.net/npm/vant@1.5/lib/vant.min.js';
+    var vm = new Vue({
+        el: "#main",
+        data: {
+            name:'',
+            fsnum:'',
+            ttnum:'',
+            isyuan:1,
+            issan:1,
+            ischange:1,
+            isshow:0,
+            price:0,
+            wordnum:0,
+            iscreate:0,
+            isdown:0,
+        },
+        mounted() {
+        },
+        methods: {
+            doguzhi:function () {
+                let that=this;
+                console.log(that.name,'微信号')
+                console.log(that.fsnum,'粉丝数量')
+                console.log(that.ttnum,'头条数量')
+                console.log(that.isyuan,'原创')
+                console.log(that.issan,'赞赏')
+                console.log(that.ischange,'主体')
+                $.toast.prototype.defaults.duration=1000;
+                if(!that.name){
+                    $.toast("请输入微信号", "text");
+                }else if(!that.fsnum){
+                    $.toast("粉丝数量不可为空", "text");
+                }else if(!that.ttnum){
+                    $.toast("头条数量不可为空", "text");
+                }else{
+                    that.isshow=1;
+                    that.wordnum=that.rnd(9999,99999);
+                    that.valuation(that.fsnum,that.issan);
+                }
+
+
+            },
+            valuation:function (fsnum, iszan) {
+
+                let that=this;
+                if (iszan == 1) {
+                    createData = 0.9;
+                } else if (iszan == 2) {
+                    createData = 1.2;
+                }
+
+                //最大值和最小值
+                let min = fsnum * 0.5;
+                let max = fsnum * 0.8;
+                that.price=(Math.round(min*createData)+Math.round(max*createData))/2;
+
+
+            },
+            rnd: function(n, m){
+                let random = Math.floor(Math.random()*(m-n+1)+n);
+                return random;
+            },
+            createimg:function () {
+                let that=this;
+                that.isdown=1;
+                that.iscreate==1;
+                $.showLoading('生成中...');
+                setTimeout(function () {
+                    $.hideLoading();
+                },800)
+                let he=$("#gushires").height();
+                let wh=$("#gushires").width();
+                html2canvas($("#gushires"), {
+                    height: he + 20,
+                    width: wh + 50  ,
+                    onrendered: function(canvas) {
+                        //将canvas画布放大若干倍，然后盛放在较小的容器内，就显得不模糊了
+                        let timestamp = Date.parse(new Date());
+                        //把截取到的图片替换到a标签的路径下载
+                        $("#dow").attr('href',canvas.toDataURL());
+                        //下载下来的图片名字
+                        $("#dow").attr('download',timestamp + '.png') ;
+                        //document.body.appendChild(canvas);
+                    }
+                    //可以带上宽高截取你所需要的部分内容
+                });
+            },
+
+
+
+        }
+    })
+</script>
+</body>
+</html>

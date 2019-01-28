@@ -29,7 +29,8 @@ function returnJson(type){
                     {
                         business_id:1,
                         name: "账号估值",
-                        img_url: "./images/icon_gu.png"
+                        img_url: "./images/icon_gu.png",
+                        gourl:'guzhi.html'
                     },
                     {
                         business_id:2,

@@ -31,52 +31,59 @@
 
 <!-- main start -->
 <div id="main">
-<div class="weui-form-preview">
-    <div class="weui-form-preview__hd">
-        <div class="weui-form-preview__item">
-            <label class="weui-form-preview__label">付款金额</label>
-            <em class="weui-form-preview__value">¥2400.00</em>
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">付款金额</label>
+                <em class="weui-form-preview__value">¥{{info.oneprice}}</em>
+            </div>
         </div>
-    </div>
-    <div class="weui-form-preview__bd">
-        <div class="weui-form-preview__item">
-            <label class="weui-form-preview__label">商品</label>
-            <span class="weui-form-preview__value">电动打蛋机</span>
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">商品</label>
+                <span class="weui-form-preview__value">{{info.zhname}}</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">账号类型</label>
+                <span class="weui-form-preview__value" v-if='info.type == 1'>订阅号</span>
+                <span class="weui-form-preview__value" v-if='info.type == 2'>服务号</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">认证主体</label>
+                <span class="weui-form-preview__value" v-if='info.isrz == 0'>未认证</span>
+                <span class="weui-form-preview__value" v-if='info.isrz == 1'>个人认证</span>
+                <span class="weui-form-preview__value" v-if='info.isrz == 2'>企业认证</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">所属类目</label>
+                <span class="weui-form-preview__value">{{info.fortype}}</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">粉丝数量</label>
+                <span class="weui-form-preview__value">{{info.fansnum}}</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">注册时间</label>
+                <span class="weui-form-preview__value">{{info.addtime}}</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">状态</label>
+                <span class="weui-form-preview__value">待支付</span>
+            </div>
         </div>
-        <div class="weui-form-preview__item">
-            <label class="weui-form-preview__label">标题标题</label>
-            <span class="weui-form-preview__value">名字名字名字</span>
-        </div>
-        <div class="weui-form-preview__item">
-            <label class="weui-form-preview__label">标题标题</label>
-            <span class="weui-form-preview__value">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>
-        </div>
-        <div class="weui-form-preview__item">
-            <label class="weui-form-preview__label">标题标题</label>
-            <span class="weui-form-preview__value">名字名字名字</span>
-        </div>
-        <div class="weui-form-preview__item">
-            <label class="weui-form-preview__label">标题标题</label>
-            <span class="weui-form-preview__value">名字名字名字</span>
-        </div>
-        <div class="weui-form-preview__item">
-            <label class="weui-form-preview__label">标题标题</label>
-            <span class="weui-form-preview__value">名字名字名字</span>
-        </div>
-    </div>
 
-</div>
-<!-- main end   -->
-<!-- footer start -->
-<footer>
-    <div class="order-bar">
-        <label for="weuiAgree" class="weui-agree">
-            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
-            <span class="weui-agree__text">阅读并同意<a :onclick="showxie()">《云乐互联用户协议》</a></span>
-        </label>
-        <a class="order-sub" >立即支付</a>
     </div>
-</footer>
+    <!-- main end   -->
+    <!-- footer start -->
+    <footer>
+        <div class="order-bar">
+            <label class="weui-agree">
+                <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+                <span class="weui-agree__text">阅读并同意</span>
+            </label><label @click="showxie()" class="payxieyi">《云乐互联用户协议》</label>
+            <a class="order-sub" @click="pay()">立即支付</a>
+        </div>
+    </footer>
 </div>
 <!-- footer end -->
 <!-- jquery -->
@@ -86,7 +93,84 @@
 <scritp src="./js/public.js"></scritp>
 <script src="./js/vue.js"></script>
 <script src="./js/data.js"></script>
+<script src="./js/axios.js"></script>
 <!---->
 <script src="./js/weui.min.js"></script>
+<script>
+    // import {
+    //     ImagePreview
+    // } from 'https://cdn.jsdelivr.net/npm/vant@1.5/lib/vant.min.js';
+    var vm = new Vue({
+        el: "#main",
+        data: {
+            xieyi: '',
+            info:[]
+        },
+        mounted() {
+            this.getinfo();
+        },
+        methods: {
+            showxie: function () {
+                let that = this;
+                axios.post('http://wxpay.possji.cn/yikehao/getxieyi', {
+                    state: 2
+                })
+                //then里面跟一个成功回调函数
+                    .then(function (resp) {
+                        if (resp.data.code) {
+                            that.info = resp.data.data
+                            $.alert("<div style='overflow:scroll; height:400px;'>"+that.info.contents+"</div>",'协议详细');
+                        } else {
+                            $.toast("无法加载", "text");
+                        }
+                    })
+                    // catch中跟一个失败回调函数
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            getinfo() {
+                let that = this;
+                var id = getUrlParm('gid');
+                axios.post('http://wxpay.possji.cn/yikehao/getdetail', {
+                    id: id
+                })
+                //then里面跟一个成功回调函数
+                    .then(function (resp) {
+                        if (resp.data.code) {
+                            that.info = resp.data.data
+                            console.log(that.info);
+
+                        } else {
+                            $.toast("无法加载", "text");
+                        }
+
+                    })
+                    // catch中跟一个失败回调函数
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            pay:function () {
+                if(!$('#weuiAgree').is(':checked')){
+                    $.toast.prototype.defaults.duration=1000;
+                    $.toast("请同意协议",'text');
+                    return false
+                }else{
+                    $.toast("提交", "text");
+                }
+            }
+
+        }
+    })
+    function getUrlParm(name) {
+        //获取url方法 编辑传来的参数
+        //     //之前decodeURI是用的unescape() 有时候会取汉字乱码
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return decodeURI(r[2]);
+        return null;
+    }
+</script>
 </body>
 </html>

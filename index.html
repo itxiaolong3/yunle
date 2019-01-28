@@ -64,7 +64,7 @@
         <div class="choiceness main-item" id="choiceness_bind">
             <div class="choiceness-content">
                 <div class="choiceness-item" v-for="(item,index) in data">
-                    <a href="javascript:void(0)">
+                    <a :href="item.gourl">
                         <img :src="item.img_url" alt="">
                         <span class="choiceness-item-desc">{{item.name}}</span>
                     </a>
@@ -338,6 +338,7 @@
                                                     $('.nomore').css('display','')
                                                     $(".weui-loadmore").hide()
                                                     $(document.body).destroyInfinite()
+                                                    $.toast.prototype.defaults.duration=1000;
                                                     $.toast("已加载完毕", "text");
                                                 }
 
