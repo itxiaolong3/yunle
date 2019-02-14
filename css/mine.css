@@ -31,6 +31,9 @@ body {
   width: 2rem;
   font-size: 16px;
 }
+.user-name span{
+  display: block;
+}
 .user-inf .change-inf {
   flex: 1;
   height: .8rem;

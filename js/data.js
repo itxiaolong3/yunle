@@ -35,17 +35,20 @@ function returnJson(type){
                     {
                         business_id:2,
                         name: "增值服务",
-                        img_url: "./images/icon_addserver.png"
+                        img_url: "./images/icon_addserver.png",
+                        gourl:'addserver.html'
                     },
                     {
                         business_id:3,
                         name: "服务中心",
-                        img_url: "./images/icon_sercenter.png"
+                        img_url: "./images/icon_sercenter.png",
+                        gourl:'servercenter.html'
                     },
                     {
                         business_id:4,
                         name: "我的订单",
-                        img_url: "./images/icon_order.png"
+                        img_url: "./images/icon_order.png",
+                        gourl:'order.html'
                     },
 
                 ]

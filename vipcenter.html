@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css reset -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+
+    <!-- weui -->
+    <link rel="stylesheet" href="./css/weui.css">
+    <link rel="stylesheet" href="./css/jquery-weui.css">
+    <!-- jquery -->
+    <script src="./js/jquery-2.1.4.js"></script>
+    <script src="./js/common.js"></script>
+    <!-- mine css -->
+    <link rel="stylesheet" href="./css/vip.css">
+    <title>云乐互联</title>
+</head>
+<body>
+
+<header>
+    <div class="topbar-second">
+        <span onclick="javascript:history.go(-1)"></span>
+        会员中心
+        <i class="back" onclick="javascript:history.go(-1)"></i>
+    </div>
+</header>
+<div id="v_main">
+    <ul>
+        <li @click="toPay(1)">
+            <img src="./images/vipyue.jpg" alt="" width="280px" height="150px">
+            <div class="yuevip">
+                <span>￥99元</span>
+                <span>月卡</span>
+            </div>
+
+        </li>
+        <li @click="toPay(2)">
+            <img src="./images/vipji.jpg" alt="" width="280px" height="150px">
+            <div class="jikavip">
+                <span>￥300元</span>
+                <span>季卡</span>
+            </div>
+        </li>
+        <li @click="toPay(3)">
+            <img src="./images/vipyon.jpg" alt="" width="280px" height="150px">
+            <div class="yonvip">
+                <span>￥999元</span>
+                <span>永久卡</span>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- 主体 -->
+
+<!-- footer start -->
+<footer>
+    <!-- tabbar -->
+    <div class="weui-tabbar" id="footer-tabber">
+        <a href="./index.html" class="weui-tabbar__item weui-bar__item--on">
+            <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+            <div class="weui-tabbar__icon">
+                <img src="./images/indexicon.png" alt="">
+            </div>
+            <p class="weui-tabbar__label" style="color: #999999;">首页</p>
+        </a>
+        <!--<a href="javascript:;" class="weui-tabbar__item">-->
+        <a href="./buy.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/bugicon.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">买号</p>
+        </a>
+        <a href="./fabu.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/sellicon.png" alt="">
+            </div>
+            <p class="weui-tabbar__label" >卖号</p>
+        </a>
+        <a href="#" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/usericon.png" alt="">
+            </div>
+            <p class="weui-tabbar__label" style="color: #36c7fe;">我的</p>
+        </a>
+    </div>
+</footer>
+<!-- footer end   -->
+
+<script src="./js/jquery-weui.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<!-- common js -->
+<script src="./js/common.js"></script>
+<script src="./js/vue.js"></script>
+<script src="./js/axios.js"></script>
+<script>
+    // <!--点击事件控制-->
+    var vm = new Vue({
+        el: "#v_main",
+        data: {
+        },
+        mounted() {},
+        methods: {
+            //点击
+            toPay(type) {
+                let that = this
+                console.log('点击了'+type)
+                $.confirm('是否购买该会员', function() {
+                    $.alert("点了支付"+type, "信息");
+                }, function() {
+                    //取消操作
+                });
+//                axios({
+//                    url: 'http://wxpay.possji.cn/yikehao/doLogin',
+//                    method: 'post',
+//                    data: {
+//                        phone: that.form.phoneNum,
+//                        psw: that.form.passNum,
+//                        type: 0
+//                    },
+//                    headers: {'Content-Type': 'application/json'}
+//
+//                })
+//                //then里面跟一个成功回调函数
+//                    .then(function (resp) {
+//                        if (resp.data.code == 1) {
+//                        } else {
+//                        }
+//                    })
+//                    // catch中跟一个失败回调函数
+//                    .catch(function (error) {
+//                        console.log(error);
+//                    });
+            }
+        }
+    })
+</script>
+</body>
+</html>

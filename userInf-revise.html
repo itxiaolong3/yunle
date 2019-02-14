@@ -17,7 +17,7 @@
     <script src="./js/common.js"></script>
     <!-- mine css -->
     <link rel="stylesheet" href="./css/mine.css">
-    <title>Item_wrap 我的</title>
+    <title>我的</title>
 </head>
 <body>
 
@@ -41,14 +41,26 @@
 
 <!-- 主体 -->
 <ul class="inf-rev">
+    <!--<li>-->
+        <!--<label for="user-aver">头   像</label>-->
+        <!--<img src="./images/user-pic.jpg" alt="">-->
+        <!--<input id="user-aver" type="file" name="file" capture="camera">-->
+    <!--</li>-->
     <li>
-        <label for="user-aver">头   像</label>
-        <img src="./images/user-pic.jpg" alt="">
-        <input id="user-aver" type="file" name="file" capture="camera">
+        <label for="phone">手机号</label>
+        <input id="phone" type="text" value="18319409222">
     </li>
     <li>
-        <label for="user-name">昵   称</label>
-        <input id="user-name" type="text" value="一缕阳光">
+        <label for="wechat">微信号</label>
+        <input id="wechat" type="text" value="it小龙">
+    </li>
+    <li>
+        <label for="qq">Q   Q</label>
+        <input id="qq" type="number" value="1754878444">
+    </li>
+    <li>
+        <label for="email">邮箱</label>
+        <input id="email" type="email" value="1754878444@qq.com">
     </li>
     <!--<li>-->
         <!--<label for="user-sex">性   别</label>-->
@@ -64,30 +76,30 @@
     <!-- tabbar -->
     <div class="weui-tabbar" id="footer-tabber">
         <a href="./index.html" class="weui-tabbar__item weui-bar__item--on">
-            <span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>
+            <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
             <div class="weui-tabbar__icon">
-                <img src="./images/icon_nav_button.png" alt="">
+                <img src="./images/indexicon.png" alt="">
             </div>
-            <p class="weui-tabbar__label">首页</p>
+            <p class="weui-tabbar__label" style="color: #999999;">首页</p>
         </a>
         <!--<a href="javascript:;" class="weui-tabbar__item">-->
-        <a href="./menu.html" class="weui-tabbar__item">
+        <a href="./buy.html" class="weui-tabbar__item">
             <div class="weui-tabbar__icon">
-                <img src="./images/icon_nav_msg.png" alt="">
+                <img src="./images/bugicon.png" alt="">
             </div>
-            <p class="weui-tabbar__label">分类</p>
+            <p class="weui-tabbar__label">买号</p>
         </a>
-        <a href="./order.html" class="weui-tabbar__item">
+        <a href="./fabu.html" class="weui-tabbar__item">
             <div class="weui-tabbar__icon">
-                <img src="./images/icon_nav_article.png" alt="">
+                <img src="./images/sellicon.png" alt="">
             </div>
-            <p class="weui-tabbar__label">发现</p>
+            <p class="weui-tabbar__label" >卖号</p>
         </a>
-        <a href="./mine.html" class="weui-tabbar__item">
+        <a href="#" class="weui-tabbar__item">
             <div class="weui-tabbar__icon">
-                <img src="./images/icon_nav_cell.png" alt="">
+                <img src="./images/usericon.png" alt="">
             </div>
-            <p class="weui-tabbar__label">我的</p>
+            <p class="weui-tabbar__label" style="color: #36c7fe;">我的</p>
         </a>
     </div>
 </footer>

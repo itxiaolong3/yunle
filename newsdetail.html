@@ -23,7 +23,7 @@
 <!-- header start -->
 <header>
     <div class="topbar-second">
-        <span onclick="javascript:history.go(-1)"></span>确认订单
+        <span onclick="javascript:history.go(-1)"></span>详细内容
         <i class="back" onclick="javascript:history.go(-1)"></i>
     </div>
 </header>
@@ -34,56 +34,17 @@
     <div class="weui-form-preview">
         <div class="weui-form-preview__hd">
             <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">付款金额</label>
-                <em class="weui-form-preview__value">¥{{info.oneprice}}</em>
+                <label class="weui-form-preview__label">标题</label>
+                <embed class="weui-form-preview__value">我的新闻标题</embed>
             </div>
         </div>
-        <div class="weui-form-preview__bd">
-            <div class="weui-form-preview__bd">
-                <label class="weui-form-preview__label">商品</label>
-                <span class="weui-form-preview__value">{{info.zhname}}</span>
-            </div>
-            <div class="weui-form-preview__bd">
-                <label class="weui-form-preview__label">账号类型</label>
-                <span class="weui-form-preview__value" v-if='info.type == 1'>订阅号</span>
-                <span class="weui-form-preview__value" v-if='info.type == 2'>服务号</span>
-            </div>
-            <div class="weui-form-preview__bd">
-                <label class="weui-form-preview__label">认证主体</label>
-                <span class="weui-form-preview__value" v-if='info.isrz == 0'>未认证</span>
-                <span class="weui-form-preview__value" v-if='info.isrz == 1'>个人认证</span>
-                <span class="weui-form-preview__value" v-if='info.isrz == 2'>企业认证</span>
-            </div>
-            <div class="weui-form-preview__bd">
-                <label class="weui-form-preview__label">所属类目</label>
-                <span class="weui-form-preview__value">{{info.fortype}}</span>
-            </div>
-            <div class="weui-form-preview__bd">
-                <label class="weui-form-preview__label">粉丝数量</label>
-                <span class="weui-form-preview__value">{{info.fansnum}}</span>
-            </div>
-            <div class="weui-form-preview__bd">
-                <label class="weui-form-preview__label">注册时间</label>
-                <span class="weui-form-preview__value">{{info.addtime}}</span>
-            </div>
-            <div class="weui-form-preview__bd">
-                <label class="weui-form-preview__label">状态</label>
-                <span class="weui-form-preview__value">待支付</span>
-            </div>
+        <div class="contents">
+            这里显示富文本
         </div>
 
     </div>
     <!-- main end   -->
     <!-- footer start -->
-    <footer>
-        <div class="order-bar">
-            <label class="weui-agree">
-                <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
-                <span class="weui-agree__text">阅读并同意</span>
-            </label><label @click="showxie()" class="payxieyi">《云乐互联用户协议》</label>
-            <a class="order-sub" @click="pay()">立即支付</a>
-        </div>
-    </footer>
 </div>
 <!-- footer end -->
 <!-- jquery -->
@@ -103,7 +64,7 @@
     var vm = new Vue({
         el: "#main",
         data: {
-            xieyi: [],
+            xieyi: '',
             info:[]
         },
         mounted() {
@@ -118,8 +79,8 @@
                 //then里面跟一个成功回调函数
                     .then(function (resp) {
                         if (resp.data.code) {
-                            that.xieyi = resp.data.data
-                            $.alert("<div style='overflow:scroll; height:400px;'>"+that.xieyi.contents+"</div>",'协议详细');
+                            that.info = resp.data.data
+                            $.alert("<div style='overflow:scroll; height:400px;'>"+that.info.contents+"</div>",'协议详细');
                         } else {
                             $.toast("无法加载", "text");
                         }

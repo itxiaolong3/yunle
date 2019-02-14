@@ -13,19 +13,19 @@
     <!-- index.css -->
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="css/order.css">
+    <link rel="stylesheet" href="css/server.css">
     <!-- rem 适配 -->
     <script src="./js/jquery-2.1.4.js"></script>
     <script src="./js/common.js"></script>
     <script src="./js/vue.js"></script>
 
-    <title>Item_wrap 我的订单</title>
+    <title>服务中心</title>
 </head>
 <body>
 <!-- header start -->
     <div class="topbar-second">
         <span onclick="javascript:history.go(-1)"></span>
-        订单列表
+        服务中心
         <i class="back" onclick="javascript:history.go(-1)"></i>
     </div>
 
@@ -34,43 +34,27 @@
         <div class="order_nav" id="order-menu-bind">
             <a class="order_item"
                v-for="(item,index) in orderMenus"
-               :href="'order.html?status='+item.id"
-               :class="{'order_item_active':orderStatus==item.id}">
-               {{item.name}}
+                :href="'servercenter.html?status='+item.id"
+                :class="{'order_item_active':orderStatus==item.id}">
+                {{item.name}}
             </a>
         </div>
         <div class="order_content" id="order-content-bind">
             <div class="order_product" v-for="(item,index) in order_product_list">
                 <div class="pro_content">
-                    <div class="weui-form-preview__bd">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">订单号</label>
-                            <span class="weui-form-preview__value">2147483647</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">类型</label>
-                            <span class="weui-form-preview__value">买号支付</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">标题</label>
-                            <span class="weui-form-preview__value">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>
-                        </div>
+                    <div class="pro_img">
+                        <a href="#">
+                            <img :src=" item.products[0].image_url " alt="">
+                        </a>
+                    </div>
+                    <div class="pro_inf">
+                        <div class="pro_name">{{ item.products[0].name }}</div>
+                        <div class="pro_desc">{{ item.products[0].desc }}</div>
+                        <div class="pro_desc">2019-05-02</div>
                     </div>
                 </div>
-                <div class="pro_total_price" v-if="item.products !=''">共计：￥ <span>600</span>元</div>
-
-                <!--<div class="pro_operation" v-if="item.order_status == 0">-->
-                    <!--<a href="#">所有订单</a>-->
-                <!--</div>-->
-                <!--<div class="pro_operation" v-if="item.order_status == 1">-->
-                    <!--<a href="#">待付款</a>-->
-                    <!--<a class="deleteOrder">删除订单</a>-->
-                <!--</div>-->
-                <!--<div class="pro_operation" v-if="item.order_status == 2">-->
-                    <!--<a href="#">待收货</a>-->
-                <!--</div>-->
                 <div class="pro_operation">
-                    <a href="./orderdetail.html">订单详细</a>
+                    <a href="./newsdetail.html">浏览详细</a>
                 </div>
 
             </div>
@@ -141,10 +125,8 @@
                    el: "#order-menu-bind",
                    data:{
                        orderMenus:[
-                           {id:0,name:"买号订单"},
-                           {id:1,name:"会员订单"},
-                           {id:2,name:"发布订单"},
-                           {id:3,name:"增值服务"},
+                           {id:0,name:"行业新闻"},
+                           {id:1,name:"疑难解答"},
                        ],
                        orderStatus:status,     // 订单选中状态
                    }
@@ -174,29 +156,6 @@
 
                // })
            },
-
-           // 订单操作
-           // 删除订单
-           deleteOrder: function(){
-               // console.log(this)
-               // console.log($(this));
-               // $(this).parents(".order_product").empty();
-               //如果参数过多，建议通过 object 方式传入
-               var _that = $(this)
-               $.confirm({
-                   // title: '标题',
-                   text: '确认删除订单',
-                   onOK: function () {
-                       //点击确认
-                       // console.log($(this))
-                       _that.parents(".order_product").fadeOut(500).empty();
-                   },
-                   onCancel: function () {
-                   }
-               });
-           },
-           // 支付订单
-
 
        }
        order.init();
