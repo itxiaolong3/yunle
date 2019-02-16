@@ -192,6 +192,17 @@
                     this.getScrollHeight();
                     this.choiceness_bind();
                     this.category_bind();
+                    let openid=this.getUrlPerm('openid');
+                    console.log(openid,'得到openid')
+                    localStorage.setItem('openid',openid);
+                },
+                getUrlPerm:function(name){
+                    //获取url方法 编辑传来的参数
+                    //     //之前decodeURI是用的unescape() 有时候会取汉字乱码
+                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                    var r = window.location.search.substr(1).match(reg);
+                    if (r != null) return decodeURI(r[2]);
+                    return null;
                 },
                 // 事件函数
                 bindEvents: function(){
@@ -369,7 +380,7 @@
                                     .catch(function (error) {
                                         console.log(error);
                                     });
-                            },
+                            }
 
                         },
                         mounted(){

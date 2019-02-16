@@ -29,7 +29,8 @@
         </div>
     </header>
     <!-- 我的页面 -->
-    <div class="user-inf">
+    <div id="main_mine">
+    <div class="user-inf" >
         <div class="user-pic">
             <a href="#">
                 <img src="./images/user-pic.jpg" alt="">
@@ -83,7 +84,8 @@
     </ul>
 
     <!-- 退出 -->
-    <a class="login-out" href="./login.html">退出登录</a>
+    <a class="login-out" href="./login.html" v-if="!uid">登录</a>
+    <a class="login-out" @click="loginout" v-if="uid">退出登录</a>
     <!-- footer start -->
     <footer>
         <!-- tabbar -->
@@ -117,38 +119,48 @@
         </div>
     </footer>
     <!-- footer end   -->
-
+    </div>
     <script src="./js/jquery-weui.min.js"></script>
     <script src="./js/swiper.min.js"></script>
     <!-- common js -->
-    <script src="./js/common.js"></script>
-    <script src="./js/cookie.js"></script>
     <script src="./js/request.js"></script>
-
+    <script src="./js/vue.js"></script>
+    <script src="./js/axios.js"></script>
     <script>
-        $(function () {
-            // alert(1)     // 测试jquery
-            var index = {
-                init: function () {
-                   this.regUserLogin();
-                },
+        // <!--点击事件控制-->
+        let Vm = new Vue({
+            el: "#main_mine",
+            data: {
+               uid:''
+            },
+            mounted() {
+                this.regUserLogin();
+            },
+            methods: {
                 // 验证用户是否登录
-                regUserLogin: function(){
-                    // fetchMemberInfo().then((userInfo) =>{
+                regUserLogin(){
+                    let openid=localStorage.getItem('openid');
+                    console.log('个人中心1'+openid)
+                    if(openid==null||openid==''){
+                        window.location.href="http://wxpay.possji.cn";
+                    }else{
+                        let islogin=localStorage.getItem('uid');
+                        console.log(this,'this打印')
+                        this.uid=islogin
 
-                    // });
+                        if (islogin==null||islogin==''){
+                            window.location.href="login.html";
+                        }
+                    }
 
-                    // 获取用户信息并渲染到页面
-                    $.ajax(
-
-                    )
+                },
+                loginout(){
+                    this.uid=''
+                    localStorage.setItem('uid','');
+                    window.location.reload();
                 }
             }
-            // 执行函数
-            index.init();
-            // fn();
         })
-
     </script>
 </body>
 </html>

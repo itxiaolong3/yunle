@@ -19,6 +19,9 @@
     <script src="./js/jquery-2.1.4.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/bootstrapValidator.js"></script>
+    <!-- weui -->
+    <link rel="stylesheet" href="./css/weui.css">
+    <link rel="stylesheet" href="./css/jquery-weui.css">
 
     <script src="./js/common.js"></script>
 </head>
@@ -41,7 +44,8 @@
             </div>
             <div class="security-code">
                 <input type="text" placeholder="请输入验证码" v-model='form.code'>
-                <span class="get-code countDownBtn" id="getCode" id="verity" @click='getCode'>获取验证码</span>
+                <span class="get-code countDownBtn" id="getCode" id="verity" @click='getCode' v-if="!issend">获取验证码</span>
+                <span class="get-code countDownBtn" v-if="issend">({{times}}s)</span>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" name="password" v-model='form.passNum' placeholder="请输入密码">
@@ -57,7 +61,8 @@
     <script src="./js/vue.js"></script>
     <script src="./js/axios.js"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    
+    <script src="./js/jquery-2.1.4.js"></script>
+    <script src="./js/jquery-weui.min.js"></script>
     <script>
         // <!--点击事件控制-->
         var vm = new Vue({
@@ -68,7 +73,9 @@
                     phoneNum: null,
                     passNum: null,
                     againPassNum: null
-                }
+                },
+                issend:false,
+                times:60
             },
             mounted() {
 
@@ -91,7 +98,18 @@
                         })
                         //then里面跟一个成功回调函数
                         .then(function (resp) {
-                            if (resp.data.code) {} else {
+                            if (resp.data.code) {
+                                that.issend=true;
+                                var auth_timetimer =  setInterval(()=>{
+                                    that.times--;
+                                    console.log(this.times,'倒计时');
+                                    if(that.times<=0){
+                                        that.issend = false;
+                                        that.times = 60;
+                                        clearInterval(auth_timetimer);
+                                    }
+                                }, 1000);
+                            } else {
                                 $.toast("无法加载", "text");
                             }
 

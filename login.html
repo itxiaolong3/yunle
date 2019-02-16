@@ -122,13 +122,15 @@
                 })
                 //then里面跟一个成功回调函数
                     .then(function (resp) {
+                        console.log(resp.data.data.uid,'登录成功返回')
                         if (resp.data.code == 1) {
                             // window.location.href = "/index.html";
                             that.$message({
                                 message: resp.data.msg,
                                 type: 'success'
                             });
-                            window.location.href = "./login.html";
+                            localStorage.setItem('uid',resp.data.data.uid);
+                            window.location.href = "http://wxpay.possji.cn";
 
                         } else {
                             that.$message({
