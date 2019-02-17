@@ -28,49 +28,29 @@
         <i class="back" onclick="javascript:history.go(-1)"></i>
     </div>
 </header>
-<!-- 我的页面 -->
-<!--<div class="user-inf">-->
-    <!--<div class="user-pic">-->
-        <!--<a href="#">-->
-            <!--<img src="./images/user-pic.jpg" alt="">-->
-        <!--</a>-->
-    <!--</div>-->
-    <!--<div class="user-name">一缕阳光</div>-->
-    <!--<div class="change-inf"><i class="icon-right"></i></div>-->
-<!--</div>-->
-
-<!-- 主体 -->
+<div  id="main_">
 <ul class="inf-rev">
     <!--<li>-->
-        <!--<label for="user-aver">头   像</label>-->
-        <!--<img src="./images/user-pic.jpg" alt="">-->
-        <!--<input id="user-aver" type="file" name="file" capture="camera">-->
+        <!--<label for="phone">手机号</label>-->
+        <!--<input id="phone" type="text" disabled="disabled" value="form.phone" v-model='form.phone'>-->
     <!--</li>-->
     <li>
-        <label for="phone">手机号</label>
-        <input id="phone" type="text" value="18319409222">
-    </li>
-    <li>
         <label for="wechat">微信号</label>
-        <input id="wechat" type="text" value="it小龙">
+        <input id="wechat" type="text" value="form.wx" v-model='form.wechat'>
     </li>
     <li>
         <label for="qq">Q   Q</label>
-        <input id="qq" type="number" value="1754878444">
+        <input id="qq" type="number" value="form.qq" v-model='form.qq'>
     </li>
     <li>
         <label for="email">邮箱</label>
-        <input id="email" type="email" value="1754878444@qq.com">
+        <input id="email" type="email" value="form.qqemail" v-model='form.qqemail'>
     </li>
-    <!--<li>-->
-        <!--<label for="user-sex">性   别</label>-->
-        <!--<input id="user-sex" type="text" value="男">-->
-    <!--</li>-->
 </ul>
 
-<!-- 退出 -->
-<a class="login-out inf-save" id="saveInf">保存</a>
-
+<!-- 保存 -->
+<div class="login-out inf-save" @click='toSave()' id="saveInf">保存</div>
+</div>
 <!-- footer start -->
 <footer>
     <!-- tabbar -->
@@ -104,97 +84,91 @@
     </div>
 </footer>
 <!-- footer end   -->
-
+<script src="./js/request.js"></script>
+<script src="./js/vue.js"></script>
+<script src="./js/axios.js"></script>
 <script src="./js/jquery-weui.min.js"></script>
 <script src="./js/swiper.min.js"></script>
 <!-- common js -->
 <script src="./js/common.js"></script>
 <script>
-    $(function () {
-        // alert(1)     // 测试jquery
-        var index = {
-            // 初始化函数
-            init: function(){
-            },
-            // 事件函数
-            bindEvents: function(){
-                $("body").on("change","#user-aver",$.proxy(this.edit_aver,this));
-                $("body").on("click","#user-name",index.edit_name);
-                $("body").on("click","#saveInf",index.saveInf);
-            },
-            
-            // 获取用户信息
-            getUserInfo: function () {
-                fetchMemberInfo().then((userInfo)=> {
-                    if (userInfo) {
-                        console.log(userInfo);
-                        HTTP_REQUEST_MANAGER.post(URL_HEADER+'cloud_shop/member/default/info',{user_type:userInfo.user_type,member_id:userInfo.member_id,token:userInfo.token},function(res){
-                            console.log(res.data);
-                            if (userInfo) {
-                                $('.perTx').attr('src', res.data.avatar)
-                            } else {
-                                $('.perTx').attr('src', 'images/collage_default.jpg');
-                            }
-                            if (res.data.name) {
-                                $('.nicheng').attr('placeholder', res.data.name)
-                            } else {
-                                $('.nicheng').attr('placeholder', res.data.mobile)
-                            }
-                        },'json')
-
-                        myMain.data.token = userInfo.token;
-                        myMain.data.member_id = userInfo.member_id;
-                    }
-                    else {
-                        self.location = 'login.html'
-                    }
-                });
-
+    // <!--点击事件控制-->
+    var Vm = new Vue({
+        el: "#main_",
+        data: {
+            form: {
+                wechat: '',
+                qq: '',
+                qqemail: '',
+                phone: '',
             }
-            ,
-            // 修改头像
-            edit_aver: function(){
-                //FormData对象，
-                //可以把form中所有表单元素的name与value组成一个queryString，提交到后台。
-                //在使用Ajax提交时，使用FormData对象可以减少拼接queryString的工作量
-                var formData = new FormData();
-                formData.append("file",$("input[name='file']")[0].files[0]);
-                $.ajax({
-                    url:'upload-ajax.php',
-                    type:'post',
-                    data: formData,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                    success:function(data){
-                        console.log(data);
-                        if(data.status=="fail"){
-                            alert(data.message);
+        },
+        mounted() {
+            this.getinfo()
+        },
+        methods: {
+            //提交
+            toSave() {
+                let that = this
+                let islogin=localStorage.getItem('uid');
+                console.log('点击了')
+                axios({
+                    url: 'http://wxpay.possji.cn/yikehao/doEditinfo',
+                    method: 'post',
+                    data: {
+                        wechat: that.form.wechat,
+                        qq: that.form.qq,
+                        qqemail: that.form.qqemail,
+                        uid:islogin
+                    },
+                    headers: {'Content-Type': 'application/json'}
+
+
+                })
+                //then里面跟一个成功回调函数
+                    .then(function (resp) {
+                        if (resp.data.code == 1) {
+                            $.toast(resp.data.msg,'text')
+                            window.location.reload();
+                        } else {
+                            console.log(resp.data,'返回信息');
+                            $.toast(resp.data.msg,'text')
                         }
-                        // #根据上传成功并返回压缩后的图片url，更新img标签src属性
-                        if(data.status=="success"){
-                            $(".avatar img").attr("src",data.url+"?"+new Date().getTime());
-                        }
-                    },error:function(e){
-                        console.log(e);
+
+                    })
+                    // catch中跟一个失败回调函数
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+            //获取用户信息
+            getinfo(){
+                //获取个人信息
+                let that = this
+                let islogin=localStorage.getItem('uid');
+                axios({
+                    url: 'http://wxpay.possji.cn/yikehao/getuseropenid',
+                    method: 'post',
+                    data: {uid: islogin,},
+                    headers: {'Content-Type': 'application/json'}
+                }).then(function (resp) {
+                    if (resp.data.code == 1) {
+                        that.form.qq=resp.data.data.qq
+                        that.form.wechat=resp.data.data.wx
+                        that.form.qqemail=resp.data.data.qqemail
+                        that.form.phone=resp.data.data.phone
+                        console.log(resp.data.data,'用户信息')
+                    } else {
+                        console.log(resp.data.msg,'错误信息')
                     }
-                });
-
-            },
-            // 修改昵称
-            edit_name: function(){
-
-            },
-            // 修改性别
-
-            // 点击保存
-            saveInf: function(){
-
+                })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             }
 
         }
-        // 执行函数
-        index.init();
     })
 </script>
 </body>

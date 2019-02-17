@@ -8,13 +8,15 @@
     <!-- css reset -->
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/common.css">
-
     <!-- weui -->
     <link rel="stylesheet" href="./css/weui.css">
     <link rel="stylesheet" href="./css/jquery-weui.css">
     <!-- jquery -->
     <script src="./js/jquery-2.1.4.js"></script>
     <script src="./js/common.js"></script>
+    <script src="./js/request.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/axios.js"></script>
     <!-- mine css -->
     <link rel="stylesheet" href="./css/mine.css">
     <title>我的</title>
@@ -33,12 +35,17 @@
     <div class="user-inf" >
         <div class="user-pic">
             <a href="#">
-                <img src="./images/user-pic.jpg" alt="">
+                <img src="./images/userlogo.png" alt="">
             </a>
         </div>
         <div class="user-name">
-            <span>手机号:<label style="font-size: 13px;color: grey;padding-left: 10px;">183548487878</label></span>
-            <span>等级:<label style="font-size: 13px;color: grey;padding-left: 10px;">普通会员</label></span>
+            <span>手机号:<label style="font-size: 13px;color: grey;padding-left: 10px;">{{userinfo.phone}}</label></span>
+            <span>等级:
+                <label style="font-size: 13px;color: grey;padding-left: 10px;" v-if="userinfo.vipstate==0">普通会员</label>
+                <label style="font-size: 13px;color: grey;padding-left: 10px;" v-if="userinfo.vipstate==1">月卡会员</label>
+                <label style="font-size: 13px;color: grey;padding-left: 10px;" v-if="userinfo.vipstate==2">季卡会员</label>
+                <label style="font-size: 13px;color: grey;padding-left: 10px;" v-if="userinfo.vipstate==3">永久会员</label>
+            </span>
         </div>
         <a class="change-inf" href="./userInf-revise.html"><i class="icon-right"></i></a>
     </div>
@@ -53,7 +60,8 @@
             </a>
         </li>
         <li>
-            <a href="http://wpa.qq.com/msgrd?v=3&uin=1710600973&site=qq&menu=yes" target="_blank">
+            <!--<a href="http://wpa.qq.com/msgrd?v=3&uin=1710600973&site=qq&menu=yes" target="_blank">-->
+            <a :href="'http://wpa.qq.com/msgrd?v=3&uin=' + userinfo.kfqq +'&site=qq&menu=yes'" target="_blank">
                 <i class="icon-inf-item icon-kf"></i>
                 联系客服
                 <i class="icon-right"></i>
@@ -67,7 +75,7 @@
             <!--</a>-->
         <!--</li>-->
         <li>
-            <a href="./vipcenter.html">
+            <a @click="gotovip(userinfo.vipstate)">
                 <i class="icon-inf-item"></i>
                 会员中心
                 <i class="icon-right"></i>
@@ -123,15 +131,13 @@
     <script src="./js/jquery-weui.min.js"></script>
     <script src="./js/swiper.min.js"></script>
     <!-- common js -->
-    <script src="./js/request.js"></script>
-    <script src="./js/vue.js"></script>
-    <script src="./js/axios.js"></script>
     <script>
         // <!--点击事件控制-->
         let Vm = new Vue({
             el: "#main_mine",
             data: {
-               uid:''
+               uid:'',
+                userinfo:{}
             },
             mounted() {
                 this.regUserLogin();
@@ -140,16 +146,32 @@
                 // 验证用户是否登录
                 regUserLogin(){
                     let openid=localStorage.getItem('openid');
-                    console.log('个人中心1'+openid)
                     if(openid==null||openid==''){
                         window.location.href="http://wxpay.possji.cn";
                     }else{
                         let islogin=localStorage.getItem('uid');
-                        console.log(this,'this打印')
                         this.uid=islogin
-
                         if (islogin==null||islogin==''){
                             window.location.href="login.html";
+                        }else{
+                            //获取个人信息
+                            let that = this
+                            axios({
+                                url: 'http://wxpay.possji.cn/yikehao/getuseropenid',
+                                method: 'post',
+                                data: {uid: islogin,},
+                                headers: {'Content-Type': 'application/json'}
+                            }).then(function (resp) {
+                                    if (resp.data.code == 1) {
+                                        that.userinfo=resp.data.data
+                                        console.log(resp.data.data,'用户信息')
+                                    } else {
+                                        console.log(resp.data.msg,'错误信息')
+                                    }
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
                         }
                     }
 
@@ -158,6 +180,9 @@
                     this.uid=''
                     localStorage.setItem('uid','');
                     window.location.reload();
+                },
+                gotovip(level){
+                   window.location.href='./vipcenter.html?level='+level
                 }
             }
         })

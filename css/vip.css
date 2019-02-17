@@ -11,6 +11,9 @@ body {
   padding: 10px;
   margin: 0 auto;
 }
+#v_main ul{
+  margin-bottom: 50px;
+}
 #v_main li{
   text-align: center;
   margin-top: 15px;
@@ -33,17 +36,16 @@ body {
   top: 480px;
 }
 .yuevip span{
-  margin-left: 50px;
+  margin-left: 40px;
   font-size: 20px;
   color: black;
 }
 .jikavip span{
-  margin-left: 50px;
+  margin-left: 30px;
   font-size: 20px;
   color: white;
 }
 .yonvip span{
-  margin-left: 10px;
   font-size: 20px;
   color: white;
 }
