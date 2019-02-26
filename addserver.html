@@ -29,80 +29,23 @@
     </div>
 </header>
 <div id="v_main">
-    <div class="items">
+    <div class="items" v-for="(item,index) in list" >
         <div class="con">
-            <img src="./images/vip.jpg" width="90" height="80">
+            <img :src="item.titleimg" width="90" height="80">
             <ul>
                 <li>
                     <label style="font-size: 13px;font-weight:bold;padding-right: 10px;">名称:</label>
-                    <span>我是增值服务的名</span>
+                    <span>{{item.title}}</span>
                 </li>
                 <li>
                     <label style="font-size: 13px;font-weight:bold;padding-right: 10px;">价格:</label>
-                    <span>105.00</span>
+                    <span>{{item.price}}</span>
                 </li>
             </ul>
         </div>
         <div class="bt">
-            <span @click="toPay(666)">立即支付</span>
-            <span @click="showdetail(11)">查看详细</span>
-        </div>
-    </div>
-    <div class="items">
-        <div class="con">
-            <img src="./images/vip.jpg" width="90" height="80">
-            <ul>
-                <li>
-                    <label style="font-size: 13px;font-weight:bold;padding-right: 10px;">名称:</label>
-                    <span>我是增值服务的名</span>
-                </li>
-                <li>
-                    <label style="font-size: 13px;font-weight:bold;padding-right: 10px;">价格:</label>
-                    <span>105.00</span>
-                </li>
-            </ul>
-        </div>
-        <div class="bt">
-            <span @click="toPay(666)">立即支付</span>
-            <span @click="showdetail(11)">查看详细</span>
-        </div>
-    </div>
-    <div class="items">
-        <div class="con">
-            <img src="./images/vip.jpg" width="90" height="80">
-            <ul>
-                <li>
-                    <label style="font-size: 13px;font-weight:bold;padding-right: 10px;">名称:</label>
-                    <span>我是增值服务的名</span>
-                </li>
-                <li>
-                    <label style="font-size: 13px;font-weight:bold;padding-right: 10px;">价格:</label>
-                    <span>105.00</span>
-                </li>
-            </ul>
-        </div>
-        <div class="bt">
-            <span @click="toPay(666)">立即支付</span>
-            <span @click="showdetail(11)">查看详细</span>
-        </div>
-    </div>
-    <div class="items">
-        <div class="con">
-            <img src="./images/vip.jpg" width="90" height="80">
-            <ul>
-                <li>
-                    <label style="font-size: 13px;font-weight:bold;padding-right: 10px;">名称:</label>
-                    <span>我是增值服务的名</span>
-                </li>
-                <li>
-                    <label style="font-size: 13px;font-weight:bold;padding-right: 10px;">价格:</label>
-                    <span>105.00</span>
-                </li>
-            </ul>
-        </div>
-        <div class="bt">
-            <span @click="toPay(666)">立即支付</span>
-            <span @click="showdetail(11)">查看详细</span>
+            <span @click="toPay(item.id,item.price)">立即支付</span>
+            <span @click="showdetail(item.contents)">查看详细</span>
         </div>
     </div>
 </div>
@@ -153,50 +96,87 @@
     var vm = new Vue({
         el: "#v_main",
         data: {
+            list:{}
         },
-        mounted() {},
+        mounted() {
+            this.getlist()
+        },
         methods: {
             //点击
-            toPay(type) {
+            toPay(gid,price) {
                 let that = this
-                console.log('点击了'+type)
-                $.confirm('是否购买该服务', function() {
-                    $.alert("点了支付"+type, "信息");
+                console.log('点击了'+gid)
+                $.confirm('是否购买该服务:￥'+price, function() {
+                    let openid=localStorage.getItem('openid');
+                    if(openid==null||openid==''){
+                        window.location.href="http://wxpay.possji.cn";
+                    }else{
+                        let that = this
+                        let uid=localStorage.getItem('uid');
+                        axios({
+                            url: 'http://wxpay.possji.cn/yikehao/wxpay',
+                            method: 'post',
+                            data: {
+                                openid:openid,
+                                uid:uid,
+                                gid:gid,
+                                paytype:2,
+                                price:price
+                            },
+                            headers: {'Content-Type': 'application/json'}
+                        }).then(function (resp) {
+                            if (resp.data.code == 1) {
+                                //支付成功
+                                /////////////////////////
+                                function onBridgeReady(){
+                                    WeixinJSBridge.invoke(
+                                        'getBrandWCPayRequest', resp.data,
+                                        function(res){
+                                            if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                                                //   //支付成功，延迟3秒跳转到订单详情页面
+                                                console.log(res,'支付成功信息')
+                                                $.alert("支付成功！", "支付提示");
+                                                window.location.href='mine.html';
+                                            }else{
+                                                console.log(res,'支付错误信息')
+                                                $.alert("支付失败", "支付提示");
+                                                history.go(-2);
+                                            }
+                                        }
+                                    );
+                                }
+                                if (typeof WeixinJSBridge == "undefined"){
+                                    if( document.addEventListener ){
+                                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                                    }else if (document.attachEvent){
+                                        document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                                        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                                    }
+                                }else{
+                                    onBridgeReady();
+                                }
+                                //////////////////
+                            } else {
+                                console.log(resp.data.msg,'错误信息')
+                            }
+                        })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    }
                 }, function() {
                     //取消操作
                 });
-//                axios({
-//                    url: 'http://wxpay.possji.cn/yikehao/doLogin',
-//                    method: 'post',
-//                    data: {
-//                        phone: that.form.phoneNum,
-//                        psw: that.form.passNum,
-//                        type: 0
-//                    },
-//                    headers: {'Content-Type': 'application/json'}
-//
-//                })
-//                //then里面跟一个成功回调函数
-//                    .then(function (resp) {
-//                        if (resp.data.code == 1) {
-//                        } else {
-//                        }
-//                    })
-//                    // catch中跟一个失败回调函数
-//                    .catch(function (error) {
-//                        console.log(error);
-//                    });
             },
-            showdetail(id){
+            getlist(){
                 let that = this;
-                axios.post('http://wxpay.possji.cn/yikehao/getxieyi', {
-                    state: 2
+                axios.post('http://wxpay.possji.cn/yikehao/getaddserver', {
                 })
                 //then里面跟一个成功回调函数
                     .then(function (resp) {
                         if (resp.data.code) {
-                            that.xieyi = resp.data.data
-                            $.alert("<div style='overflow:scroll; height:400px;'>"+that.xieyi.contents+"</div>",'服务详细');
+                            that.list = resp.data.data
+                            console.log(resp.data,'返回数据');
                         } else {
                             $.toast("无法加载", "text");
                         }
@@ -205,6 +185,9 @@
                     .catch(function (error) {
                         console.log(error);
                     });
+            },
+            showdetail(contents){
+                $.alert("<div style='overflow:scroll; height:400px;'>"+contents+"</div>",'服务详细');
             }
         }
     })

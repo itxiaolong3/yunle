@@ -18,6 +18,14 @@
     <!-- 适配 -->
     <script src="./js/common.js"></script>
     <title>云乐互联</title>
+    <style>
+        .contents img{
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
 <!-- header start -->
@@ -34,12 +42,11 @@
     <div class="weui-form-preview">
         <div class="weui-form-preview__hd">
             <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">标题</label>
-                <embed class="weui-form-preview__value">我的新闻标题</embed>
+                <label class="weui-form-preview__label">{{info.title}}</label>
+                <embed class="weui-form-preview__value">{{info.desc}}</embed>
             </div>
         </div>
-        <div class="contents">
-            这里显示富文本
+        <div class="contents" v-html="info.contents">
         </div>
 
     </div>
@@ -71,30 +78,13 @@
             this.getinfo();
         },
         methods: {
-            showxie: function () {
+            getinfo(types) {
                 let that = this;
-                axios.post('http://wxpay.possji.cn/yikehao/getxieyi', {
-                    state: 2
-                })
-                //then里面跟一个成功回调函数
-                    .then(function (resp) {
-                        if (resp.data.code) {
-                            that.info = resp.data.data
-                            $.alert("<div style='overflow:scroll; height:400px;'>"+that.info.contents+"</div>",'协议详细');
-                        } else {
-                            $.toast("无法加载", "text");
-                        }
-                    })
-                    // catch中跟一个失败回调函数
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            },
-            getinfo() {
-                let that = this;
-                var id = getUrlParm('gid');
-                axios.post('http://wxpay.possji.cn/yikehao/getdetail', {
-                    id: id
+                var id = getUrlParm('id');
+                var types = getUrlParm('types');
+                axios.post('http://wxpay.possji.cn/yikehao/getNeworProdetail', {
+                    id: id,
+                    type:types
                 })
                 //then里面跟一个成功回调函数
                     .then(function (resp) {
@@ -111,15 +101,6 @@
                     .catch(function (error) {
                         console.log(error);
                     });
-            },
-            pay:function () {
-                if(!$('#weuiAgree').is(':checked')){
-                    $.toast.prototype.defaults.duration=1000;
-                    $.toast("请同意协议",'text');
-                    return false
-                }else{
-                    $.toast("提交", "text");
-                }
             }
 
         }

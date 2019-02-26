@@ -38,7 +38,8 @@
             <div class="pro-title pro-item"><span>标题：</span>{{info.zhname}}</div>
             <div class="pro-price pro-item"><label>价格：</label>
                 <span class="pro-newPrice">￥{{info.oneprice}}</span>
-                <span class="callqq" @click="callqq(info.kfqq)">联系客服</span>
+                <!--<span class="callqq" @click="callqq(info.kfqq)">联系客服</span>-->
+                <a class="callqq" :href="'http://wpa.qq.com/msgrd?v=3&uin=' + info.kfqq +'&site=qq&menu=yes'" target="_blank">联系客服</a>
                 <span class="sellcall" @click="showcall()">卖家联系方式</span>
             </div>
             <div class="infoContent">
@@ -290,12 +291,43 @@
                     window.open("http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes");
                 },
                 showcall:function () {
-                    $.confirm('<label style="color: red;">重点提示</label>  一定要经过云乐互联担保交易，保证资金100%安全。普通会员最多免费看3个商家，是否继续', function() {
-                        //这里发送请求显示商家联系电话，待上uid。如果没登录先去登录才可以查看
-                        $.alert("商家联系方式：18319409222", "信息");
-                    }, function() {
-                        //取消操作
-                    });
+                    let gid = getUrl('id');
+                    let openid=localStorage.getItem('openid');
+                    console.log(openid,'商品详细里面的openid')
+                    if(openid=='null'||openid==''){
+                        window.location.href="http://wxpay.possji.cn";
+                    }else{
+                        let islogin=localStorage.getItem('uid');
+                        if (islogin==null||islogin==''){
+                            window.location.href="login.html";
+                        }else{
+                            $.confirm('<label style="color: red;">重点提示</label>  一定要经过云乐互联担保交易，保证资金100%安全。普通会员最多免费看3个商家，是否继续', function() {
+                                //这里发送请求显示商家联系电话，待上uid。如果没登录先去登录才可以查看
+                                let that = this
+                                axios({
+                                    url: 'http://wxpay.possji.cn/yikehao/getbossphone',
+                                    method: 'post',
+                                    data: {uid: islogin,id:gid},
+                                    headers: {'Content-Type': 'application/json'}
+                                }).then(function (resp) {
+                                    if (resp.data.code == 1) {
+                                        $.alert("商家联系方式："+resp.data.data.phone, "信息");
+                                        console.log(resp.data.data.phone,'商家联系方式')
+                                    } else {
+                                        console.log(resp.data.msg,'错误信息')
+                                        $.alert("异常提示："+resp.data.phone, "信息");
+                                    }
+                                })
+                                    .catch(function (error) {
+                                        console.log(error);
+                                    });
+
+                            }, function() {
+                                //取消操作
+                            });
+                        }
+                    }
+
                 }
 
             }

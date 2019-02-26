@@ -146,9 +146,9 @@
                 // 验证用户是否登录
                 regUserLogin(){
                     let openid=localStorage.getItem('openid');
-                    if(openid==null||openid==''){
-                        window.location.href="http://wxpay.possji.cn";
-                    }else{
+//                    if(openid==null||openid==''){
+//                        window.location.href="http://wxpay.possji.cn";
+//                    }else{
                         let islogin=localStorage.getItem('uid');
                         this.uid=islogin
                         if (islogin==null||islogin==''){
@@ -173,7 +173,7 @@
                                     console.log(error);
                                 });
                         }
-                    }
+                    //}
 
                 },
                 loginout(){

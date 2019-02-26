@@ -81,7 +81,7 @@
                 <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
                 <span class="weui-agree__text">阅读并同意</span>
             </label><label @click="showxie()" class="payxieyi">《云乐互联用户协议》</label>
-            <a class="order-sub" @click="pay()">立即支付</a>
+            <a class="order-sub" @click="pay(info.id,info.oneprice)">立即支付</a>
         </div>
     </footer>
 </div>
@@ -151,13 +151,78 @@
                         console.log(error);
                     });
             },
-            pay:function () {
+            pay:function (gid,price) {
+                //let gid = getUrlParm('gid');
+//                console.log(id,'参数id')
+//                console.log(gid,'方法传入的id')
                 if(!$('#weuiAgree').is(':checked')){
                     $.toast.prototype.defaults.duration=1000;
                     $.toast("请同意协议",'text');
                     return false
                 }else{
-                    $.toast("提交", "text");
+                    //支付
+                    let openid=localStorage.getItem('openid');
+                    if(openid==null||openid==''){
+                        window.location.href="http://wxpay.possji.cn";
+                    }else{
+                        let that = this
+                        let uid=localStorage.getItem('uid');
+                        if (uid==null||uid==''){
+                            window.location.href="login.html";
+                        }else{
+                            axios({
+                                url: 'http://wxpay.possji.cn/yikehao/wxpay',
+                                method: 'post',
+                                data: {
+                                    openid:openid,
+                                    uid:uid,
+                                    gid:gid,
+                                    paytype:1,
+                                    price:price
+                                },
+                                headers: {'Content-Type': 'application/json'}
+                            }).then(function (resp) {
+                                if (resp.data.code == 1) {
+                                    //支付成功
+                                    /////////////////////////
+                                    function onBridgeReady(){
+                                        WeixinJSBridge.invoke(
+                                            'getBrandWCPayRequest', resp.data,
+                                            function(res){
+                                                if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                                                    //   //支付成功，延迟3秒跳转到订单详情页面
+                                                    console.log(res,'支付成功信息')
+                                                    $.alert("支付成功！", "支付提示");
+                                                    window.location.href='mine.html';
+                                                }else{
+                                                    console.log(res,'支付错误信息')
+                                                    $.alert("支付失败", "支付提示");
+                                                    history.go(-2);
+                                                }
+                                            }
+                                        );
+                                    }
+                                    if (typeof WeixinJSBridge == "undefined"){
+                                        if( document.addEventListener ){
+                                            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                                        }else if (document.attachEvent){
+                                            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                                            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                                        }
+                                    }else{
+                                        onBridgeReady();
+                                    }
+                                    //////////////////
+                                } else {
+                                    console.log(resp.data.msg,'错误信息')
+                                }
+                            })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                        }
+
+                    }
                 }
             }
 

@@ -31,43 +31,136 @@
 
 <!-- main start -->
 <div id="main">
-    <div class="weui-form-preview">
+    <div class="weui-form-preview" v-if="types==0">
         <div class="weui-form-preview__hd">
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">付款金额</label>
-                <em class="weui-form-preview__value">¥201154</em>
+                <em class="weui-form-preview__value">¥{{info.payprice}}</em>
+            </div>
+        </div>
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">类型</label>
+                <span class="weui-form-preview__value">{{info.types}}</span>
+                <!--<span class="weui-form-preview__value" v-if='info.type == 2'>服务号</span>-->
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">订单号</label>
+                <span class="weui-form-preview__value" >{{info.ordernum}}</span>
+                <!--<span class="weui-form-preview__value" v-if='info.isrz == 1'>个人认证</span>-->
+                <!--<span class="weui-form-preview__value" v-if='info.isrz == 2'>企业认证</span>-->
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">手机号</label>
+                <span class="weui-form-preview__value">{{info.phone}}</span>
+                <!--<span class="weui-form-preview__value">{{info.fortype}}</span>-->
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">支付时间</label>
+                <span class="weui-form-preview__value">{{info.paytime}}</span>
+                <!--<span class="weui-form-preview__value">{{info.addtime}}</span>-->
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">商品名称</label>
+                <span class="weui-form-preview__value">{{info.name}}</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="weui-form-preview" v-if="types==1">
+        <div class="weui-form-preview__hd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">付款金额</label>
+                <em class="weui-form-preview__value">¥{{info.payprice}}</em>
+            </div>
+        </div>
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">类型</label>
+                <span class="weui-form-preview__value" v-if="info.types==1">月卡会员</span>
+                <span class="weui-form-preview__value" v-if="info.types==2">季卡会员</span>
+                <span class="weui-form-preview__value" v-if="info.types==3">永久会员</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">订单号</label>
+                <span class="weui-form-preview__value" >{{info.ordernum}}</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">支付时间</label>
+                <span class="weui-form-preview__value">{{info.paytime}}</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">手机号</label>
+                <span class="weui-form-preview__value">{{info.phone}}</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="weui-form-preview" v-if="types==2">
+        <div class="weui-form-preview__hd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">金额</label>
+                <em class="weui-form-preview__value">¥{{info.price}}</em>
             </div>
         </div>
         <div class="weui-form-preview__bd">
             <div class="weui-form-preview__bd">
                 <label class="weui-form-preview__label">账号类型</label>
-                <span class="weui-form-preview__value">订阅号</span>
-                <!--<span class="weui-form-preview__value" v-if='info.type == 2'>服务号</span>-->
+                <span class="weui-form-preview__value" v-if="info.type==1">订阅号</span>
+                <span class="weui-form-preview__value" v-if="info.type==2">服务号</span>
             </div>
             <div class="weui-form-preview__bd">
                 <label class="weui-form-preview__label">认证主体</label>
-                <span class="weui-form-preview__value" >未认证</span>
-                <!--<span class="weui-form-preview__value" v-if='info.isrz == 1'>个人认证</span>-->
-                <!--<span class="weui-form-preview__value" v-if='info.isrz == 2'>企业认证</span>-->
+                <span class="weui-form-preview__value" v-if="info.isrz==0" >未认证</span>
+                <span class="weui-form-preview__value" v-if='info.isrz == 1'>个人认证</span>
+                <span class="weui-form-preview__value" v-if='info.isrz == 2'>企业认证</span>
             </div>
             <div class="weui-form-preview__bd">
                 <label class="weui-form-preview__label">所属类目</label>
-                <span class="weui-form-preview__value">搞笑|娱乐|视频</span>
-                <!--<span class="weui-form-preview__value">{{info.fortype}}</span>-->
+                <span class="weui-form-preview__value">{{info.fortype}}</span>
             </div>
             <div class="weui-form-preview__bd">
                 <label class="weui-form-preview__label">粉丝数量</label>
-                <span class="weui-form-preview__value">105454</span>
-                <!--<span class="weui-form-preview__value">{{info.fansnum}}</span>-->
+                <span class="weui-form-preview__value">{{info.fansnum}}</span>
             </div>
             <div class="weui-form-preview__bd">
                 <label class="weui-form-preview__label">注册时间</label>
-                <span class="weui-form-preview__value">2019-02-24</span>
-                <!--<span class="weui-form-preview__value">{{info.addtime}}</span>-->
+                <span class="weui-form-preview__value">{{info.addtime}}</span>
             </div>
             <div class="weui-form-preview__bd">
                 <label class="weui-form-preview__label">商品</label>
-                <span class="weui-form-preview__value">我是是红绿明德</span>
+                <span class="weui-form-preview__value">{{info.zhname}}</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="weui-form-preview" v-if="types==3">
+        <div class="weui-form-preview__hd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">付款金额</label>
+                <em class="weui-form-preview__value">¥{{info.payprice}}</em>
+            </div>
+        </div>
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">类型</label>
+                <span class="weui-form-preview__value">{{types}}</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">订单号</label>
+                <span class="weui-form-preview__value" >{{info.ordernum}}</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">支付时间</label>
+                <span class="weui-form-preview__value">{{info.paytime}}</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">手机号</label>
+                <span class="weui-form-preview__value">{{info.phone}}</span>
+            </div>
+            <div class="weui-form-preview__bd">
+                <label class="weui-form-preview__label">商品</label>
+                <span class="weui-form-preview__value">增值服务</span>
             </div>
         </div>
 
@@ -93,37 +186,21 @@
     var vm = new Vue({
         el: "#main",
         data: {
-            xieyi: '',
-            info:[]
+            info:{},
+            types:0
         },
         mounted() {
             this.getinfo();
         },
         methods: {
-            showxie: function () {
-                let that = this;
-                axios.post('http://wxpay.possji.cn/yikehao/getxieyi', {
-                    state: 2
-                })
-                //then里面跟一个成功回调函数
-                    .then(function (resp) {
-                        if (resp.data.code) {
-                            that.info = resp.data.data
-                            $.alert("<div style='overflow:scroll; height:400px;'>"+that.info.contents+"</div>",'协议详细');
-                        } else {
-                            $.toast("无法加载", "text");
-                        }
-                    })
-                    // catch中跟一个失败回调函数
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            },
             getinfo() {
                 let that = this;
-                var id = getUrlParm('gid');
-                axios.post('http://wxpay.possji.cn/yikehao/getdetail', {
-                    id: id
+                var id = getUrlParm('id');
+                var types = getUrlParm('types');
+                this.types=types
+                axios.post('http://wxpay.possji.cn/yikehao/getOrderdetail', {
+                    id: id,
+                    types:types
                 })
                 //then里面跟一个成功回调函数
                     .then(function (resp) {
@@ -140,15 +217,6 @@
                     .catch(function (error) {
                         console.log(error);
                     });
-            },
-            pay:function () {
-                if(!$('#weuiAgree').is(':checked')){
-                    $.toast.prototype.defaults.duration=1000;
-                    $.toast("请同意协议",'text');
-                    return false
-                }else{
-                    $.toast("提交", "text");
-                }
             }
 
         }

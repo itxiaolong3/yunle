@@ -223,22 +223,34 @@
                 },
                 getinfo() {
                     let that = this;
-                    axios.get('http://wxpay.possji.cn/yikehao/gettype', {})
-                        //then里面跟一个成功回调函数
-                        .then(function (resp) {
-                            if (resp.data.code) {
-                                console.log('多选框', resp.data.data);
-                                that.form.checkList = resp.data.data
+                    let openid=localStorage.getItem('openid');
+                    if(openid==null||openid==''){
+                        window.location.href="http://wxpay.possji.cn";
+                    }else{
+                        let that = this
+                        let uid=localStorage.getItem('uid');
+                        if (uid==null||uid==''){
+                            window.location.href="login.html";
+                        }else{
+                            axios.get('http://wxpay.possji.cn/yikehao/gettype', {})
+                            //then里面跟一个成功回调函数
+                                .then(function (resp) {
+                                    if (resp.data.code) {
+                                        console.log('多选框', resp.data.data);
+                                        that.form.checkList = resp.data.data
 
-                            } else {
-                                $.toast("无法加载", "text");
-                            }
+                                    } else {
+                                        $.toast("无法加载", "text");
+                                    }
 
-                        })
-                        // catch中跟一个失败回调函数
-                        .catch(function (error) {
-                            console.log(error);
-                        });
+                                })
+                                // catch中跟一个失败回调函数
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                        }
+                    }
+
                 },
                 getNameType() {
                     let that = this;

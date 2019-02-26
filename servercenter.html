@@ -30,31 +30,51 @@
     </div>
 
  <!--main start -->
-    <div class="order">
+    <div class="order" id="v_main">
         <div class="order_nav" id="order-menu-bind">
-            <a class="order_item"
-               v-for="(item,index) in orderMenus"
-                :href="'servercenter.html?status='+item.id"
-                :class="{'order_item_active':orderStatus==item.id}">
-                {{item.name}}
+            <a class="order_item" :class="{'order_item_active':tiemtap}" @click="changeitme">
+                {{newtitle}}
+            </a>
+            <a class="order_item" :class="{'order_item_active':!tiemtap}" @click="changeitme">
+                {{protitle}}
             </a>
         </div>
-        <div class="order_content" id="order-content-bind">
-            <div class="order_product" v-for="(item,index) in order_product_list">
+        <div class="order_content"  v-if="tiemtap">
+            <div class="order_product" v-for="(item,index) in newlist">
                 <div class="pro_content">
                     <div class="pro_img">
                         <a href="#">
-                            <img :src=" item.products[0].image_url " alt="">
+                            <img :src=" item.titleimg" alt="">
                         </a>
                     </div>
                     <div class="pro_inf">
-                        <div class="pro_name">{{ item.products[0].name }}</div>
-                        <div class="pro_desc">{{ item.products[0].desc }}</div>
-                        <div class="pro_desc">2019-05-02</div>
+                        <div class="pro_name">{{ item.title }}</div>
+                        <div class="pro_desc">{{ item.desc }}</div>
+                        <div class="pro_desc">{{ item.addtime }}</div>
                     </div>
                 </div>
                 <div class="pro_operation">
-                    <a href="./newsdetail.html">浏览详细</a>
+                    <a :href="'./newsdetail.html?types=1&id='+item.id">浏览详细</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="order_content"  v-if="!tiemtap">
+            <div class="order_product" v-for="(item,index) in serlist">
+                <div class="pro_content">
+                    <div class="pro_img">
+                        <a href="#">
+                            <img :src=" item.titleimg" alt="">
+                        </a>
+                    </div>
+                    <div class="pro_inf">
+                        <div class="pro_name">{{ item.title }}</div>
+                        <div class="pro_desc">{{ item.desc }}</div>
+                        <div class="pro_desc">{{ item.addtime }}</div>
+                    </div>
+                </div>
+                <div class="pro_operation">
+                    <a :href="'./newsdetail.html?types=0&id='+item.id">浏览详细</a>
                 </div>
 
             </div>
@@ -85,7 +105,7 @@
             </div>
             <p class="weui-tabbar__label" >卖号</p>
         </a>
-        <a href="#" class="weui-tabbar__item">
+        <a href="./mine.html" class="weui-tabbar__item">
             <div class="weui-tabbar__icon">
                 <img src="./images/usericon.png" alt="">
             </div>
@@ -102,63 +122,50 @@
 <script src="./js/public.js"></script>
 <script src="./js/data.js"></script>
 <script src="./js/request.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@1.5/lib/vant.min.js"></script>
+<script src="./js/vue.js"></script>
+<script src="./js/data.js"></script>
+<script src="./js/axios.js"></script>
 
 <script>
-    $(function () {
-       var order = {
-           init: function(){
-               this.renderOrder();
-               this.bindEvents();
-               // this.renderStatusOrder();
-           },
-           bindEvents: function(){
-                $("body").on("click",".deleteOrder",order.deleteOrder);
-           },
-           // 渲染order-menus
-           renderOrder: function(){
-               // alert(1)
-               var status = getUrl("status");
-               status = status ? status : 0;
-               console.log(status)
-               var orderMenuVue = new Vue({
-                   el: "#order-menu-bind",
-                   data:{
-                       orderMenus:[
-                           {id:0,name:"行业新闻"},
-                           {id:1,name:"疑难解答"},
-                       ],
-                       orderStatus:status,     // 订单选中状态
-                   }
-               });
-               this.renderStatusOrder(status);
-
-           },
-           // 渲染订单
-           renderStatusOrder: function(status){
-               // 先验证用户是否登录
-               // fetchMemberInfo().then((userInfo) =>{
-                   var orderContentVue = new Vue({
-                           el: "#order-content-bind",
-                           data:{
-                               order_product_list:[],    // 产品列表
-                           },
-                       })
-
-                   // 模拟数据渲染
-                   var statusKeyMap = {0: '所有订单', 1: '待付款', 2: '待收货', 3: '已完成'};
-                   var mockData = getOrderList(statusKeyMap[status]);
-                   console.log(mockData)
-                   console.log(status)
-                   orderContentVue.order_product_list = mockData.data.order_list;
-
-                   // 接口数据渲染
-
-               // })
-           },
-
-       }
-       order.init();
+    // <!--点击事件控制-->
+    var vm = new Vue({
+        el: "#v_main",
+        data: {
+            newlist:{},
+            serlist:{},
+            tiemtap:1,
+            newtitle:'新闻中心',
+            protitle:'疑难解答'
+        },
+        mounted() {
+            this.getnewlist()
+        },
+        methods: {
+            changeitme(){
+                this.tiemtap =!this.tiemtap
+            },
+            getnewlist(){
+                let that = this;
+                axios.post('http://wxpay.possji.cn/yikehao/getSerandProinfo', {
+                })
+                //then里面跟一个成功回调函数
+                    .then(function (resp) {
+                        if (resp.data.code) {
+                            that.newlist = resp.data.data.newlist
+                            that.serlist = resp.data.data.prolist
+                            console.log(resp.data,'返回新闻数据');
+                        } else {
+                            $.toast("无法加载", "text");
+                        }
+                    })
+                    // catch中跟一个失败回调函数
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+        }
     })
 </script>
 </body>

@@ -19,344 +19,364 @@
 </head>
 
 <body ontouchstart>
-    <!-- main start -->
-    <div class="main" id="main_">
-        <!--top-->
-        <div class="top" id="changstate">
-            <div class="title">
-                <ul class="fuckUl">
-                    <!--<li class="active li_itme" v-if="willShow == true" @click="fn()"><span style="color: #E04E3B;">账号类型</span></li>-->
-                    <!--<li class="noactive li_itme" v-if="willShow == false" @click="fn()">账号类型</li>-->
-                    <!--<li class="li_itme noactive">所属类目</li>-->
-                    <!--<li class="li_itme noactive">价格区间</li>-->
-                    <!--<li class="li_itme noactive">认证类型</li>-->
-                    <li v-for="( item , index ) of  test" :key="index" class="li_itme noactive" :class="[willShow == index && 'active']" @click="got(index)">
-                        {{item.name}}
+<!-- main start -->
+<div class="main" id="main_">
+    <!--top-->
+    <div class="top" id="changstate">
+        <div class="title">
+            <ul class="fuckUl">
+                <!--<li class="active li_itme" v-if="willShow == true" @click="fn()"><span style="color: #E04E3B;">账号类型</span></li>-->
+                <!--<li class="noactive li_itme" v-if="willShow == false" @click="fn()">账号类型</li>-->
+                <!--<li class="li_itme noactive">所属类目</li>-->
+                <!--<li class="li_itme noactive">价格区间</li>-->
+                <!--<li class="li_itme noactive">认证类型</li>-->
+                <li v-for="( item , index ) of  test" :key="index" class="li_itme noactive" :class="[willShow == index && 'active']" @click="got(index)">
+                    {{item.name}}
+                </li>
+
+            </ul>
+            <div class="showcon con0" v-if="willShow==0">
+                <ul>
+                    <li>
+                        <a @click="checks(0,1)">全部</a>
                     </li>
-
+                    <li>
+                        <a @click="checks(1,1)">订阅号</a>
+                    </li>
+                    <li>
+                        <a @click="checks(2,1)">服务号</a>
+                    </li>
                 </ul>
-                <div class="showcon con0" v-if="willShow==0">
-                    <ul>
-                        <li>
-                            <a @click="checks(0,1)">全部</a>
-                        </li>
-                        <li>
-                            <a @click="checks(1,1)">订阅号</a>
-                        </li>
-                        <li>
-                            <a @click="checks(2,1)">服务号</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="showcon con1" v-if="willShow==1">
-                    <ul>
-                        <a @click="checks(0,2)" style="color: #363636;padding: 0px 6px;font-size: 15px;">不限</a>
-                        <li v-for="( item,index) in list">
-                            <a @click="checks(item.tid,2)">{{item.name}}</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="showcon con2" v-if="willShow==2">
-                    <ul>
-                        <li>
-                            <a @click="checks(0,3)">不限</a>
-                        </li>
-                        <li>
-                            <a @click="checks(1,3)">1万以内</a>
-                        </li>
-                        <li>
-                            <a @click="checks(2,3)">1-3万</a>
-                        </li>
-                        <li>
-                            <a @click="checks(3,3)">3-5万</a>
-                        </li>
-                        <li>
-                            <a @click="checks(4,3)">5-7万</a>
-                        </li>
-                        <li>
-                            <a @click="checks(5,3)">7-10万</a>
-                        </li>
-                        <li>
-                            <a @click="checks(6,3)">10-20万</a>
-                        </li>
-                        <li>
-                            <a @click="checks(7,3)">20万以上</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="showcon con3" v-if="willShow==3">
-                    <ul>
-                        <li>
-                            <a @click="checks(3,4)">不限</a>
-                        </li>
-                        <li>
-                            <a @click="checks(0,4)">未认证</a>
-                        </li>
-                        <li>
-                            <a @click="checks(1,4)">个体认证</a>
-                        </li>
-                        <li>
-                            <a @click="checks(2,4)">企业认证</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="zindex" v-if="showmb==1" @click="hiddenzindex()"></div>
             </div>
-
+            <div class="showcon con1" v-if="willShow==1">
+                <ul>
+                    <a @click="checks(0,2)" style="color: #363636;padding: 0px 6px;font-size: 15px;">不限</a>
+                    <li v-for="( item,index) in list">
+                        <a @click="checks(item.tid,2)">{{item.name}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="showcon con2" v-if="willShow==2">
+                <ul>
+                    <li>
+                        <a @click="checks(0,3)">不限</a>
+                    </li>
+                    <li>
+                        <a @click="checks(1,3)">1万以内</a>
+                    </li>
+                    <li>
+                        <a @click="checks(2,3)">1-3万</a>
+                    </li>
+                    <li>
+                        <a @click="checks(3,3)">3-5万</a>
+                    </li>
+                    <li>
+                        <a @click="checks(4,3)">5-7万</a>
+                    </li>
+                    <li>
+                        <a @click="checks(5,3)">7-10万</a>
+                    </li>
+                    <li>
+                        <a @click="checks(6,3)">10-20万</a>
+                    </li>
+                    <li>
+                        <a @click="checks(7,3)">20万以上</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="showcon con3" v-if="willShow==3">
+                <ul>
+                    <li>
+                        <a @click="checks(3,4)">不限</a>
+                    </li>
+                    <li>
+                        <a @click="checks(0,4)">未认证</a>
+                    </li>
+                    <li>
+                        <a @click="checks(1,4)">个体认证</a>
+                    </li>
+                    <li>
+                        <a @click="checks(2,4)">企业认证</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="zindex" v-if="showmb==1" @click="hiddenzindex()"></div>
         </div>
 
-        <!-- item -->
-        <div class="category main-item">
+    </div>
 
-            <div class="findtab">
-                <span v-if="htypeid==1">订阅号</span>
-                <span v-if="htypeid==2">服务号</span>
-                <span v-for="( item,index) in list" v-if="item.tid==typeid">{{item.name}}</span>
-                <span v-if="priceid==1">1万以内</span>
-                <span v-if="priceid==2">1-3万</span>
-                <span v-if="priceid==3">3-5万</span>
-                <span v-if="priceid==4">5-7万</span>
-                <span v-if="priceid==5">7-10万</span>
-                <span v-if="priceid==6">10-20万</span>
-                <span v-if="priceid==7">20万以上</span>
-                <span v-if="rzid==1">个人认证</span>
-                <span v-if="rzid==2">企业认证</span>
-                <span v-if="rzid==0">未认证</span>
-                <label v-if="htypeid>0||typeid>0||priceid>0||rzid<3" style="margin-left: 5px;" @click="checks(0,5)"><img src="./images/delicon.png" width="15" height="15">清空条件</label>
-            </div>
-             <div class="category-content" id="category_bind">
-                 <div class="category-item" v-for="(item,index) in data" style="height: 220px;">
-                     <a :href="'product_detail.html?id='+item.id">
-                         <ul>
-                             <li>
-                                 <div class="li_top">
-                                     <img src="./images/sicon_wx.png" width="25" height="25">
-                                     <span>{{item.zhname}}</span>
-                                 </div>
-                            </li>
-                            <li>
-                                <div class="li_top">
-                                    <img src="./images/sicon_hy.png" width="25" height="25">
-                                    <span>所属行业:【{{item.fortypetext}}】</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="li_center">
-                                    <aside>
-                                        <span>粉丝数量</span>
-                                        <span>{{item.fansnum}}</span>
-                                    </aside>
-                                    <aside>
-                                        <span>账号类型</span>
-                                        <span v-if="item.type==1">订阅号</span>
-                                        <span v-else>服务号</span>
-                                    </aside>
-                                    <aside>
-                                        <span>单粉价格</span>
-                                        <span>{{item.oneprice}}粉/元</span>
-                                    </aside>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="price">
-                                    <span>价格</span>
-                                    <span style="color: red;">￥{{item.price}}</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <!-- item -->
+    <div class="category main-item">
 
-        <div class="weui-loadmore">
-            <i class="weui-loading"></i>
-            <span class="weui-loadmore__tips">正在加载</span>
+        <div class="findtab">
+            <span v-if="keywords.id==1">{{keywords.values}}</span>
+            <span v-if="htypeid==1">订阅号</span>
+            <span v-if="htypeid==2">服务号</span>
+            <span v-for="( item,index) in list" v-if="item.tid==typeid">{{item.name}}</span>
+            <span v-if="priceid==1">1万以内</span>
+            <span v-if="priceid==2">1-3万</span>
+            <span v-if="priceid==3">3-5万</span>
+            <span v-if="priceid==4">5-7万</span>
+            <span v-if="priceid==5">7-10万</span>
+            <span v-if="priceid==6">10-20万</span>
+            <span v-if="priceid==7">20万以上</span>
+            <span v-if="rzid==1">个人认证</span>
+            <span v-if="rzid==2">企业认证</span>
+            <span v-if="rzid==0">未认证</span>
+            <label v-if="htypeid>0||typeid>0||priceid>0||rzid<3||keywords.id>0" style="margin-left: 5px;" @click="checks(0,5)"><img src="./images/delicon.png" width="15" height="15">清空条件</label>
         </div>
-        <!-- nomore -->
-        <div class="nomore" style="display: none">
-            <span class="nomore-line"></span>
-            <span class="no-inf">我是底线</span>
-            <span class="nomore-line"></span>
+        <div class="category-content" id="category_bind">
+            <div class="category-item" v-for="(item,index) in data" style="height: 220px;">
+                <a :href="'product_detail.html?id='+item.id">
+                    <ul>
+                        <li>
+                            <div class="li_top">
+                                <img src="./images/sicon_wx.png" width="25" height="25">
+                                <span>{{item.zhname}}</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="li_top">
+                                <img src="./images/sicon_hy.png" width="25" height="25">
+                                <span>所属行业:【{{item.fortypetext}}】</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="li_center">
+                                <aside>
+                                    <span>粉丝数量</span>
+                                    <span>{{item.fansnum}}</span>
+                                </aside>
+                                <aside>
+                                    <span>账号类型</span>
+                                    <span v-if="item.type==1">订阅号</span>
+                                    <span v-else>服务号</span>
+                                </aside>
+                                <aside>
+                                    <span>单粉价格</span>
+                                    <span>{{item.oneprice}}粉/元</span>
+                                </aside>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="price">
+                                <span>价格</span>
+                                <span style="color: red;">￥{{item.price}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </a>
+            </div>
         </div>
     </div>
-    <!-- main end   -->
 
-    <!-- 回到顶部 -->
-    <div class="comeBack" id="comeTop">
-        <i class="icon-toTop"></i>
-        <span class="come-top">顶部</span>
+    <div class="weui-loadmore">
+        <i class="weui-loading"></i>
+        <span class="weui-loadmore__tips">正在加载</span>
     </div>
-    <!-- footer start -->
-    <footer>
-        <!-- tabbar -->
-        <div class="weui-tabbar" id="footer-tabber">
-            <a href="./index.html" class="weui-tabbar__item weui-bar__item--on">
-                <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
-                <div class="weui-tabbar__icon">
-                    <img src="./images/indexicon.png" alt="">
-                </div>
-                <p class="weui-tabbar__label" style="color: #999999;">首页</p>
-            </a>
-            <!--<a href="javascript:;" class="weui-tabbar__item">-->
-            <a href="#" class="weui-tabbar__item">
-                <div class="weui-tabbar__icon">
-                    <img src="./images/bugicon.png" alt="">
-                </div>
-                <p class="weui-tabbar__label" style="color: #36c7fe;">买号</p>
-            </a>
-            <a href="./fabu.html" class="weui-tabbar__item">
-                <div class="weui-tabbar__icon">
-                    <img src="./images/sellicon.png" alt="">
-                </div>
-                <p class="weui-tabbar__label">卖号</p>
-            </a>
-            <a href="./mine.html" class="weui-tabbar__item">
-                <div class="weui-tabbar__icon">
-                    <img src="./images/usericon.png" alt="">
-                </div>
-                <p class="weui-tabbar__label">我的</p>
-            </a>
-        </div>
-    </footer>
-    <!-- footer end   -->
-    <!-- jquery -->
-    <script src="./js/jquery-2.1.4.js"></script>
-    <script src="./js/jquery-weui.min.js"></script>
-    <script src="./js/swiper.min.js"></script>
-    <!-- common js -->
-    <script src="./js/common.js"></script>
-    <script src="./js/vue.js"></script>
-    <script src="./js/data.js"></script>
-    <script src="./js/axios.js"></script>
-    <script>
-        // <!--点击事件控制-->
-        var vm = new Vue({
-            el: "#main_",
-            data: {
-                list: [],
-                data: [],
-                willShow: null,
-                showmb: 0,
-                test: [{
-                        ind: 0,
-                        name: '账号类型'
-                    },
-                    {
-                        ind: 1,
-                        name: '所属类目'
-                    },
-                    {
-                        ind: 2,
-                        name: '价格区间'
-                    },
-                    {
-                        ind: 3,
-                        name: '认证类型'
-                    },
-                ],
-                htypeid: 0,
-                typeid: 0,
-                priceid: 0,
-                rzid: 3,
-                page: 1,
-                loading:false
+    <!-- nomore -->
+    <div class="nomore" style="display: none">
+        <span class="nomore-line"></span>
+        <span class="no-inf">我是底线</span>
+        <span class="nomore-line"></span>
+    </div>
+</div>
+<!-- main end   -->
+
+<!-- 回到顶部 -->
+<div class="comeBack" id="comeTop">
+    <i class="icon-toTop"></i>
+    <span class="come-top">顶部</span>
+</div>
+<!-- footer start -->
+<footer>
+    <!-- tabbar -->
+    <div class="weui-tabbar" id="footer-tabber">
+        <a href="./index.html" class="weui-tabbar__item weui-bar__item--on">
+            <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+            <div class="weui-tabbar__icon">
+                <img src="./images/indexicon.png" alt="">
+            </div>
+            <p class="weui-tabbar__label" style="color: #999999;">首页</p>
+        </a>
+        <!--<a href="javascript:;" class="weui-tabbar__item">-->
+        <a href="#" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/bugicon.png" alt="">
+            </div>
+            <p class="weui-tabbar__label" style="color: #36c7fe;">买号</p>
+        </a>
+        <a href="./fabu.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/sellicon.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">卖号</p>
+        </a>
+        <a href="./mine.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="./images/usericon.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</footer>
+<!-- footer end   -->
+<!-- jquery -->
+<script src="./js/jquery-2.1.4.js"></script>
+<script src="./js/jquery-weui.min.js"></script>
+<script src="./js/swiper.min.js"></script>
+<!-- common js -->
+<script src="./js/common.js"></script>
+<script src="./js/vue.js"></script>
+<script src="./js/data.js"></script>
+<script src="./js/axios.js"></script>
+<script>
+    // <!--点击事件控制-->
+    var vm = new Vue({
+        el: "#main_",
+        data: {
+            list: [],
+            data: [],
+            willShow: null,
+            showmb: 0,
+            test: [{
+                ind: 0,
+                name: '账号类型'
             },
-            mounted() {
-                this.gettypelist()
+                {
+                    ind: 1,
+                    name: '所属类目'
+                },
+                {
+                    ind: 2,
+                    name: '价格区间'
+                },
+                {
+                    ind: 3,
+                    name: '认证类型'
+                },
+            ],
+            htypeid: 0,
+            typeid: 0,
+            priceid: 0,
+            rzid: 3,
+            page: 1,
+            loading:false,
+            keywords:{
+                id:0,
+                values:''
+            },
+            ischeck:0
+        },
+        mounted() {
+            this.gettypelist()
+            this.getSelllist()
+            //                this.$refs.fuckLi.addClass('li_itme')
+        },
+        methods: {
+
+            got(index) {
+                $('body').css('overflow', 'hidden');
+                this.showmb = 1
+                this.willShow = index
+                console.log(this.test, this.willShow)
+            },
+            hiddenzindex() {
+                this.showmb = 0
+                this.willShow = null
+                $('body').css('overflow', '');
+            },
+            checks(id, type) {
+                this.showmb = 0
+                this.willShow = null
+                $('body').css('overflow', '');
+                let that = this;
+                switch (type) {
+                    case 1:
+                        console.log('类型' + type + 'id=' + id)
+                        that.htypeid = id;
+                        break
+                    case 2:
+                        that.typeid = id
+                        console.log('类型' + type + 'id=' + id)
+                        break
+                    case 3:
+                        that.priceid = id
+                        console.log('类型' + type + 'id=' + id)
+                        break
+                    case 4:
+                        that.rzid = id
+                        console.log('类型' + type + 'id=' + id)
+                        break
+                    case 5:
+                        that.htypeid=0;
+                        that.typeid= 0;
+                        that.priceid=0;
+                        that.rzid=3;
+                        that.keywords.id=0;
+                        that.keywords.values='';
+                        that.ischeck=1;
+                        break
+                }
+                console.log(that.htypeid,that.typeid,that.priceid,that.rzid);
+                that.page=1;
+                that.data=[];
+                console.log('状态+'+that.loading)
                 this.getSelllist()
-                //                this.$refs.fuckLi.addClass('li_itme')
+
             },
-            methods: {
+            gettypelist() {
 
-                got(index) {
-                    $('body').css('overflow', 'hidden');
-                    this.showmb = 1
-                    this.willShow = index
-                    console.log(this.test, this.willShow)
-                },
-                hiddenzindex() {
-                    this.showmb = 0
-                    this.willShow = null
-                    $('body').css('overflow', '');
-                },
-                checks(id, type) {
-                    this.showmb = 0
-                    this.willShow = null
-                    $('body').css('overflow', '');
-                    let that = this;
-                    switch (type) {
-                        case 1:
-                            console.log('类型' + type + 'id=' + id)
-                            that.htypeid = id;
-                            break
-                        case 2:
-                            that.typeid = id
-                            console.log('类型' + type + 'id=' + id)
-                            break
-                        case 3:
-                            that.priceid = id
-                            console.log('类型' + type + 'id=' + id)
-                            break
-                        case 4:
-                            that.rzid = id
-                            console.log('类型' + type + 'id=' + id)
-                            break
-                        case 5:
-                            that.htypeid=0;
-                            that.typeid= 0;
-                            that.priceid=0;
-                            that.rzid=3;
-                            break
+                let that = this;
+                axios.post('http://wxpay.possji.cn/yikehao/gettype', {})
+                //then里面跟一个成功回调函数
+                    .then(function (resp) {
+                        if (resp.data.code) {
+                            that.list = resp.data.data
+                        } else {
+                            $.toast("无法加载", "text");
+                        }
+
+                    })
+                    // catch中跟一个失败回调函数
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            getSelllist() {
+                //使用axios发送请求
+                let that = this;
+                console.log(that.htypeid,that.typeid,that.priceid,that.rzid);
+                if(that.ischeck==0){
+                    var keyw=this.getUrlPerm('keyword');
+                    if(keyw!=null&&keyw!=''){
+                        that.keywords.values=keyw;
+                        that.keywords.id=1;
                     }
-                    console.log(that.htypeid,that.typeid,that.priceid,that.rzid);
-                    that.page=1;
-                    that.data=[];
-                    console.log('状态+'+that.loading)
-                    this.getSelllist()
+                }else{
+                    var keyw='';
+                }
 
-                },
-                gettypelist() {
-
-                    let that = this;
-                    axios.post('http://wxpay.possji.cn/yikehao/gettype', {})
-                        //then里面跟一个成功回调函数
-                        .then(function (resp) {
-                            if (resp.data.code) {
-                                that.list = resp.data.data
-                            } else {
-                                $.toast("无法加载", "text");
-                            }
-
-                        })
-                        // catch中跟一个失败回调函数
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                },
-                getSelllist() {
-                    //使用axios发送请求
-                    let that = this;
-                    console.log(that.htypeid,that.typeid,that.priceid,that.rzid);
-
-                    //分页加载开始
-                    let loading = that.loading; //状态标记
-                    $(document.body).infinite().on("infinite", function () {
+                console.log(keyw,'关键字')
+                //分页加载开始
+                let loading = that.loading; //状态标记
+                $(document.body).infinite().on("infinite", function () {
                     console.log('状态' + loading)
                     if (loading) return;
                     that.loading = true;
                     let newpage = that.page;
                     newpage++;
                     that.page = newpage;
-                        $(".weui-loadmore").show()
+                    $(".weui-loadmore").show()
                     axios.post('http://wxpay.possji.cn/yikehao/findhao', {
-                            page: that.page,
-                            htypeid:that.htypeid,
-                            typeid:that.typeid,
-                            priceid:that.priceid,
-                            rzid:that.rzid
-                        })
-                        //then里面跟一个成功回调函数
+                        page: that.page,
+                        htypeid:that.htypeid,
+                        typeid:that.typeid,
+                        priceid:that.priceid,
+                        rzid:that.rzid,
+                        keyword:that.keywords.values
+                    })
+                    //then里面跟一个成功回调函数
                         .then(function (resp) {
                             if (resp.data.code==1) {
                                 that.loading = true;
@@ -380,168 +400,91 @@
                         });
                     //loading = false;
 
-                    });
-                    //分页加载结束
-                    axios.post('http://wxpay.possji.cn/yikehao/findhao', {
-                            page: that.page,
-                            htypeid:that.htypeid,
-                            typeid:that.typeid,
-                            priceid:that.priceid,
-                            rzid:that.rzid
-                        })
-                        //then里面跟一个成功回调函数
-                        .then(function (resp) {
-                            if (resp.data.code) {
-                                that.data = resp.data.data
-                                $(".weui-loadmore").hide()
-                            } else {
-                                $.toast("无法加载", "text");
-                            }
-
-                        })
-                        // catch中跟一个失败回调函数
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                },
-            }
-        })
-    </script>
-    <script>
-        $(function () {
-            // alert(1)     // 测试jquery
-
-            var index = {
-                // 初始化函数
-                init: function () {
-                    this.bindEvents();
-                    this.getScrollHeight();
-                    // this.category_bind();
-                },
-                // 事件函数
-                bindEvents: function () {
-                    $("body").on("click", ".weui-tabbar__item", index.clickTabbar);
-                    $("body").on("click", "#comeTop", index.clickComeTop);
-                    $("body").on("keypress", "#searchInput", index.searchKeypress)
-                },
-                // 数据渲染
-                // category_bind: function () {
-                //     var categoryVue = new Vue({
-                //         el: "#category_bind",
-                //         data: {
-                //             data: [],
-                //             page: 1,
-                //             ii: 'kkkk'
-                //         },
-                //         methods: {
-                //             // getSelllist() {
-                //             //     //使用axios发送请求
-                //             //     let that = this;
-                //             //     //分页加载开始
-                //             //     let loading = false; //状态标记
-                //             //     $(document.body).infinite().on("infinite", function () {
-                //             //         console.log('状态' + loading)
-                //             //         if (loading) return;
-                //             //         loading = true;
-                //             //         let newpage = that.page;
-                //             //         newpage++;
-                //             //         that.page = newpage;
-                //             //         axios.post('http://wxpay.possji.cn/yikehao/findhao', {
-                //             //                 page: that.page,
-                //             //                 htypeid:vm.htypeid,
-                //             //                 typeid:vm.typeid,
-                //             //                 priceid:vm.priceid,
-                //             //                 rzid:vm.rzid                                   
-                //             //             })
-                //             //             //then里面跟一个成功回调函数
-                //             //             .then(function (resp) {
-                //             //                 if (resp.data.code) {
-                //             //                     loading = false;
-                //             //                     let sellarr = that.data;
-                //             //                     let newdata = sellarr.concat(resp.data
-                //             //                         .data)
-                //             //                     that.data = newdata
-                //             //                     $(".weui-loadmore").hide()
-                //             //                 } else {
-                //             //                     $('.nomore').css('display', '')
-                //             //                     $(".weui-loadmore").hide()
-                //             //                     $(document.body).destroyInfinite()
-                //             //                     $.toast("已加载完毕", "text");
-                //             //                 }
-
-                //             //             })
-                //             //             .catch(function (error) {
-                //             //                 console.log(error);
-                //             //             });
-                //             //         //loading = false;
-
-                //             //     });
-                //             //     //分页加载结束
-                //             //     axios.post('http://wxpay.possji.cn/yikehao/findhao', {
-                //             //         page: that.page,
-                //             //                 htypeid:vm.htypeid,
-                //             //                 typeid:vm.typeid,
-                //             //                 priceid:vm.priceid,
-                //             //                 rzid:vm.rzid  
-                //             //         })
-                //             //         //then里面跟一个成功回调函数
-                //             //         .then(function (resp) {
-                //             //             if (resp.data.code) {
-                //             //                 categoryVue.data = resp.data.data
-                //             //             } else {
-                //             //                 $.toast("无法加载", "text");
-                //             //             }
-
-                //             //         })
-                //             //         // catch中跟一个失败回调函数
-                //             //         .catch(function (error) {
-                //             //             console.log(error);
-                //             //         });
-                //             // },
-
-                //         },
-                //         mounted() {
-                //             console.log('传账号类型=' + vm.htypeid)
-                //             console.log('传所属类目=' + vm.typeid)
-                //             console.log('传价格区间=' + vm.priceid)
-                //             console.log('传认证类型=' + vm.rzid)
-                //             // this.getSelllist();
-                //         }
-                //     })
-                //     return categoryVue
-                // },
-
-                // 监听滚动条位置
-                getScrollHeight: function () {
-                    $(window).scroll(function () {
-                        var scrollHeight = $(document).scrollTop();
-                        // console.log(scrollHeight);
-                        if (scrollHeight > 500) {
-                            $("#comeTop").fadeIn(500);
+                });
+                //分页加载结束
+                axios.post('http://wxpay.possji.cn/yikehao/findhao', {
+                    page: that.page,
+                    htypeid:that.htypeid,
+                    typeid:that.typeid,
+                    priceid:that.priceid,
+                    rzid:that.rzid,
+                    keyword:that.keywords.values
+                })
+                //then里面跟一个成功回调函数
+                    .then(function (resp) {
+                        if (resp.data.code) {
+                            that.data = resp.data.data
+                            $(".weui-loadmore").hide()
                         } else {
-                            $("#comeTop").fadeOut(500);
+                            $.toast("无法加载", "text");
                         }
+
+                    })
+                    // catch中跟一个失败回调函数
+                    .catch(function (error) {
+                        console.log(error);
                     });
-                },
-                // 点击返回顶部
-                clickComeTop: function () {
-                    $("html,body").animate({
-                        scrollTop: 0
-                    }, 500);
-                },
-                searchKeypress: function (event) {
-                    if (event.keyCode == 13) {
-                        event.preventDefault();
-                        // alert(1)
-                        location.href = "html?search=" + event.target.value;
+            },
+            getUrlPerm(name){
+                //获取url方法 编辑传来的参数
+                //     //之前decodeURI是用的unescape() 有时候会取汉字乱码
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return decodeURI(r[2]);
+                return null;
+            },
+        }
+    })
+</script>
+<script>
+    $(function () {
+        // alert(1)     // 测试jquery
+
+        var index = {
+            // 初始化函数
+            init: function () {
+                this.bindEvents();
+                this.getScrollHeight();
+                // this.category_bind();
+            },
+            // 事件函数
+            bindEvents: function () {
+                $("body").on("click", ".weui-tabbar__item", index.clickTabbar);
+                $("body").on("click", "#comeTop", index.clickComeTop);
+                $("body").on("keypress", "#searchInput", index.searchKeypress)
+            },
+
+            // 监听滚动条位置
+            getScrollHeight: function () {
+                $(window).scroll(function () {
+                    var scrollHeight = $(document).scrollTop();
+                    // console.log(scrollHeight);
+                    if (scrollHeight > 500) {
+                        $("#comeTop").fadeIn(500);
+                    } else {
+                        $("#comeTop").fadeOut(500);
                     }
-                },
-            }
-            // 执行函数
-            index.init();
-            return index
-        })
-    </script>
+                });
+            },
+            // 点击返回顶部
+            clickComeTop: function () {
+                $("html,body").animate({
+                    scrollTop: 0
+                }, 500);
+            },
+            searchKeypress: function (event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    // alert(1)
+                    location.href = "html?search=" + event.target.value;
+                }
+            },
+        }
+        // 执行函数
+        index.init();
+        return index
+    })
+</script>
 </body>
 
 </html>
