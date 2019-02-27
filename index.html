@@ -194,7 +194,11 @@
                 this.category_bind();
                 let openid=this.getUrlPerm('openid');
                 console.log(openid,'得到openid')
-                localStorage.setItem('openid',openid);
+                let getopenid=localStorage.getItem('openid');
+                if(getopenid==null||getopenid==''||getopenid=='null'){
+                    localStorage.setItem('openid',openid);
+                }
+
             },
             getUrlPerm:function(name){
                 //获取url方法 编辑传来的参数

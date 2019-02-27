@@ -294,9 +294,9 @@
                     let gid = getUrl('id');
                     let openid=localStorage.getItem('openid');
                     console.log(openid,'商品详细里面的openid')
-                    if(openid=='null'||openid==''){
-                        window.location.href="http://wxpay.possji.cn";
-                    }else{
+//                    if(openid=='null'||openid==null||openid==''){
+//                        window.location.href="http://wxpay.possji.cn";
+//                    }else{
                         let islogin=localStorage.getItem('uid');
                         if (islogin==null||islogin==''){
                             window.location.href="login.html";
@@ -326,7 +326,7 @@
                                 //取消操作
                             });
                         }
-                    }
+                   // }
 
                 }
 
