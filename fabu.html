@@ -235,31 +235,15 @@
             changeCheck(id, value, index) {
                 // this arr  = []
                 console.log(id,value,index);
-
-                // for (let i in this.form.checkValue) {
-                //     console.log('控',this.form.checkValue[i]);
-                //     this.form.arr[index] = id + '|' + value
-                //     if (this.form.checkValue[index] == null) {
-                //         this.form.arr.splice(index,1)
-                //     } else {
-
-                //         this.form.arr[index] = id + '|' + value
-                //     }
-
-                // }
-                // let str = id+'|'+value
-                // for(let item of this.form.checkValue) {
-                //     this.form.arr.push(str)
-                // }
                 console.log(this.form.checkValue, this.form.arr);
 
             },
             getinfo() {
                 let that = this;
-                let openid = localStorage.getItem('openid');
-                if (openid == null || openid == '') {
-                    window.location.href = "http://wxpay.possji.cn";
-                } else {
+                //let openid = localStorage.getItem('openid');
+//                if (openid == null || openid == 'null' ||openid == '') {
+//                    window.location.href="http://wxpay.possji.cn/yikehao/myapi";
+//                } else {
                     let that = this
                     that.uid = localStorage.getItem('uid');
                     if (that.uid == null || that.uid == '') {
@@ -282,7 +266,7 @@
                                 console.log(error);
                             });
                     }
-                }
+                //}
 
             },
             getNameType() {
@@ -356,7 +340,7 @@
                         if (resp.data.code == 1) {
                             console.log('图哈哈哈哈哈哈哈哈哈哈片', resp.data.data);
 
-                            $.toast("成功", "text");
+                            $.toast("提交成功", "text");
                         } else {
                             $.toast("无法加载", "text");
                         }
@@ -384,7 +368,6 @@
                         }
 
                     })
-
                         .then(function (resp) {
                             if (resp.data.code == 1) {
                                 console.log('图片', resp.data.data);
