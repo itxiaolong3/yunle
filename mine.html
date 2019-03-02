@@ -147,7 +147,7 @@
                 regUserLogin(){
                     let openid=localStorage.getItem('openid');
 //                    if(openid==null||openid==''){
-//                        window.location.href="http://wxpay.possji.cn";
+//                        window.location.href="http://yqf.yun-le.com";
 //                    }else{
                         let islogin=localStorage.getItem('uid');
                         this.uid=islogin
@@ -157,7 +157,7 @@
                             //获取个人信息
                             let that = this
                             axios({
-                                url: 'http://wxpay.possji.cn/yikehao/getuseropenid',
+                                url: 'http://yqf.yun-le.com/yikehao/getuseropenid',
                                 method: 'post',
                                 data: {uid: islogin,},
                                 headers: {'Content-Type': 'application/json'}

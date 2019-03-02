@@ -102,7 +102,7 @@
                 toLogin() {
                     let that = this
                     axios({
-                            url: 'http://wxpay.possji.cn/yikehao/doLogin',
+                            url: 'http://yqf.yun-le.com/yikehao/doLogin',
                             method: 'post',
                             data: {
                                 phone: that.form.phoneNum,
@@ -124,7 +124,7 @@
                                     type: 'success'
                                 });
                                 localStorage.setItem('uid',resp.data.data.uid);
-                                window.location.href = "http://wxpay.possji.cn";
+                                window.location.href = "http://yqf.yun-le.com";
 
                             } else {
                                 that.$message({
@@ -145,7 +145,7 @@
                     let that = this;
                     console.log(that.form.phoneNum);
                     axios({
-                            url: 'http://wxpay.possji.cn/yikehao/sendsms',
+                            url: 'http://yqf.yun-le.com/yikehao/sendsms',
                             method: 'post',
                             data: {
                                 phone: that.form.phoneNum

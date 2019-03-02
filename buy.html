@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./css/weui.css">
     <link rel="stylesheet" href="./css/jquery-weui.css">
 
-    <title>云乐互联</title>
+    <title>益企发</title>
 </head>
 
 <body ontouchstart>
@@ -328,7 +328,7 @@
             gettypelist() {
 
                 let that = this;
-                axios.post('http://wxpay.possji.cn/yikehao/gettype', {})
+                axios.post('http://yqf.yun-le.com/yikehao/gettype', {})
                 //then里面跟一个成功回调函数
                     .then(function (resp) {
                         if (resp.data.code) {
@@ -368,7 +368,7 @@
                     newpage++;
                     that.page = newpage;
                     $(".weui-loadmore").show()
-                    axios.post('http://wxpay.possji.cn/yikehao/findhao', {
+                    axios.post('http://yqf.yun-le.com/yikehao/findhao', {
                         page: that.page,
                         htypeid:that.htypeid,
                         typeid:that.typeid,
@@ -402,7 +402,7 @@
 
                 });
                 //分页加载结束
-                axios.post('http://wxpay.possji.cn/yikehao/findhao', {
+                axios.post('http://yqf.yun-le.com/yikehao/findhao', {
                     page: that.page,
                     htypeid:that.htypeid,
                     typeid:that.typeid,

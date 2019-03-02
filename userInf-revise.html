@@ -113,7 +113,7 @@
                 let islogin=localStorage.getItem('uid');
                 console.log('点击了')
                 axios({
-                    url: 'http://wxpay.possji.cn/yikehao/doEditinfo',
+                    url: 'http://yqf.yun-le.com/yikehao/doEditinfo',
                     method: 'post',
                     data: {
                         wechat: that.form.wechat,
@@ -148,7 +148,7 @@
                 let that = this
                 let islogin=localStorage.getItem('uid');
                 axios({
-                    url: 'http://wxpay.possji.cn/yikehao/getuseropenid',
+                    url: 'http://yqf.yun-le.com/yikehao/getuseropenid',
                     method: 'post',
                     data: {uid: islogin,},
                     headers: {'Content-Type': 'application/json'}

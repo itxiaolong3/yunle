@@ -17,7 +17,7 @@
     <script src="./js/common.js"></script>
     <!-- mine css -->
     <link rel="stylesheet" href="./css/vip.css">
-    <title>云乐互联</title>
+    <title>益企发</title>
 </head>
 <body>
 
@@ -133,17 +133,17 @@
                                 { text: "支付宝", onClick: function(){
                                     let that = this
                                     let uid=localStorage.getItem('uid');
-                                    window.location.href="http://wxpay.possji.cn/yikehao/AliPay?uid="+uid+"&gid="+type+"&paytype=0";
+                                    window.location.href="http://yqf.yun-le.com/yikehao/AliPay?uid="+uid+"&gid="+type+"&paytype=0";
                                 } },
                                 { text: "微信支付", onClick: function(){
                                     let openid=localStorage.getItem('openid');
                                     if(openid==null||openid=='null'||openid==''){
-                                        window.location.href="http://wxpay.possji.cn/yikehao/myapi";
+                                        window.location.href="http://yqf.yun-le.com/yikehao/myapi";
                                     }else{
                                         let that = this
                                         let uid=localStorage.getItem('uid');
                                         axios({
-                                            url: 'http://wxpay.possji.cn/yikehao/wxpay',
+                                            url: 'http://yqf.yun-le.com/yikehao/wxpay',
                                             method: 'post',
                                             data: {
                                                 openid:openid,
@@ -207,7 +207,7 @@
                 //获取vip信息
                 let that = this
                 axios({
-                    url: 'http://wxpay.possji.cn/yikehao/getVip',
+                    url: 'http://yqf.yun-le.com/yikehao/getVip',
                     method: 'post',
                     data: {},
                     headers: {'Content-Type': 'application/json'}

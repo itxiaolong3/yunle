@@ -19,7 +19,7 @@
     <script src="./js/common.js"></script>
     <!-- vant组件库 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@1.5/lib/index.css">
-    <title>云乐互联</title>
+    <title>益企发</title>
 </head>
 
 <body>
@@ -238,7 +238,7 @@
                     }
                 ],
                 willShow: 0,
-                url: 'http://wxpay.possji.cn',
+                url: 'http://yqf.yun-le.com',
                 showbanner: false,
                 images :[
                     
@@ -260,7 +260,7 @@
                 getinfo() {
                     let that = this;
                     var id = getUrl('id');
-                    axios.post('http://wxpay.possji.cn/yikehao/getdetail', {
+                    axios.post('http://yqf.yun-le.com/yikehao/getdetail', {
                             id: id
                         })
                         //then里面跟一个成功回调函数
@@ -295,7 +295,7 @@
                     let openid=localStorage.getItem('openid');
                     console.log(openid,'商品详细里面的openid')
 //                    if(openid=='null'||openid==null||openid==''){
-//                        window.location.href="http://wxpay.possji.cn";
+//                        window.location.href="http://yqf.yun-le.com";
 //                    }else{
                         let islogin=localStorage.getItem('uid');
                         if (islogin==null||islogin==''){
@@ -305,7 +305,7 @@
                                 //这里发送请求显示商家联系电话，待上uid。如果没登录先去登录才可以查看
                                 let that = this
                                 axios({
-                                    url: 'http://wxpay.possji.cn/yikehao/getbossphone',
+                                    url: 'http://yqf.yun-le.com/yikehao/getbossphone',
                                     method: 'post',
                                     data: {uid: islogin,id:gid},
                                     headers: {'Content-Type': 'application/json'}

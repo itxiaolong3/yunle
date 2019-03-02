@@ -32,8 +32,8 @@
 <!-- 我的页面 -->
 <div class="main" id="main">
     <div class="main_son">
-        公众号名称:
-        <el-input type="text" placeholder="公众号名称" v-model='form.name'></el-input>
+        账号简单介绍:
+        <el-input type="text" placeholder="账号简单介绍" v-model='form.name'></el-input>
     </div>
     <div class="main_son">
         售价:
@@ -61,7 +61,7 @@
     <div class="main_son">
         认证主体:
         <el-radio v-model="form.radio1" label="1" @change="radioChange1(form.radio1)">未认证</el-radio>
-        <el-radio v-model="form.radio1" label="2" @change="radioChange1(form.radio1)">个人认证</el-radio>
+        <el-radio v-model="form.radio1" label="2" @change="radioChange1(form.radio1)">个人</el-radio>
         <el-radio v-model="form.radio1" label="3" @change="radioChange1(form.radio1)">企业认证</el-radio>
     </div>
     <div class="main_son">
@@ -90,10 +90,10 @@
         联系方式:
         <el-input type="text" placeholder="联系方式" v-model='form.phoneNumber'></el-input>
     </div>
-    <div class="main_son">
-        UV值:
-        <el-input type="text" placeholder="UV值" v-model='form.UV'></el-input>%
-    </div>
+    <!--<div class="main_son">-->
+        <!--UV值:-->
+        <!--<el-input type="text" placeholder="UV值" v-model='form.UV'></el-input>%-->
+    <!--</div>-->
     <div class="main_son">
         头条阅读数:
         <el-input type="text" placeholder="头条阅读数" v-model='form.headerNumber'></el-input>
@@ -198,7 +198,7 @@
             uid: '',
             imgs:'',
             imgInfo: [],
-            url: 'http://wxpay.possji.cn',
+            url: 'http://yqf.yun-le.com',
 
         },
         mounted() {
@@ -235,21 +235,37 @@
             changeCheck(id, value, index) {
                 // this arr  = []
                 console.log(id,value,index);
+
+                // for (let i in this.form.checkValue) {
+                //     console.log('控',this.form.checkValue[i]);
+                //     this.form.arr[index] = id + '|' + value
+                //     if (this.form.checkValue[index] == null) {
+                //         this.form.arr.splice(index,1)
+                //     } else {
+
+                //         this.form.arr[index] = id + '|' + value
+                //     }
+
+                // }
+                // let str = id+'|'+value
+                // for(let item of this.form.checkValue) {
+                //     this.form.arr.push(str)
+                // }
                 console.log(this.form.checkValue, this.form.arr);
 
             },
             getinfo() {
                 let that = this;
-                //let openid = localStorage.getItem('openid');
-//                if (openid == null || openid == 'null' ||openid == '') {
-//                    window.location.href="http://wxpay.possji.cn/yikehao/myapi";
-//                } else {
+                let openid = localStorage.getItem('openid');
+                if (openid == null || openid == '') {
+                    window.location.href = "http://yqf.yun-le.com";
+                } else {
                     let that = this
                     that.uid = localStorage.getItem('uid');
                     if (that.uid == null || that.uid == '') {
                         window.location.href = "login.html";
                     } else {
-                        axios.get('http://wxpay.possji.cn/yikehao/gettype', {})
+                        axios.get('http://yqf.yun-le.com/yikehao/gettype', {})
                         //then里面跟一个成功回调函数
                             .then(function (resp) {
                                 if (resp.data.code) {
@@ -266,12 +282,12 @@
                                 console.log(error);
                             });
                     }
-                //}
+                }
 
             },
             getNameType() {
                 let that = this;
-                axios.get('http://wxpay.possji.cn/yikehao/gethaotype', {})
+                axios.get('http://yqf.yun-le.com/yikehao/gethaotype', {})
                 //then里面跟一个成功回调函数
                     .then(function (resp) {
                         if (resp.data.code) {
@@ -314,7 +330,7 @@
                 //这里发送请求显示商家联系电话，待上uid。如果没登录先去登录才可以查看
                 let that = this
                 // for (let item of that.imgInfo) {
-                axios.post('http://wxpay.possji.cn/yikehao/doPosthao', {
+                axios.post('http://yqf.yun-le.com/yikehao/doPosthao', {
                     zhname: that.form.name,
                     price: that.form.price,
                     fansnum: that.form.fansNum,
@@ -324,7 +340,6 @@
                     sexbli: that.form.sexbli,
                     isliu: that.form.isliu,
                     phone: that.form.phoneNumber,
-                    UV: that.form.UV,
                     headernum: that.form.headerNumber,
                     weiguinum: that.form.fuckNum,
                     desc: that.form.desc,
@@ -340,7 +355,7 @@
                         if (resp.data.code == 1) {
                             console.log('图哈哈哈哈哈哈哈哈哈哈片', resp.data.data);
 
-                            $.toast("提交成功", "text");
+                            $.toast("成功", "text");
                         } else {
                             $.toast("无法加载", "text");
                         }
@@ -360,7 +375,7 @@
                     formd.append("image1", 222);
                     console.log(formd);
                     axios({
-                        url: 'http://wxpay.possji.cn/yikehao/apiLoadimg',
+                        url: 'http://yqf.yun-le.com/yikehao/apiLoadimg',
                         method: 'post',
                         data: formd,
                         headers: {
@@ -368,6 +383,7 @@
                         }
 
                     })
+
                         .then(function (resp) {
                             if (resp.data.code == 1) {
                                 console.log('图片', resp.data.data);

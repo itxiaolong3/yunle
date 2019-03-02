@@ -15,11 +15,22 @@
     <link rel="stylesheet" href="./css/weui.css">
     <link rel="stylesheet" href="./css/jquery-weui.css">
 
-    <title>云乐互联</title>
+    <title>益企发</title>
+    <style>
+        .top_logo{
+            width: 100%;
+            background-color: #94C8E0;
+            display: flex;
+            align-content: center;
+        }
+    </style>
 </head>
 <body ontouchstart>
 <!-- header start -->
 <header>
+    <div class="top_logo">
+        <img src="./images/indexlogo.png" width="80" height="80">
+    </div>
     <!-- swiper -->
     <div class="swiper-container indexBanner" id="indexBanner" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
         <div class="swiper-wrapper">
@@ -249,7 +260,7 @@
                         getBanner(){
                             //使用axios发送请求
                             let that=this;
-                            axios.get('http://wxpay.possji.cn/yikehao/getbanner')
+                            axios.get('http://yqf.yun-le.com/yikehao/getbanner')
                             //then里面跟一个成功回调函数
                                 .then(function (resp) {
                                     if (resp.data.code){
@@ -285,7 +296,7 @@
                         getNotifi(){
                             //使用axios发送请求
                             let that=this;
-                            axios.get('http://wxpay.possji.cn/yikehao/sellnotifi')
+                            axios.get('http://yqf.yun-le.com/yikehao/sellnotifi')
                             //then里面跟一个成功回调函数
                                 .then(function (resp) {
                                     if (resp.data.code){
@@ -338,7 +349,7 @@
                                 let newpage=that.page;
                                 newpage++;
                                 that.page=newpage;
-                                axios.post('http://wxpay.possji.cn/yikehao/haolist', {
+                                axios.post('http://yqf.yun-le.com/yikehao/haolist', {
                                     page: that.page
                                 })
                                 //then里面跟一个成功回调函数
@@ -365,7 +376,7 @@
 
                             });
 
-                            axios.post('http://wxpay.possji.cn/yikehao/haolist', {
+                            axios.post('http://yqf.yun-le.com/yikehao/haolist', {
                                 // name: this.newName
                                 page: that.page
                             })

@@ -17,7 +17,7 @@
 
     <!-- 适配 -->
     <script src="./js/common.js"></script>
-    <title>云乐互联</title>
+    <title>益企发</title>
 </head>
 <body>
 <!-- header start -->
@@ -34,9 +34,15 @@
     <div id="form_main" v-if="!isshow">
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">公众微信号</label></div>
+                <div class="weui-cell__hd"><label class="weui-label">账号名称</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" v-model='name' placeholder="请输入微信号">
+                    <input class="weui-input" type="text" v-model='name' placeholder="请输入名称">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">账号ID</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" v-model='zhID' placeholder="账号ID">
                 </div>
             </div>
             <div class="weui-cell">
@@ -51,19 +57,20 @@
                     <input class="weui-input" type="number" v-model='ttnum'  placeholder="请输头条阅读数">
                 </div>
             </div>
-            <div class="weui-cell weui-cell_select">
-                <div class="weui-cell__bd">
-                    <select class="weui-select" name="select1" v-model="isyuan">
-                        <option selected="" value="1">未开通原创</option>
-                        <option value="2">已开通原创</option>
-                    </select>
-                </div>
-            </div>
+            <!--<div class="weui-cell weui-cell_select">-->
+                <!--<div class="weui-cell__bd">-->
+                    <!--<select class="weui-select" name="select1" v-model="isyuan">-->
+                        <!--<option selected="" value="1">未开通原创</option>-->
+                        <!--<option value="2">已开通原创</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="weui-cell weui-cell_select">
                 <div class="weui-cell__bd">
                     <select class="weui-select" name="select1" v-model="issan">
-                        <option selected="" value="1">未开通赞赏功能</option>
-                        <option value="2">已开通赞赏功能</option>
+                        <option selected="" value="0">账号类型</option>
+                        <option value="1">公众号</option>
+                        <option value="2">小程序</option>
                     </select>
                 </div>
             </div>
@@ -82,8 +89,12 @@
         <div class="con">
             <ul>
                 <li>
-                    <label>公众号微信号:</label>
+                    <label>账号名称:</label>
                     <span>{{name}}</span>
+                </li>
+                <li>
+                    <label>账号ID:</label>
+                    <span>{{zhID}}</span>
                 </li>
                 <li>
                     <label>粉丝数量:</label>
@@ -93,18 +104,18 @@
                     <label>头条阅读:</label>
                     <span>{{ttnum}}</span>
                 </li>
+                <!--<li>-->
+                    <!--<label style="width: 80px;">原创功能:</label>-->
+                    <!--<span>-->
+                        <!--<label v-if="isyuan==1">未开通原创</label>-->
+                        <!--<label v-if="isyuan==2">已开通原创</label>-->
+                    <!--</span>-->
+                <!--</li>-->
                 <li>
-                    <label style="width: 80px;">原创功能:</label>
+                    <label style="width: 80px;">账号类型:</label>
                     <span>
-                        <label v-if="isyuan==1">未开通原创</label>
-                        <label v-if="isyuan==2">已开通原创</label>
-                    </span>
-                </li>
-                <li>
-                    <label style="width: 80px;">赞赏功能:</label>
-                    <span>
-                        <label v-if="issan==1">未开赞赏功能</label>
-                        <label v-if="issan==2">已开赞赏功能</label>
+                        <label v-if="issan==1">公众号</label>
+                        <label v-if="issan==2">小程序</label>
                     </span>
                 </li>
                 <li>
@@ -153,10 +164,11 @@
         el: "#main",
         data: {
             name:'',
+            zhID:'',
             fsnum:'',
             ttnum:'',
             isyuan:1,
-            issan:1,
+            issan:0,
             ischange:1,
             isshow:0,
             price:0,
@@ -177,11 +189,13 @@
                 console.log(that.ischange,'主体')
                 $.toast.prototype.defaults.duration=1000;
                 if(!that.name){
-                    $.toast("请输入微信号", "text");
+                    $.toast("请输入账号名称", "text");
                 }else if(!that.fsnum){
                     $.toast("粉丝数量不可为空", "text");
                 }else if(!that.ttnum){
                     $.toast("头条数量不可为空", "text");
+                }else if(!that.issan){
+                    $.toast("请选择账号类型", "text");
                 }else{
                     that.isshow=1;
                     that.wordnum=that.rnd(9999,99999);

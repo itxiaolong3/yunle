@@ -198,7 +198,7 @@
 
 	// 这里是简单的调用，其余api请参考文档
 	_weui2.default.uploader('#uploaderCustom', {
-	    url: 'http://wxpay.possji.cn/yikehao/apiLoadimg',
+	    url: 'http://yqf.yun-le.com/yikehao/apiLoadimg',
 	    auto: false,
 	    onQueued: function onQueued() {
 	        uploadCustomFileList.push(this);
