@@ -35,7 +35,7 @@
         <div class="weui-form-preview__hd">
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">付款金额</label>
-                <em class="weui-form-preview__value">¥{{info.oneprice}}</em>
+                <em class="weui-form-preview__value">¥{{info.price}}</em>
             </div>
         </div>
         <div class="weui-form-preview__bd">
@@ -80,8 +80,8 @@
             <label class="weui-agree">
                 <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
                 <span class="weui-agree__text">阅读并同意</span>
-            </label><label @click="showxie()" class="payxieyi">《云乐互联用户协议》</label>
-            <a class="order-sub" @click="pay(info.id,info.oneprice)">立即支付</a>
+            </label><label @click="showxie()" class="payxieyi">《益企发用户协议》</label>
+            <a class="order-sub" @click="pay(info.id,info.price)">立即支付</a>
         </div>
     </footer>
 </div>

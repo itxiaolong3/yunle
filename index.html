@@ -387,7 +387,9 @@
                                         console.log(resp.data);
                                         categoryVue.data=resp.data.data
                                     }else{
-                                        $.toast("无法加载", "text");
+                                        $.toast("暂无无数据", "text");
+                                        $('.nomore').css('display','')
+                                        $(".weui-loadmore").hide()
                                     }
 
                                 })
