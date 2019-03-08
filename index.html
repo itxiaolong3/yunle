@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./css/weui.css">
     <link rel="stylesheet" href="./css/jquery-weui.css">
 
-    <title>益企发</title>
+    <title>益企发-公众号交易平台|公众号买卖|公众号出售|公众号转让|购买公众号|粉丝迁移</title>
     <style>
         .top_logo{
             width: 100%;
@@ -260,7 +260,7 @@
                         getBanner(){
                             //使用axios发送请求
                             let that=this;
-                            axios.get('http://yqf.yun-le.com/yikehao/getbanner')
+                            axios.get('http://www.yqfyqf.com/yikehao/getbanner')
                             //then里面跟一个成功回调函数
                                 .then(function (resp) {
                                     if (resp.data.code){
@@ -296,7 +296,7 @@
                         getNotifi(){
                             //使用axios发送请求
                             let that=this;
-                            axios.get('http://yqf.yun-le.com/yikehao/sellnotifi')
+                            axios.get('http://www.yqfyqf.com/yikehao/sellnotifi')
                             //then里面跟一个成功回调函数
                                 .then(function (resp) {
                                     if (resp.data.code){
@@ -349,7 +349,7 @@
                                 let newpage=that.page;
                                 newpage++;
                                 that.page=newpage;
-                                axios.post('http://yqf.yun-le.com/yikehao/haolist', {
+                                axios.post('http://www.yqfyqf.com/yikehao/haolist', {
                                     page: that.page
                                 })
                                 //then里面跟一个成功回调函数
@@ -376,7 +376,7 @@
 
                             });
 
-                            axios.post('http://yqf.yun-le.com/yikehao/haolist', {
+                            axios.post('http://www.yqfyqf.com/yikehao/haolist', {
                                 // name: this.newName
                                 page: that.page
                             })

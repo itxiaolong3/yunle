@@ -198,7 +198,7 @@
             uid: '',
             imgs:'',
             imgInfo: [],
-            url: 'http://yqf.yun-le.com',
+            url: 'http://www.yqfyqf.com',
 
         },
         mounted() {
@@ -258,14 +258,14 @@
                 let that = this;
                 let openid = localStorage.getItem('openid');
                 if (openid == null || openid == '') {
-                    window.location.href = "http://yqf.yun-le.com";
+                    window.location.href = "http://www.yqfyqf.com";
                 } else {
                     let that = this
                     that.uid = localStorage.getItem('uid');
                     if (that.uid == null || that.uid == '') {
                         window.location.href = "login.html";
                     } else {
-                        axios.get('http://yqf.yun-le.com/yikehao/gettype', {})
+                        axios.get('http://www.yqfyqf.com/yikehao/gettype', {})
                         //then里面跟一个成功回调函数
                             .then(function (resp) {
                                 if (resp.data.code) {
@@ -287,7 +287,7 @@
             },
             getNameType() {
                 let that = this;
-                axios.get('http://yqf.yun-le.com/yikehao/gethaotype', {})
+                axios.get('http://www.yqfyqf.com/yikehao/gethaotype', {})
                 //then里面跟一个成功回调函数
                     .then(function (resp) {
                         if (resp.data.code) {
@@ -330,7 +330,7 @@
                 //这里发送请求显示商家联系电话，待上uid。如果没登录先去登录才可以查看
                 let that = this
                 // for (let item of that.imgInfo) {
-                axios.post('http://yqf.yun-le.com/yikehao/doPosthao', {
+                axios.post('http://www.yqfyqf.com/yikehao/doPosthao', {
                     zhname: that.form.name,
                     price: that.form.price,
                     fansnum: that.form.fansNum,
@@ -375,7 +375,7 @@
                     formd.append("image1", 222);
                     console.log(formd);
                     axios({
-                        url: 'http://yqf.yun-le.com/yikehao/apiLoadimg',
+                        url: 'http://www.yqfyqf.com/yikehao/apiLoadimg',
                         method: 'post',
                         data: formd,
                         headers: {

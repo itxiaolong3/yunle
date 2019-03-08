@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./css/weui.css">
     <link rel="stylesheet" href="./css/jquery-weui.css">
 
-    <title>益企发</title>
+    <title>益企发-公众号交易平台|公众号买卖|公众号出售|公众号转让|购买公众号|粉丝迁移</title>
 </head>
 
 <body ontouchstart>
@@ -40,12 +40,15 @@
                     <li>
                         <a @click="checks(0,1)">全部</a>
                     </li>
-                    <li>
-                        <a @click="checks(1,1)">订阅号</a>
+                    <li v-for="( item,index) in haolist">
+                        <a @click="checks(item.htid,1)">{{item.name}}</a>
                     </li>
-                    <li>
-                        <a @click="checks(2,1)">服务号</a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a @click="checks(1,1)">订阅号</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a @click="checks(2,1)">服务号</a>-->
+                    <!--</li>-->
                 </ul>
             </div>
             <div class="showcon con1" v-if="willShow==1">
@@ -110,8 +113,9 @@
 
         <div class="findtab">
             <span v-if="keywords.id==1">{{keywords.values}}</span>
-            <span v-if="htypeid==1">订阅号</span>
-            <span v-if="htypeid==2">服务号</span>
+            <!--<span v-if="htypeid==1">订阅号</span>-->
+            <!--<span v-if="htypeid==2">服务号</span>-->
+            <span v-for="( item,index) in haolist" v-if="item.htid==htypeid">{{item.name}}</span>
             <span v-for="( item,index) in list" v-if="item.tid==typeid">{{item.name}}</span>
             <span v-if="priceid==1">1万以内</span>
             <span v-if="priceid==2">1-3万</span>
@@ -149,8 +153,9 @@
                                 </aside>
                                 <aside>
                                     <span>账号类型</span>
-                                    <span v-if="item.type==1">订阅号</span>
-                                    <span v-else>服务号</span>
+                                    <span>{{item.haotype}}</span>
+                                    <!--<span v-if="item.type==1">订阅号</span>-->
+                                    <!--<span v-else>服务号</span>-->
                                 </aside>
                                 <aside>
                                     <span>单粉价格</span>
@@ -236,6 +241,7 @@
         el: "#main_",
         data: {
             list: [],
+            haolist: [],
             data: [],
             willShow: null,
             showmb: 0,
@@ -270,6 +276,7 @@
         },
         mounted() {
             this.gettypelist()
+            this.gethaotypelist()
             this.getSelllist()
             //                this.$refs.fuckLi.addClass('li_itme')
         },
@@ -328,13 +335,31 @@
             gettypelist() {
 
                 let that = this;
-                axios.post('http://yqf.yun-le.com/yikehao/gettype', {})
+                axios.post('http://www.yqfyqf.com/yikehao/gettype', {})
                 //then里面跟一个成功回调函数
                     .then(function (resp) {
                         if (resp.data.code) {
                             that.list = resp.data.data
                         } else {
                             $.toast("无法加载", "text");
+                        }
+
+                    })
+                    // catch中跟一个失败回调函数
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            gethaotypelist() {
+
+                let that = this;
+                axios.post('http://www.yqfyqf.com/yikehao/gethaotype', {})
+                //then里面跟一个成功回调函数
+                    .then(function (resp) {
+                        if (resp.data.code) {
+                            that.haolist = resp.data.data
+                        } else {
+                            $.toast("无账号类型", "text");
                         }
 
                     })
@@ -368,7 +393,7 @@
                     newpage++;
                     that.page = newpage;
                     $(".weui-loadmore").show()
-                    axios.post('http://yqf.yun-le.com/yikehao/findhao', {
+                    axios.post('http://www.yqfyqf.com/yikehao/findhao', {
                         page: that.page,
                         htypeid:that.htypeid,
                         typeid:that.typeid,
@@ -402,7 +427,7 @@
 
                 });
                 //分页加载结束
-                axios.post('http://yqf.yun-le.com/yikehao/findhao', {
+                axios.post('http://www.yqfyqf.com/yikehao/findhao', {
                     page: that.page,
                     htypeid:that.htypeid,
                     typeid:that.typeid,

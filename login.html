@@ -109,7 +109,7 @@
                 let that = this
                 console.log('点击了')
                 axios({
-                    url: 'http://yqf.yun-le.com/yikehao/doLogin',
+                    url: 'http://www.yqfyqf.com/yikehao/doLogin',
                     method: 'post',
                     data: {
                         phone: that.form.phoneNum,
@@ -130,7 +130,7 @@
                                 type: 'success'
                             });
                             localStorage.setItem('uid',resp.data.data.uid);
-                            window.location.href = "http://yqf.yun-le.com";
+                            window.location.href = "http://www.yqfyqf.com";
 
                         } else {
                             that.$message({

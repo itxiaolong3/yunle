@@ -19,7 +19,7 @@
     <script src="./js/common.js"></script>
     <!-- vant组件库 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@1.5/lib/index.css">
-    <title>益企发</title>
+    <title>益企发-公众号交易平台|公众号买卖|公众号出售|公众号转让|购买公众号|粉丝迁移</title>
 </head>
 
 <body>
@@ -82,22 +82,22 @@
                 </div>
                 <div class="infoContentSon">
                     <div class="infoContentSon_1">
-                        <div class="infoContentSon_1_body">
+                        <div class="infoContentSon_1_body" style="display: flex;justify-content: center;width: 115px;height: 120px;">
                             <div class="infoContentSon_1_top">
                                 所属类目
                             </div>
                             <div class="infoContentSon_1_bottom">
-                                {{info.fortype}}
+                                {{info.fortypetext}}
                             </div>
                         </div>
-                        <div class="infoContentSon_1_body">
-                            <div class="infoContentSon_1_top">
-                                阅读UV
-                            </div>
-                            <div class="infoContentSon_1_bottom">
-                                {{info.UV}}
-                            </div>
-                        </div>
+                        <!--<div class="infoContentSon_1_body">-->
+                            <!--<div class="infoContentSon_1_top">-->
+                                <!--阅读UV-->
+                            <!--</div>-->
+                            <!--<div class="infoContentSon_1_bottom">-->
+                                <!--{{info.UV}}-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="infoContentSon_1_body">
                             <div class="infoContentSon_1_top">
                                 账号类型
@@ -238,7 +238,7 @@
                     }
                 ],
                 willShow: 0,
-                url: 'http://yqf.yun-le.com',
+                url: 'http://www.yqfyqf.com',
                 showbanner: false,
                 images :[
                     
@@ -260,7 +260,7 @@
                 getinfo() {
                     let that = this;
                     var id = getUrl('id');
-                    axios.post('http://yqf.yun-le.com/yikehao/getdetail', {
+                    axios.post('http://www.yqfyqf.com/yikehao/getdetail', {
                             id: id
                         })
                         //then里面跟一个成功回调函数
@@ -295,17 +295,17 @@
                     let openid=localStorage.getItem('openid');
                     console.log(openid,'商品详细里面的openid')
 //                    if(openid=='null'||openid==null||openid==''){
-//                        window.location.href="http://yqf.yun-le.com";
+//                        window.location.href="http://www.yqfyqf.com";
 //                    }else{
                         let islogin=localStorage.getItem('uid');
                         if (islogin==null||islogin==''){
                             window.location.href="login.html";
                         }else{
-                            $.confirm('<label style="color: red;">重点提示</label>  一定要经过云乐互联担保交易，保证资金100%安全。普通会员最多免费看3个商家，是否继续', function() {
+                            $.confirm('<label style="color: red;">重点提示</label>  一定要经过云乐互联担保交易，保证资金100%安全。', function() {
                                 //这里发送请求显示商家联系电话，待上uid。如果没登录先去登录才可以查看
                                 let that = this
                                 axios({
-                                    url: 'http://yqf.yun-le.com/yikehao/getbossphone',
+                                    url: 'http://www.yqfyqf.com/yikehao/getbossphone',
                                     method: 'post',
                                     data: {uid: islogin,id:gid},
                                     headers: {'Content-Type': 'application/json'}
